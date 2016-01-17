@@ -44,8 +44,10 @@ public class TaskFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         TextView tv = (TextView) getActivity().findViewById(R.id.tv2_task);
+
                         tv.setText(task.toString());
                         sendInt(taskDecision);
+                        sendString(task);
                     }
                 });
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -83,9 +85,11 @@ public class TaskFragment extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
     }
-
     public void sendInt(Integer int1){
         ((SettingActivity)this.getActivity()).setTaskInt(int1);
+    }
+    public void sendString(String string1){
+        ((SettingActivity)this.getActivity()).setTaskString(string1);
     }
 
 }

@@ -27,14 +27,6 @@
             android:name=".ExerciseActivity"
             android:screenOrientation="landscape" >
         </activity>
-        <activity
-            android:name=".InitialActivity"
-            android:screenOrientation="landscape" >
-        </activity>
-        <activity
-            android:name=".VowelActivity"
-            android:screenOrientation="landscape" >
-        </activity>
 
     </application>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />

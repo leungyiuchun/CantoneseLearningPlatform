@@ -21,6 +21,7 @@ public class SettingActivity extends AppCompatActivity {
     TextView hints_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("SettingActivity","onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
@@ -29,6 +30,9 @@ public class SettingActivity extends AppCompatActivity {
         task_tv = (TextView)findViewById(R.id.tv2_task);
         hints_tv = (TextView)findViewById(R.id.tv2_hints);
 
+        if(((MyApp)getApplication()).getInitList().size()==0){
+            init_tv.setText("請選擇聲母");
+        }
         Button pass_button = (Button)this.findViewById(R.id.setting_button);
         pass_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,8 +47,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 DialogFragment InitialDialog = new InitialFragment();
-                InitialDialog.show(getFragmentManager(),"dialog");
-//                Intent intent = new Intent(SettingActivity.this, InitialActivity.class);
+                InitialDialog.show(getFragmentManager(), "dialog");
 //                startActivity(intent);
             }
         });
@@ -62,9 +65,9 @@ public class SettingActivity extends AppCompatActivity {
         task_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Task","clicked");
+                Log.d("Task", "clicked");
                 DialogFragment taskDialog = new TaskFragment();
-                taskDialog.show(getFragmentManager(),"dialog");
+                taskDialog.show(getFragmentManager(), "dialog");
             }
         });
 
@@ -73,7 +76,7 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DialogFragment hintsDialog = new HintsFragment();
-                hintsDialog.show(getFragmentManager(),"dialog");
+                hintsDialog.show(getFragmentManager(), "dialog");
 
             }
         });
@@ -81,11 +84,18 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        init_tv.setText(Arrays.toString(((MyApp)getApplication()).getInitArray()));
-        vowel_tv.setText(Arrays.toString(((MyApp)getApplication()).getVowelArray()));
+        if(((MyApp)getApplication()).getInitList().size()==0){
+            init_tv.setText("請選擇聲母");
+        }else {
+            init_tv.setText(((MyApp)getApplication()).getInitList().toString());
+        }
 
+        if(((MyApp)getApplication()).getVowelList().size()==0){
+            vowel_tv.setText("請選擇韻母");
+        }else {
+            vowel_tv.setText(((MyApp)getApplication()).getVowelList().toString());
+        }
         super.onResume();
-//        if (displayed==false){init_tv.setText(Arrays.toString(initArray));}
 
 
     }
@@ -100,14 +110,39 @@ public class SettingActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    public void setInitArray(String[] array){
-        ((MyApp)getApplication()).setInitArray(array);
+
+
+    @Override
+    protected void onStop() {
+        Log.d("SettingActivity", "onStop");
+        super.onStop();
     }
+
+    @Override
+    protected void onDestroy() {
+        Log.d("SettingActivity","onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.d("SettingActivity","onRestart");
+        super.onRestart();
+    }
+
+
     public void setVowelArray(String[] array){
         ((MyApp)getApplication()).setVowelArray(array);
+    }
+    public void setTaskString(String string1){
+        ((MyApp)getApplication()).setTaskString(string1);
+    }
+    public void setHintsString(String string1){
+        ((MyApp)getApplication()).setHintsString(string1);
     }
     public void setTaskInt(Integer taskInt){((MyApp)getApplication()).setTaskInt(taskInt);}
     public void setHintInt(Integer hintInt){
         ((MyApp)getApplication()).setHintInt(hintInt);
     }
+
 }

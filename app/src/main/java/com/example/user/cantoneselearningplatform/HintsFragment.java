@@ -19,18 +19,12 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.Arrays;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HintsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HintsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class HintsFragment extends DialogFragment {
-    String hints = "  ";
-    int hintsDecision;
+    String hints = "";
+    int hintsDecision =0;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -44,9 +38,33 @@ public class HintsFragment extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if (hintsDecision==4){
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("未選提示")
+                                    .setMessage("請選擇提示 ")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+//                                     continue with delete
+                                        }
+                                    })
+                                    .show();
+                        }
                         TextView tv = (TextView) getActivity().findViewById(R.id.tv2_hints);
-                        tv.setText(hints.toString());
+
+                        if(hintsDecision==0){
+                            tv.setText("沒有提示");
+                        }else {
+                            tv.setText("請選擇提示");
+                        }
+                        if(hints.isEmpty()){
+
+                        }else {
+                            tv.setText(hints.toString());
+                        }
+                        Log.d("HintsDecision",""+hintsDecision);
                         sendInt(hintsDecision);
+                        sendString(hints);
+
                     }
                 });
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -59,6 +77,7 @@ public class HintsFragment extends DialogFragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     rg.setVisibility(View.VISIBLE);
+                    hintsDecision = 4;
                 } else {
                     rg.setVisibility(View.INVISIBLE);
                     hintsDecision = 0;
@@ -103,5 +122,8 @@ public class HintsFragment extends DialogFragment {
 
     public void sendInt(Integer int1){
         ((SettingActivity)this.getActivity()).setHintInt(int1);
+    }
+    public void sendString(String string1){
+        ((SettingActivity) this.getActivity()).setHintsString(string1);
     }
 }

@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 public class ExerciseActivity extends Activity {
@@ -96,6 +97,7 @@ public class ExerciseActivity extends Activity {
                 et1.setVisibility(View.VISIBLE);
                 et2.setVisibility(View.VISIBLE);
                 img.setVisibility(View.VISIBLE);
+                et1.requestFocus();
                 confirm_button.setVisibility(View.VISIBLE);
             }
         });
@@ -119,13 +121,13 @@ public class ExerciseActivity extends Activity {
 
     @Override
     protected void onResume() {
-        globalInitArray =  ((MyApp)getApplication()).getInitArray();
         globalVowelArray =  ((MyApp)getApplication()).getVowelArray();
         globalTaskInt =  ((MyApp)getApplication()).getTaskInt();
         globalHintInt =  ((MyApp)getApplication()).getHintInt();
         setTask(et1, et2, globalTaskInt);
         setHints(et1, et2, globalHintInt);
-        Log.d("All called","");
+        Log.d("ExerciseInit", "" + Arrays.toString(globalInitArray));
+        Log.d("ExerciseVowel",""+ Arrays.toString(globalVowelArray));
         super.onResume();
     }
 

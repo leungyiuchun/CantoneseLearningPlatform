@@ -16,8 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Button  play_button = (Button)this.findViewById(R.id.play_button);
-        Button  setting_button = (Button)this.findViewById(R.id.setting_button);
+        Log.d("MainActivity","onCreate");
+        Button  play_button ;
+        Button  setting_button;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setting_button = (Button)findViewById(R.id.setting_button);
@@ -44,8 +45,33 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        Log.d("MainActivity","onResume");
         checkInternet();
         super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d("MainActivity","onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d("MainActivity","onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d("MainActivity","onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.d("MainActivity","onRestart");
+        super.onRestart();
     }
 
     public void checkInternet(){

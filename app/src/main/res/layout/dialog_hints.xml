@@ -45,7 +45,7 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_hints_1"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -53,21 +53,16 @@
         android:layout_below="@+id/hints_themeSep">
 
         <Switch
-            android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:switchMinWidth="200dp"
             android:text="@string/hints"
             android:textSize="50dp"
-            android:scrollbarSize="50dp"
             android:id="@+id/hints_switch1"
             android:layout_gravity="center_horizontal" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="94dp"
-            android:textSize="50dp"
-            android:layout_toRightOf="@+id/switch1"
-            android:id="@+id/switch1_status"/>
-    </RelativeLayout>
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_hints_1"
         android:orientation="vertical"
