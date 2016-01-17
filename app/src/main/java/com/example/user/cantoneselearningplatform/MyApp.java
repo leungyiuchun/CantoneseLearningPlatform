@@ -252,8 +252,6 @@ public class MyApp extends Application {
     public List getInitList(){return this.init_List;}
     public List getVowelList(){return this.vowel_List;}
 
-    public String[] getVowelArray(){return this.globalVowelArray;}
-    public void setVowelArray(String[] vowelArray){this.globalVowelArray = vowelArray;}
 
     public String getTaskString(){return this.globalTaskString;}
     public void setTaskString(String taskString){this.globalTaskString =taskString;}

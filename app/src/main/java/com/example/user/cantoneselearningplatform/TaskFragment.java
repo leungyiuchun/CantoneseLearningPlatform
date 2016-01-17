@@ -44,10 +44,8 @@ public class TaskFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         TextView tv = (TextView) getActivity().findViewById(R.id.tv2_task);
+                        tv.setText(((MyApp) getActivity().getApplication()).getTaskString());
 
-                        tv.setText(task.toString());
-                        sendInt(taskDecision);
-                        sendString(task);
                     }
                 });
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -56,40 +54,52 @@ public class TaskFragment extends DialogFragment {
         rb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                taskDecision = 1;
-                task = rb1.getText().toString();
+                if (isChecked) {
+                    setTaskInt(1);
+                    setTaskString(rb1.getText().toString());
+
+                }
             }
         });
         final RadioButton rb2 = (RadioButton)view.findViewById(R.id.task_rb_2);
         rb2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                taskDecision = 2;
-                task = rb2.getText().toString();
-
+                if (isChecked) {
+                    setTaskInt(2);
+                    setTaskString(rb2.getText().toString());
+                }
             }
         });
         final RadioButton rb3 = (RadioButton)view.findViewById(R.id.task_rb_3);
         rb3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                taskDecision = 3;
-                task = rb3.getText().toString();
+                if (isChecked) {
+                    setTaskInt(3);
+                    setTaskString(rb3.getText().toString());
+                }
             }
         });
+        switch (((MyApp) getActivity().getApplication()).getTaskInt()){
+            case 1: rb1.setChecked(true);
+                    break;
+            case 2:rb2.setChecked(true);
+                    break;
+            case 3:rb3.setChecked(true);
+                    break;
+        }
         builder.setView(view);
         return builder.create();
+
+
     }
+    public void setTaskInt(Integer int1){((MyApp)getActivity().getApplication()).setTaskInt(int1);}
+    public void setTaskString(String string1){((MyApp)getActivity().getApplication()).setTaskString(string1);}
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-    }
-    public void sendInt(Integer int1){
-        ((SettingActivity)this.getActivity()).setTaskInt(int1);
-    }
-    public void sendString(String string1){
-        ((SettingActivity)this.getActivity()).setTaskString(string1);
     }
 
 }

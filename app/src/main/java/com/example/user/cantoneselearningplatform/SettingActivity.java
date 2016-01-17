@@ -21,7 +21,6 @@ public class SettingActivity extends AppCompatActivity {
     TextView hints_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("SettingActivity","onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
@@ -32,6 +31,16 @@ public class SettingActivity extends AppCompatActivity {
 
         if(((MyApp)getApplication()).getInitList().size()==0){
             init_tv.setText("請選擇聲母");
+        }
+
+        if(((MyApp)getApplication()).getVowelList().size()==0){
+            vowel_tv.setText("請選擇韻母");
+        }
+        if(((MyApp)getApplication()).getTaskInt()==0){
+            task_tv.setText("請選擇任務");
+        }
+        if(((MyApp)getApplication()).getHintInt()==0){
+            hints_tv.setText("請選擇提示");
         }
         Button pass_button = (Button)this.findViewById(R.id.setting_button);
         pass_button.setOnClickListener(new View.OnClickListener() {
@@ -130,19 +139,5 @@ public class SettingActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-
-    public void setVowelArray(String[] array){
-        ((MyApp)getApplication()).setVowelArray(array);
-    }
-    public void setTaskString(String string1){
-        ((MyApp)getApplication()).setTaskString(string1);
-    }
-    public void setHintsString(String string1){
-        ((MyApp)getApplication()).setHintsString(string1);
-    }
-    public void setTaskInt(Integer taskInt){((MyApp)getApplication()).setTaskInt(taskInt);}
-    public void setHintInt(Integer hintInt){
-        ((MyApp)getApplication()).setHintInt(hintInt);
-    }
 
 }

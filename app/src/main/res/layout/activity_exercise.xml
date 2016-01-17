@@ -43,7 +43,7 @@
                 android:textColor="#ffffff"
                 />
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_toRightOf="@+id/soundButton"
                 android:background="@drawable/init_et"
@@ -57,10 +57,10 @@
 
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:gravity="center"
                 android:maxLength="5"
-                android:layout_weight="5"
+                android:layout_weight="2"
                 android:inputType="text"
                 android:textColor="#ffffff"
                 android:background="@drawable/vowel_init"

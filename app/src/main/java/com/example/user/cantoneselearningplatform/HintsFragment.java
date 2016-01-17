@@ -38,7 +38,7 @@ public class HintsFragment extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (hintsDecision==4){
+                        if (((MyApp)getActivity().getApplication()).getHintInt()==4){
                             new AlertDialog.Builder(getActivity())
                                     .setTitle("未選提示")
                                     .setMessage("請選擇提示 ")
@@ -50,20 +50,20 @@ public class HintsFragment extends DialogFragment {
                                     .show();
                         }
                         TextView tv = (TextView) getActivity().findViewById(R.id.tv2_hints);
-
-                        if(hintsDecision==0){
+                        Log.d("HintInt",""+((MyApp)getActivity().getApplication()).getHintInt());
+                        Log.d("HintTask",""+((MyApp)getActivity().getApplication()).getHintsString());
+                        if(((MyApp)getActivity().getApplication()).getHintInt()==0){
                             tv.setText("沒有提示");
                         }else {
-                            tv.setText("請選擇提示");
-                        }
-                        if(hints.isEmpty()){
+                            if(((MyApp)getActivity().getApplication()).getHintsString().isEmpty()){
+                            }else {
+                                Log.d("Hint","DONE");
 
-                        }else {
-                            tv.setText(hints.toString());
+                                tv.setText(((MyApp) getActivity().getApplication()).getHintsString());
+                            }
                         }
-                        Log.d("HintsDecision",""+hintsDecision);
-                        sendInt(hintsDecision);
-                        sendString(hints);
+
+
 
                     }
                 });
@@ -77,29 +77,36 @@ public class HintsFragment extends DialogFragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     rg.setVisibility(View.VISIBLE);
-                    hintsDecision = 4;
+                    setHintsInt(4);
+                    setHintsString("請選擇提示");
+
                 } else {
                     rg.setVisibility(View.INVISIBLE);
-                    hintsDecision = 0;
-                    hints = "沒有提示";
+                    setHintsInt(0);
+                    setHintsString("沒有提示");
                 }
             }
+
         });
 
         final RadioButton rb1 = (RadioButton)view.findViewById(R.id.task_rb_1);
         rb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                hintsDecision = 1;
-                hints = rb1.getText().toString();
+                if (isChecked) {
+                    setHintsInt(1);
+                    setHintsString(rb1.getText().toString());
+                }
             }
         });
         final RadioButton rb2 = (RadioButton)view.findViewById(R.id.task_rb_2);
         rb2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                hintsDecision = 2;
-                hints = rb2.getText().toString();
+                if (isChecked) {
+                    setHintsInt(2);
+                    setHintsString(rb2.getText().toString());
+                }
 
             }
         });
@@ -107,11 +114,28 @@ public class HintsFragment extends DialogFragment {
         rb3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                hintsDecision = 3;
-                hints = rb3.getText().toString();
+                if (isChecked) {
+                    setHintsInt(3);
+                    setHintsString(rb3.getText().toString());
+                }
             }
         });
         builder.setView(view);
+        switch (((MyApp) getActivity().getApplication()).getHintInt()){
+            case 0: switch1.setChecked(false);
+                    break;
+            case 1: switch1.setChecked(true);
+                    rb1.setChecked(true);
+                    break;
+            case 2: switch1.setChecked(true);
+                    rb2.setChecked(true);
+                    break;
+            case 3: switch1.setChecked(true);
+                    rb3.setChecked(true);
+                    break;
+            case 4: switch1.setChecked(true);
+                    break;
+        }
         return builder.create();
     }
 
@@ -119,11 +143,6 @@ public class HintsFragment extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
     }
-
-    public void sendInt(Integer int1){
-        ((SettingActivity)this.getActivity()).setHintInt(int1);
-    }
-    public void sendString(String string1){
-        ((SettingActivity) this.getActivity()).setHintsString(string1);
-    }
+    public void setHintsInt(Integer int1){((MyApp)getActivity().getApplication()).setHintInt(int1);}
+    public void setHintsString(String string1){((MyApp)getActivity().getApplication()).setHintsString(string1);}
 }

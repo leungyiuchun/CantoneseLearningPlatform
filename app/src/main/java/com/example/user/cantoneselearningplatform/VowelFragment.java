@@ -488,9 +488,6 @@ public class VowelFragment extends DialogFragment {
         super.onAttach(context);
     }
 
-    public void sendArray(String[] array){
-        ((SettingActivity)this.getActivity()).setVowelArray(array);
-    }
 
     public void show(Boolean clicked,String msg,TextView tv){
         if (clicked){

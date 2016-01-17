@@ -121,7 +121,6 @@ public class ExerciseActivity extends Activity {
 
     @Override
     protected void onResume() {
-        globalVowelArray =  ((MyApp)getApplication()).getVowelArray();
         globalTaskInt =  ((MyApp)getApplication()).getTaskInt();
         globalHintInt =  ((MyApp)getApplication()).getHintInt();
         setTask(et1, et2, globalTaskInt);
