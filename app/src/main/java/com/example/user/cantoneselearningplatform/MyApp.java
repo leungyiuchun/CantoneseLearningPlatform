@@ -91,6 +91,8 @@ public class MyApp extends Application {
     Integer globalTaskInt = 0;
     Integer globalHintInt = 0;
 
+    Integer quantityInt = 0;
+
     public int global_init_index=0;
     public int del_init=0;
     public Boolean get_init_1(){return  this.init_1_clicked;}
@@ -264,4 +266,7 @@ public class MyApp extends Application {
 
     public Integer getHintInt(){return this.globalHintInt;}
     public void setHintInt(Integer taskInt){this.globalHintInt = taskInt;}
+
+    public Integer getQuantityInt(){return this.quantityInt;}
+    public void setQuantityInt(Integer qInt){this.quantityInt = qInt;}
 }

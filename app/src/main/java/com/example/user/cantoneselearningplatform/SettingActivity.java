@@ -89,6 +89,14 @@ public class SettingActivity extends AppCompatActivity {
 
             }
         });
+        final Button quantity_button = (Button)this.findViewById(R.id.tv_quantity);
+        quantity_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment quantityDialog= new QuantityFragment();
+                quantityDialog.show(getFragmentManager(), "dialog");
+            }
+        });
     }
 
     @Override

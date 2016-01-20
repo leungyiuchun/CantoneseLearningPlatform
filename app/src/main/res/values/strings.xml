@@ -9,8 +9,11 @@
     <string name="setting_vowel">韻母</string>
     <string name="setting_task">選填</string>
     <string name="setting_hints">提示</string>
+    <string name="setting_quantity">數量</string>
     <string name="setting_finish">完成</string>
-
+    <string name="selected_init">已選聲母</string>
+    <string name="selected_vowel">已選韻母</string>
+    <string name="select_quantity">請選題目數量</string>
     <string name="init_1">b</string>
     <string name="init_2">p</string>
     <string name="init_3">m</string>
@@ -97,6 +100,7 @@
 
     <string name="task_theme">請選擇是次練習的題目</string>
     <string name="hints_theme">請選擇是次練習的提示</string>
+    <string name="quantity_theme">請選擇是次練習的數量</string>
     <string name="hints">提示</string>
 
 
