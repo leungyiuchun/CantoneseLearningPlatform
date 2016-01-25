@@ -268,5 +268,5 @@ public class MyApp extends Application {
     public void setHintInt(Integer taskInt){this.globalHintInt = taskInt;}
 
     public Integer getQuantityInt(){return this.quantityInt;}
-    public void setQuantityInt(Integer qInt){this.quantityInt = qInt;}
+    public void setQuantityInt(Integer qInt){this.quantityInt += qInt;}
 }
