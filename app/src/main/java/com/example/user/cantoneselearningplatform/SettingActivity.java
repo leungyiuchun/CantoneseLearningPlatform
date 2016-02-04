@@ -19,6 +19,8 @@ public class SettingActivity extends AppCompatActivity {
     TextView vowel_tv;
     TextView task_tv;
     TextView hints_tv;
+    TextView quantity_tv;
+    TextView mode_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,8 @@ public class SettingActivity extends AppCompatActivity {
         vowel_tv = (TextView)findViewById(R.id.tv2_vowel);
         task_tv = (TextView)findViewById(R.id.tv2_task);
         hints_tv = (TextView)findViewById(R.id.tv2_hints);
-
+        quantity_tv = (TextView)findViewById(R.id.tv2_quantity);
+        mode_tv = (TextView)findViewById(R.id.tv2_mode);
         if(((MyApp)getApplication()).getInitList().size()==0){
             init_tv.setText("請選擇聲母");
         }
@@ -97,6 +100,14 @@ public class SettingActivity extends AppCompatActivity {
                 quantityDialog.show(getFragmentManager(), "dialog");
             }
         });
+        final Button mode_button = (Button)this.findViewById(R.id.tv_mode);
+        mode_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment modeDialog= new ModeFragment();
+                modeDialog.show(getFragmentManager(), "dialog");
+            }
+        });
     }
 
     @Override
@@ -112,6 +123,19 @@ public class SettingActivity extends AppCompatActivity {
         }else {
             vowel_tv.setText(((MyApp)getApplication()).getVowelList().toString());
         }
+//        if(((MyApp)getApplication()).getVowelList().size()==0){
+//            task_tv.setText("請選擇任務");
+//        }else {
+            task_tv.setText(((MyApp)getApplication()).getTaskString());
+//        }
+//        if(((MyApp)getApplication()).getVowelList().size()==0){
+//            hints_tv.setText("請選擇韻母");
+//        }else {
+            hints_tv.setText(((MyApp)getApplication()).getHintsString());
+            quantity_tv.setText(((MyApp) getApplication()).getQuantityInt());
+            mode_tv.setText(((MyApp)getApplication()).getModeString());
+
+//        }
         super.onResume();
 
 

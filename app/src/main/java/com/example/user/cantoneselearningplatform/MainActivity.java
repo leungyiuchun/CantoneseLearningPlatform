@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     .setMessage("請開啟Wi-Fi或數據連線 ")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+//                            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
                         }
                     })
                     .show();

@@ -89,11 +89,11 @@ class CustomKeyboard {
             } else if( primaryCode==CodeAllRight ) {
                 edittext.setSelection(edittext.length());
             } else if( primaryCode==CodePrev ) {
-                View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
-                if( focusNew!=null ) focusNew.requestFocus();
+//                View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
+//                if( focusNew!=null ) focusNew.requestFocus();
             } else if( primaryCode==CodeNext ) {
-                View focusNew= edittext.focusSearch(View.FOCUS_FORWARD);
-                if( focusNew!=null ) focusNew.requestFocus();
+//                View focusNew= edittext.focusSearch(View.FOCUS_FORWARD);
+//                if( focusNew!=null ) focusNew.requestFocus();
             } else { // insert character
                 editable.insert(start, Character.toString((char) primaryCode));
                 Log.d("keyboard inserted","");

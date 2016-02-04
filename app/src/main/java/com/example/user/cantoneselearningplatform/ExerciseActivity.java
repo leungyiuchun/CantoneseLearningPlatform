@@ -47,6 +47,8 @@ public class ExerciseActivity extends Activity {
         setContentView(R.layout.activity_exercise);
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
+        globalTaskInt =  ((MyApp)getApplication()).getTaskInt();
+        globalHintInt =  ((MyApp)getApplication()).getHintInt();
         final ImageView img = (ImageView) findViewById(R.id.imageView);
         final View v1 = findViewById(R.id.TwoToFour);
         int[] et1XY = new int[2];
@@ -92,12 +94,12 @@ public class ExerciseActivity extends Activity {
             public void onClick(View v) {
                 String toSpeak = soundButton.getText().toString();
                 Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
-                t1.setSpeechRate(0.5f);
+                t1.setSpeechRate(0.3f); //larger it is, faster it would be.
                 t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 et1.setVisibility(View.VISIBLE);
                 et2.setVisibility(View.VISIBLE);
+                setFocus(et1,et2,globalTaskInt);
                 img.setVisibility(View.VISIBLE);
-                et1.requestFocus();
                 confirm_button.setVisibility(View.VISIBLE);
             }
         });
@@ -109,20 +111,19 @@ public class ExerciseActivity extends Activity {
             public void onClick(View v) {
                 initial = et1.getText().toString();
                 vowel = et2.getText().toString();
-                if (checkAnswer(initial, vowel, ans_init,ans_vowel)) {
+                if (checkAnswer(initial, vowel, ans_init, ans_vowel)) {
                     Intent intent = new Intent(ExerciseActivity.this, ExerciseActivity.class);
                     startActivity(intent);
-                }
-                else{
+                } else {
                 }
             }
         });
+
     }
 
     @Override
     protected void onResume() {
-        globalTaskInt =  ((MyApp)getApplication()).getTaskInt();
-        globalHintInt =  ((MyApp)getApplication()).getHintInt();
+
         setTask(et1, et2, globalTaskInt);
         setHints(et1, et2, globalHintInt);
         Log.d("ExerciseInit", "" + Arrays.toString(globalInitArray));
@@ -184,13 +185,35 @@ public class ExerciseActivity extends Activity {
             case 1:
                 et2.setText(ans_vowel);
                 et2.setEnabled(false);
+                et2.setKeyListener(null);
+
                 break;
             case 2:
                 et1.setText(ans_init);
                 et1.setEnabled(false);
+                et1.setKeyListener(null);
+
                 break;
             case 3:
                 //do nothing as both init and vowel are needed to be filled.
+                break;
+        }
+    }
+    public void setFocus(EditText et1,EditText et2, Integer decision){
+        switch (decision) {
+            case 0:
+//                et1.requestFocus();
+                break;
+            case 1:
+                et1.requestFocus();
+
+                break;
+            case 2:
+                et2.requestFocus();
+
+                break;
+            case 3:
+                et1.requestFocus();
                 break;
         }
     }

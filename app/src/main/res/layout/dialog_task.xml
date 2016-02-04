@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50dp"
+            android:textSize="50sp"
             android:textColor="#5E3434"
             android:text="@string/task_theme"
             android:id="@+id/task_tv_theme" />
@@ -32,18 +32,18 @@
         android:gravity="center_horizontal">
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="20sp"
             android:background="@android:color/transparent"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="10sp"
             android:background= "@android:color/darker_gray"
             android:layout_below="@+id/task_theme"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="50sp"
             android:background="@android:color/transparent" />
 
     </LinearLayout>
@@ -64,19 +64,19 @@
                 android:text="@string/setting_initial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="60dp"></RadioButton>>
+                android:textSize="60sp"/>
             <RadioButton
                 android:id="@+id/task_rb_2"
                 android:text="@string/setting_vowel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="60dp"></RadioButton>>
+                android:textSize="60sp" />
             <RadioButton
                 android:id="@+id/task_rb_3"
                 android:text="@string/ini_vowel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="60dp"></RadioButton>>
+                android:textSize="60sp"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -90,7 +90,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <!--<Button-->
-            <!--android:textSize="45dp"-->
+            <!--android:textSize="45sp"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:text="@string/setting_finish"-->

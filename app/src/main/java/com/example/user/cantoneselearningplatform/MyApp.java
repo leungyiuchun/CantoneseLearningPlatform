@@ -88,10 +88,12 @@ public class MyApp extends Application {
     String[] globalVowelArray = {""};
     String globalTaskString = "請選擇任務";
     String globalHintsString = "請選擇提示";
+    String globalModeString = "請選擇模式";
     Integer globalTaskInt = 0;
     Integer globalHintInt = 0;
-
+    Integer globalModeInt=0;
     Integer quantityInt = 0;
+    public ArrayList<Combination> combination_list = new ArrayList<Combination>();
 
     public int global_init_index=0;
     public int del_init=0;
@@ -261,12 +263,19 @@ public class MyApp extends Application {
     public String getHintsString(){return this.globalHintsString;}
     public void setHintsString(String hintsString){this.globalHintsString =hintsString;}
 
+    public String getModeString(){return this.globalModeString;}
+    public void setModeString(String modeString){this.globalModeString =modeString;}
+
     public Integer getTaskInt(){return this.globalTaskInt;}
     public void setTaskInt(Integer taskInt){this.globalTaskInt = taskInt;}
 
     public Integer getHintInt(){return this.globalHintInt;}
     public void setHintInt(Integer taskInt){this.globalHintInt = taskInt;}
+    public Integer getModeInt(){return this.globalModeInt;}
+    public void setModeInt(Integer modeInt){this.globalModeInt = modeInt;}
 
     public Integer getQuantityInt(){return this.quantityInt;}
     public void setQuantityInt(Integer qInt){this.quantityInt += qInt;}
+    public ArrayList<Combination> getCombinationList(){return this.combination_list;}
+    public void setCombinationList (ArrayList<Combination> combinationList){this.combination_list = combinationList;}
 }
