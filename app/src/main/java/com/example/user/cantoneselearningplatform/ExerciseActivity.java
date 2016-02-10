@@ -2,9 +2,11 @@ package com.example.user.cantoneselearningplatform;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.Image;
@@ -21,69 +23,124 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
 public class ExerciseActivity extends Activity {
 
     TextToSpeech t1;
+    Integer index = 0;
     String initial;
     String vowel;
-    String ans_init = "f";
-    String ans_vowel = "aa";
+    String ans_init;
+    String ans_vowel;
+    String userAnswer;
+    public Integer totalQuestion;
+    public Integer currentQuestion =1;
     CustomKeyboard mCustomKeyboard;
     String[] globalInitArray = {" "};
     String[] globalVowelArray ={" "};
+    Integer home_clicked;
     public Integer globalTaskInt = 1;
     public Integer globalHintInt = 1;
-    EditText et1;
-    EditText et2;
-
+    public EditText et1;
+    public EditText et2;
+    public TextView tv_currentQuestion;
+    public TextView tv_totalQuestion;
+    public TextView tv_mode;
+    public ArrayList<Exer> exerciseList = new ArrayList<Exer>();
+    public ArrayList<Answer> AnswerList = new ArrayList<Answer>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_exercise);
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
+        tv_currentQuestion = (TextView)findViewById(R.id.tv_currentQuestion);
+        tv_totalQuestion = (TextView)findViewById(R.id.tv_totalQuestion);
+        tv_mode = (TextView)findViewById(R.id.tv_mode);
         globalTaskInt =  ((MyApp)getApplication()).getTaskInt();
         globalHintInt =  ((MyApp)getApplication()).getHintInt();
         final ImageView img = (ImageView) findViewById(R.id.imageView);
-        final View v1 = findViewById(R.id.TwoToFour);
-        int[] et1XY = new int[2];
-        int et1Y;
-        int[] et2XY = new int[2];
-        int et2X;
-        int et2Y;
-        int[] btnXY = new int[2];
-        int btnX;
-        int btnY;
+        home_clicked = 0;
+        final Button home_button = (Button) this.findViewById(R.id.homeButton);
+        home_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                home_clicked += 1;
+                if(home_clicked.intValue() ==3){
+                    new AlertDialog.Builder(ExerciseActivity.this)
+                        .setTitle("確定離開")
+                        .setMessage("確定離開？")
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(ExerciseActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                            .show();
+                }
+            }
+        });
 
         mCustomKeyboard= new CustomKeyboard(ExerciseActivity.this, R.id.keyboardview, R.xml.keyboard );
         mCustomKeyboard.registerEditText(R.id.editText);
         mCustomKeyboard.registerEditText(R.id.editText2);
 
-        final Button confirm_button = (Button) this.findViewById(R.id.confirmButton);
-        confirm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ExerciseActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
         et1.setVisibility(View.GONE);
         et2.setVisibility(View.GONE);
-        img.setVisibility(View.GONE);
-        confirm_button.setVisibility(View.GONE);
-
+        tv_currentQuestion.setText(String.format("%d", currentQuestion));
         t1 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     t1.setLanguage(new Locale("zh", "HK"));
                 }
+            }
+        });
+
+        final Button confirmButton = (Button) findViewById(R.id.confirmButton);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                initial = et1.getText().toString();
+                vowel = et2.getText().toString();
+                userAnswer = initial + vowel;
+                if(((MyApp) getApplication()).getModeInt()==0){
+                    if (checkAnswer(initial, vowel, ans_init, ans_vowel)) {
+                        Answer ans = new Answer(initial,vowel,userAnswer);
+                        AnswerList.add(ans);
+                        if(currentQuestion.intValue() == totalQuestion.intValue()){
+                            DialogFragment remindDialog= new RemindFragment(AnswerList);
+                            remindDialog.show(getFragmentManager(), "dialog");
+                        }else{
+                            updateExercise();
+                        }
+                    }
+                }else{
+                    Answer ans = new Answer(initial,vowel,userAnswer);
+                    AnswerList.add(ans);
+
+                    if(currentQuestion.intValue() == totalQuestion.intValue()){
+                        DialogFragment resultDialog= new ResultFragment(AnswerList,exerciseList);
+                        resultDialog.show(getFragmentManager(), "dialog");
+                    }else{
+                        updateExercise();
+                    }
+                }
+
             }
         });
 
@@ -98,36 +155,30 @@ public class ExerciseActivity extends Activity {
                 t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 et1.setVisibility(View.VISIBLE);
                 et2.setVisibility(View.VISIBLE);
-                setFocus(et1,et2,globalTaskInt);
+                setFocus(et1, et2, globalTaskInt);
                 img.setVisibility(View.VISIBLE);
-                confirm_button.setVisibility(View.VISIBLE);
             }
         });
 
-        final Button confirmButton = (Button) findViewById(R.id.confirmButton);
-        confirmButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                initial = et1.getText().toString();
-                vowel = et2.getText().toString();
-                if (checkAnswer(initial, vowel, ans_init, ans_vowel)) {
-                    Intent intent = new Intent(ExerciseActivity.this, ExerciseActivity.class);
-                    startActivity(intent);
-                } else {
-                }
-            }
-        });
 
     }
 
     @Override
     protected void onResume() {
-
+        exerciseList = ((MyApp)this.getApplication()).getRandomlizeList();
+        ans_init = exerciseList.get(index).getInit();
+        ans_vowel = exerciseList.get(index).getVowel();
+        index +=1;
+        totalQuestion= ((MyApp)this.getApplication()).getQuantityInt();
+        tv_totalQuestion.setText(String.format("%d", totalQuestion));
+        tv_mode.setText(((MyApp) getApplication()).getModeString());
+        for(Integer i=0;i<exerciseList.size();i++){
+            Log.d("exer_loop",""+exerciseList.get(i).getCardProduct());
+        }
         setTask(et1, et2, globalTaskInt);
         setHints(et1, et2, globalHintInt);
-        Log.d("ExerciseInit", "" + Arrays.toString(globalInitArray));
-        Log.d("ExerciseVowel",""+ Arrays.toString(globalVowelArray));
+
         super.onResume();
     }
 
@@ -139,40 +190,20 @@ public class ExerciseActivity extends Activity {
 
         if (init.equalsIgnoreCase(ans_init_check)){
             if (vowel.equalsIgnoreCase(ans_vowel_check)){
+                et1.setTextColor(Color.BLACK);
+                et2.setTextColor(Color.BLACK);
                 return true;
             }else {
-                new AlertDialog.Builder(ExerciseActivity.this)
-                            .setTitle("韻母錯誤")
-                            .setMessage("請重填答案 ")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-//                                     continue with delete
-                                }
-                            })
-                            .show();
+                et1.setTextColor(Color.BLACK);
+                et2.setTextColor(Color.RED);
                 return false;
             }
         }else {
-            new AlertDialog.Builder(ExerciseActivity.this)
-                    .setTitle("聲母錯誤")
-                    .setMessage("請重填答案 ")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-//                                     continue with delete
-                        }
-                    })
-                    .show();
+            et1.setTextColor(Color.RED);
+            et2.setTextColor(Color.BLACK);
             if (vowel.equalsIgnoreCase(ans_vowel_check)){
             }else {
-                new AlertDialog.Builder(ExerciseActivity.this)
-                        .setTitle("韻母錯誤")
-                        .setMessage("請重填答案 ")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-//                                     continue with delete
-                            }
-                        })
-                        .show();
+                et2.setTextColor(Color.RED);
             }
             return false;
         }
@@ -224,11 +255,9 @@ public class ExerciseActivity extends Activity {
                 break;
             case 1:
                 et2.setHint(ans_vowel);
-                Log.d("Hint", "" + ans_vowel);
                 break;
             case 2:
                 et1.setHint(ans_init);
-                Log.d("Hint",""+ans_init);
                 break;
             case 3:
                 et2.setHint(ans_vowel);
@@ -236,5 +265,20 @@ public class ExerciseActivity extends Activity {
                 break;
         }
     }
-
+    public void updateExercise(){
+        currentQuestion +=1;
+        tv_currentQuestion.setText(String.format("%d", currentQuestion));
+        ans_init = exerciseList.get(index).getInit();
+        ans_vowel = exerciseList.get(index).getVowel();
+        index += 1;
+        et1.setText(null);
+        et1.setTextColor(Color.BLACK);
+        et2.setText(null);
+        et2.setTextColor(Color.BLACK);
+        et1.setVisibility(View.GONE);
+        et2.setVisibility(View.GONE);
+        setHints(et1, et2, globalHintInt);
+        setFocus(et1, et2, globalTaskInt);
+        setTask(et1,et2,globalTaskInt);
+    }
 }

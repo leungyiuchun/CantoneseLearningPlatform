@@ -519,56 +519,5 @@ public class VowelFragment extends DialogFragment {
             return clicked;
         }
     }
-//    public void addArray(String add) {
-//
-//        display[array_index] = add;
-//        array_index++;
-//
-//        if (Integer.compare(array_index,61) == 0)
-//        {
-//            new AlertDialog.Builder(VowelFragment.this.getContext())
-//                    .setTitle("已選聲母已到限制數量")
-//                    .setMessage("請重按某聲母以刪除 ")
-//                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            // continue with delete
-//                        }
-//                    })
-//
-//                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                    .show();
-//        }
-//    }
-//
-//    public void deleteArray(String del) {
-//        int delIndex;
-//        int i;
-//
-//        for (i = 0; i < array_index; i++) {
-//            if (display[i].equals(del)) {
-//                found = true;
-//                break;
-//            } else {
-//                found = false;
-//
-//            }
-//        }
-//        delIndex = i;
-//        if (found) {
-//            for (int k = delIndex; k < array_index; k++) {
-//                display[k] = display[k+1];
-//                display[k+1]=null;
-//                array_index--;
-//            }
-//        }
-//    }
-//    public String[] ArrayDisplay(String[] DisplayArray){
-//
-//        String[] displayArray = new String[array_index];
-//        for (int i=0;i<array_index;i++){
-//            displayArray[i] = DisplayArray[i];
-//        }
-//
-//        return displayArray;
-//    }
+
 }

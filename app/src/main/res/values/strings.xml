@@ -104,20 +104,25 @@
     <string name="hints_theme">請選擇是次練習的提示</string>
     <string name="quantity_theme">請選擇以下組合數量</string>
     <string name="mode_theme">請選擇是次練習的模式</string>
+    <string name="result_theme">測驗結果</string>
+    <string name="remind_theme">題目重溫</string>
     <string name="hints">提示</string>
     <string name="setting_mode">模式</string>
     <string name="training_mode">訓練模式</string>
     <string name="test_mode">測驗模式</string>
     <string name="total_quantity">總題數:</string>
-
+    <string name="total_correct">答對題數</string>
+    <string name="correct_percent">答對率</string>
     <string name="ini_vowel">聲母 + 韻母</string>
-    <string name="pass_btn"></string>
     <string name="title_activity_exercise">ExerciseActivity</string>
     <string name="title_setting_exercise">SettingActivity</string>
     <string name="submit">提交</string>
+    <string name="homepage">主頁</string>
     <string name="cancel">取消</string>
     <string name="ok">確定</string>
-
+    <string name="correct">正確</string>
+    <string name="wrong">錯誤</string>
+    <string name="slash">/</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

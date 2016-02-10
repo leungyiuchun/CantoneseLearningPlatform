@@ -132,9 +132,9 @@ public class SettingActivity extends AppCompatActivity {
 //            hints_tv.setText("請選擇韻母");
 //        }else {
             hints_tv.setText(((MyApp)getApplication()).getHintsString());
-            quantity_tv.setText(((MyApp) getApplication()).getQuantityInt());
+            quantity_tv.setText(((MyApp) getApplication()).getQuantityInt().toString());
             mode_tv.setText(((MyApp)getApplication()).getModeString());
-
+            Log.d("globalTaskLis","SettingActivity"+((MyApp)getApplication()).getCombinationList().size());
 //        }
         super.onResume();
 

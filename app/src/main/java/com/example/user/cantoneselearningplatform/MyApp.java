@@ -1,9 +1,11 @@
 package com.example.user.cantoneselearningplatform;
 
 import android.app.Application;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -85,15 +87,15 @@ public class MyApp extends Application {
     public Boolean vowel_60_clicked=false;
     public ArrayList<String> vowel_List = new ArrayList<String>();
 
-    String[] globalVowelArray = {""};
     String globalTaskString = "請選擇任務";
     String globalHintsString = "請選擇提示";
     String globalModeString = "請選擇模式";
-    Integer globalTaskInt = 0;
+    Integer globalTaskInt = 1;
     Integer globalHintInt = 0;
     Integer globalModeInt=0;
     Integer quantityInt = 0;
     public ArrayList<Combination> combination_list = new ArrayList<Combination>();
+    public ArrayList<Exer> exercise_list = new ArrayList<Exer>();
 
     public int global_init_index=0;
     public int del_init=0;
@@ -275,7 +277,26 @@ public class MyApp extends Application {
     public void setModeInt(Integer modeInt){this.globalModeInt = modeInt;}
 
     public Integer getQuantityInt(){return this.quantityInt;}
-    public void setQuantityInt(Integer qInt){this.quantityInt += qInt;}
+    public void setQuantityInt(Integer qInt){this.quantityInt = qInt;}
+
     public ArrayList<Combination> getCombinationList(){return this.combination_list;}
-    public void setCombinationList (ArrayList<Combination> combinationList){this.combination_list = combinationList;}
+    public void setCombinationList (ArrayList<Combination> combinationList){
+        this.combination_list.clear();
+        this.combination_list = combinationList;}
+    public ArrayList<Exer> getRandomlizeList(){
+        ArrayList<Exer> randomList = new ArrayList<Exer>();
+        getExerList();
+        randomList = this.exercise_list;
+        Collections.shuffle(randomList);
+        Log.d("RandomSize",""+randomList.size());
+        return  randomList;
+    }
+    public void getExerList(){
+        for(Integer i=0;i<combination_list.size();i++){
+            for(Integer j=0;j<combination_list.get(i).getInt1();j++){
+                Exer exer = new Exer(combination_list.get(i).getInit(),combination_list.get(i).getVowel(),combination_list.get(i).getCartProduct());
+                exercise_list.add(exer);
+            }
+        }
+    }
 }

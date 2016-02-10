@@ -13,10 +13,9 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
+    public Boolean test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("MainActivity","onCreate");
         Button  play_button ;
         Button  setting_button;
         super.onCreate(savedInstanceState);
@@ -25,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setting_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
-                Log.d("Set button", "Done");
             }
         });
 
@@ -35,42 +34,50 @@ public class MainActivity extends AppCompatActivity {
         play_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ExerciseActivity.class);
-                startActivity(intent);
-                Log.d("Play button", "Done");
+                Log.d("test", "" + test);
+                checkExer();
+                checkInit();
+                checkVowel();
+                checkTask();
+                checkHints();
+                checkQuantityInt();
+                checkMode();
 
+                if (test) {
+                    Intent intent = new Intent(MainActivity.this, ExerciseActivity.class);
+                    startActivity(intent);
+
+                } else {
+
+                }
             }
         });
     }
 
     @Override
     protected void onResume() {
-        Log.d("MainActivity","onResume");
+//        ((MyApp)this.getApplication())
         checkInternet();
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        Log.d("MainActivity","onPause");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        Log.d("MainActivity","onStop");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.d("MainActivity","onDestroy");
         super.onDestroy();
     }
 
     @Override
     protected void onRestart() {
-        Log.d("MainActivity","onRestart");
         super.onRestart();
     }
 
@@ -83,11 +90,107 @@ public class MainActivity extends AppCompatActivity {
                     .setMessage("請開啟Wi-Fi或數據連線 ")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-//                            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
                         }
                     })
                     .show();
         }
 
+    }
+    public void checkInit(){
+        if(((MyApp)this.getApplication()).init_List.isEmpty()){
+            test = false;
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("未設定聲母")
+                    .setMessage("未設定練習聲母")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+        }else{test = true;}
+    }
+    public void checkVowel(){
+        if(((MyApp)this.getApplication()).vowel_List.isEmpty()){
+            test = false;
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("未設定韻母")
+                    .setMessage("未設定練習韻母")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+        }else{test = true;}
+    }
+    public void checkTask(){
+        if(((MyApp)this.getApplication()).globalTaskString.equalsIgnoreCase("請選擇任務") ){
+            test = false;
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("未設定任務")
+                    .setMessage("未設定練習任務")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+        }else{test = true;}
+    }
+    public void checkHints(){
+        if(((MyApp)this.getApplication()).globalHintsString.equalsIgnoreCase("請選擇提示")){
+            test = false;
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("未設定提示")
+                    .setMessage("未設定練習提示")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+        }else{test = true;}
+    }
+    public void checkQuantityInt(){
+        if(((MyApp) this.getApplication()).quantityInt ==0){
+            test = false;
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("未設定數量")
+                    .setMessage("未設定練習數量")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+        }else{test = true;}
+    }
+    public void checkMode(){
+        if(((MyApp)this.getApplication()).globalModeString.equalsIgnoreCase("請選擇模式")){
+            test = false;
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("未設定模式")
+                    .setMessage("未設定練習模式")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+        }else{test = true;}
+    }
+    public void checkExer(){
+        if(((MyApp)this.getApplication()).getRandomlizeList().size() == 0) {
+            test = false;
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("未設定練習")
+                    .setMessage("未設定練習")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+
+        }else{test = true;}
+    }
+
+    public Boolean checkSetting(){
+
+        return true;
     }
 }

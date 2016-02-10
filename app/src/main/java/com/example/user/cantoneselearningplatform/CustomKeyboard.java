@@ -197,7 +197,6 @@ class CustomKeyboard {
                 return true; // Consume touch event
             }
         });
-        // Disable spell check (hex strings look like words to Android)
         edittext.setInputType(edittext.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     }
 //    public void abc(){
