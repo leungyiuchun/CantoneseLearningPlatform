@@ -50,15 +50,12 @@ public class HintsFragment extends DialogFragment {
                                     .show();
                         }
                         TextView tv = (TextView) getActivity().findViewById(R.id.tv2_hints);
-                        Log.d("HintInt",""+((MyApp)getActivity().getApplication()).getHintInt());
-                        Log.d("HintTask",""+((MyApp)getActivity().getApplication()).getHintsString());
+
                         if(((MyApp)getActivity().getApplication()).getHintInt()==0){
                             tv.setText("沒有提示");
                         }else {
                             if(((MyApp)getActivity().getApplication()).getHintsString().isEmpty()){
                             }else {
-                                Log.d("Hint","DONE");
-
                                 tv.setText(((MyApp) getActivity().getApplication()).getHintsString());
                             }
                         }

@@ -292,6 +292,7 @@ public class MyApp extends Application {
         return  randomList;
     }
     public void getExerList(){
+        exercise_list.clear();
         for(Integer i=0;i<combination_list.size();i++){
             for(Integer j=0;j<combination_list.get(i).getInt1();j++){
                 Exer exer = new Exer(combination_list.get(i).getInit(),combination_list.get(i).getVowel(),combination_list.get(i).getCartProduct());

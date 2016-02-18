@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 checkInit();
                 checkVowel();
                 checkTask();
-                checkHints();
+//                checkHints();
                 checkQuantityInt();
                 checkMode();
 

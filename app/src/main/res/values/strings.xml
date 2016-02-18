@@ -4,7 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_play">開始</string>
     <string name="action_settings">設定</string>
-    <string name="update_list">更新列表</string>>
+    <string name="update_list">更新</string>
     <string name="setting_initial">聲母</string>
     <string name="setting_vowel">韻母</string>
     <string name="setting_task">選填</string>
