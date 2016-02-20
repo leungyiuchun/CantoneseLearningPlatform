@@ -110,7 +110,8 @@
     <string name="setting_mode">模式</string>
     <string name="training_mode">訓練模式</string>
     <string name="test_mode">測驗模式</string>
-    <string name="total_quantity">總題數:</string>
+    <string name="total_quantity">總題數：</string>
+    <string name="total_combination">組合數量：</string>
     <string name="total_correct">答對題數</string>
     <string name="correct_percent">答對率</string>
     <string name="ini_vowel">聲母 + 韻母</string>

@@ -21,6 +21,8 @@ public class SettingActivity extends AppCompatActivity {
     TextView hints_tv;
     TextView quantity_tv;
     TextView mode_tv;
+
+    Integer quantity_flag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +134,11 @@ public class SettingActivity extends AppCompatActivity {
 //            hints_tv.setText("請選擇韻母");
 //        }else {
             hints_tv.setText(((MyApp)getApplication()).getHintsString());
-            quantity_tv.setText(((MyApp) getApplication()).getQuantityInt().toString());
+            if(((MyApp)getApplication()).getQuantityInt()==0){
+                quantity_tv.setText(((MyApp) getApplication()).getQuantityString());}
+            else {
+                quantity_tv.setText(((MyApp) getApplication()).getQuantityInt().toString());
+            }
             mode_tv.setText(((MyApp)getApplication()).getModeString());
             Log.d("globalTaskLis","SettingActivity"+((MyApp)getApplication()).getCombinationList().size());
 //        }

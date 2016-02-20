@@ -90,6 +90,7 @@ public class MyApp extends Application {
     String globalTaskString = "請選擇任務";
     String globalHintsString = "請選擇提示";
     String globalModeString = "請選擇模式";
+    String globalQuantityString = "請選擇各組合數量";
     Integer globalTaskInt = 1;
     Integer globalHintInt = 0;
     Integer globalModeInt=0;
@@ -267,7 +268,7 @@ public class MyApp extends Application {
 
     public String getModeString(){return this.globalModeString;}
     public void setModeString(String modeString){this.globalModeString =modeString;}
-
+    public String getQuantityString(){return  this.globalQuantityString;}
     public Integer getTaskInt(){return this.globalTaskInt;}
     public void setTaskInt(Integer taskInt){this.globalTaskInt = taskInt;}
 
@@ -281,7 +282,7 @@ public class MyApp extends Application {
 
     public ArrayList<Combination> getCombinationList(){return this.combination_list;}
     public void setCombinationList (ArrayList<Combination> combinationList){
-        this.combination_list.clear();
+//        this.combination_list.clear();
         this.combination_list = combinationList;}
     public ArrayList<Exer> getRandomlizeList(){
         ArrayList<Exer> randomList = new ArrayList<Exer>();
@@ -299,5 +300,13 @@ public class MyApp extends Application {
                 exercise_list.add(exer);
             }
         }
+    }
+
+    Integer quantity_flag=0;
+    public void setQuantityFlag(Integer flag){
+        this.quantity_flag =flag;
+    }
+    public Integer getQuantityFlag(){
+         return this.quantity_flag;
     }
 }

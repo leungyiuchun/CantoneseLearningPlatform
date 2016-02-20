@@ -84,7 +84,7 @@ public class ExerciseActivity extends Activity{
 
         setContentView(R.layout.activity_exercise);
         img2 = (ImageView)findViewById(R.id.imageView2);
-        img2.setVisibility(View.GONE);
+        img2.setVisibility(View.INVISIBLE);
         index = 0;
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
@@ -202,7 +202,7 @@ public class ExerciseActivity extends Activity{
                 et1.setVisibility(View.VISIBLE);
                 et2.setVisibility(View.VISIBLE);
                 setFocus(et1, et2, globalTaskInt);
-
+                Log.d("img2","before animation "+img2.getVisibility());
                 switch (globalTaskInt) {
                     case 0:
                         break;
@@ -216,10 +216,14 @@ public class ExerciseActivity extends Activity{
                         animation(soundbtnCoord[0], soundbtnCoord[1], et1Coord[0], et1Coord[1]);
                         break;
                 }
+                Log.d("img2","after animation "+img2.getVisibility());
+
             }
         });
 
         exerciseList = ((MyApp)this.getApplication()).getRandomlizeList();
+        for(int i =0;i<exerciseList.size();i++){
+        Log.d("random_list",""+exerciseList.get(i).getCardProduct());}
         ans_init = exerciseList.get(index).getInit();
         ans_vowel = exerciseList.get(index).getVowel();
         totalQuestion= ((MyApp)this.getApplication()).getQuantityInt();
@@ -228,12 +232,14 @@ public class ExerciseActivity extends Activity{
 
         setTask(et1, et2, globalTaskInt);
         setHints(et1, et2, globalHintInt);
-//        img2.setVisibility(View.GONE);
 
     }
 
     @Override
     protected void onResume() {
+        Log.d("img2","on resume before "+img2.getVisibility());
+        img2.setVisibility(View.GONE);
+        Log.d("img2", "on resume after " + img2.getVisibility());
 
         super.onResume();
     }
@@ -320,24 +326,23 @@ public class ExerciseActivity extends Activity{
 
     public void updateExercise(){
         currentQuestion +=1;
+        index += 1;
         tv_currentQuestion.setText(String.format("%d", currentQuestion));
         ans_init = exerciseList.get(index).getInit();
         ans_vowel = exerciseList.get(index).getVowel();
-        index += 1;
-        removeTextListener();
         et1.getText().clear();
         et1.setTextColor(Color.BLACK);
-        et2.setText("");
+        et2.getText().clear();
         et2.setTextColor(Color.BLACK);
         et1.setVisibility(View.GONE);
         et2.setVisibility(View.GONE);
-        addTextListener();
         ll_exercise1.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
         setHints(et1, et2, globalHintInt);
         setFocus(et1, et2, globalTaskInt);
-        setTask(et1,et2,globalTaskInt);
+        setTask(et1, et2, globalTaskInt);
+        addTextListener();
     }
 
     public void executeAnimation(ImageView image,Context context1,Integer int1){
@@ -390,7 +395,7 @@ public class ExerciseActivity extends Activity{
         animation.setRepeatCount(0);
         animation.setRepeatMode(1);
         img2.startAnimation(animation);
-        img2.setVisibility(View.INVISIBLE);
+        img2.setVisibility(View.GONE);
 
     }
     public void declareTextListener(){
@@ -445,5 +450,11 @@ public class ExerciseActivity extends Activity{
     public void removeTextListener(){
         et1.removeTextChangedListener(textWatcher1);
         et2.removeTextChangedListener(textWatcher2);
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
     }
 }

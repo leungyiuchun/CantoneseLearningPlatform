@@ -59,7 +59,9 @@ public class InitialFragment extends DialogFragment {
                             tv.setText(((MyApp)getActivity().getApplication()).getInitList().toString());
                         }
                         sendArray(passArray);
-                        Log.d("Presented", ""+Arrays.toString(passArray));
+                        Log.d("Presented", "" + Arrays.toString(passArray));
+                        ((MyApp) getActivity().getApplication()).setQuantityFlag(0);
+
                     }
                 });
         final Button init_1_button = (Button)view.findViewById(R.id.init_1_button);
@@ -68,7 +70,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_1(change(((MyApp) getActivity().getApplication()).get_init_1(), init_1_button.getText().toString(), init_1_button));
-                
+
             }
         });
         final Button init_2_button = (Button)view.findViewById(R.id.init_2_button);
@@ -77,7 +79,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_2(change(((MyApp) getActivity().getApplication()).get_init_2(), init_2_button.getText().toString(), init_2_button));
-                
+
 
             }
         });
@@ -87,7 +89,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_3(change(((MyApp) getActivity().getApplication()).get_init_3(), init_3_button.getText().toString(), init_3_button));
-                
+
             }
         });
         final Button init_4_button = (Button)view.findViewById(R.id.init_4_button);
@@ -96,7 +98,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_4(change(((MyApp) getActivity().getApplication()).get_init_4(), init_4_button.getText().toString(), init_4_button));
-                
+
             }
         });
         final Button init_5_button = (Button)view.findViewById(R.id.init_5_button);
@@ -105,7 +107,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_5(change(((MyApp) getActivity().getApplication()).get_init_5(), init_5_button.getText().toString(), init_5_button));
-                
+
             }
         });
         final Button init_6_button = (Button)view.findViewById(R.id.init_6_button);
@@ -114,7 +116,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_6(change(((MyApp) getActivity().getApplication()).get_init_6(), init_6_button.getText().toString(), init_6_button));
-                
+
             }
         });
         final Button init_7_button = (Button)view.findViewById(R.id.init_7_button);
@@ -123,7 +125,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_7(change(((MyApp) getActivity().getApplication()).get_init_7(), init_7_button.getText().toString(), init_7_button));
-                
+
             }
         });
         final Button init_8_button = (Button)view.findViewById(R.id.init_8_button);
@@ -132,7 +134,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_8(change(((MyApp) getActivity().getApplication()).get_init_8(), init_8_button.getText().toString(), init_8_button));
-                
+
             }
         });
         final Button init_9_button = (Button)view.findViewById(R.id.init_9_button);
@@ -141,7 +143,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_9(change(((MyApp) getActivity().getApplication()).get_init_9(), init_9_button.getText().toString(), init_9_button));
-                
+
             }
         });
         final Button init_10_button = (Button)view.findViewById(R.id.init_10_button);
@@ -150,7 +152,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_10(change(((MyApp) getActivity().getApplication()).get_init_10(), init_10_button.getText().toString(), init_10_button));
-                
+
             }
         });
         final Button init_11_button = (Button)view.findViewById(R.id.init_11_button);
@@ -159,7 +161,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_11(change(((MyApp) getActivity().getApplication()).get_init_11(), init_11_button.getText().toString(), init_11_button));
-                
+
             }
         });
         final Button init_12_button = (Button)view.findViewById(R.id.init_12_button);
@@ -168,7 +170,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_12(change(((MyApp) getActivity().getApplication()).get_init_12(), init_12_button.getText().toString(), init_12_button));
-                
+
             }
         });
         final Button init_13_button = (Button)view.findViewById(R.id.init_13_button);
@@ -177,7 +179,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_13(change(((MyApp) getActivity().getApplication()).get_init_13(), init_13_button.getText().toString(), init_13_button));
-                
+
             }
         });
         final Button init_14_button = (Button)view.findViewById(R.id.init_14_button);
@@ -186,7 +188,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_14(change(((MyApp) getActivity().getApplication()).get_init_14(), init_14_button.getText().toString(), init_14_button));
-                
+
             }
         });
         final Button init_15_button = (Button)view.findViewById(R.id.init_15_button);
@@ -195,7 +197,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_15(change(((MyApp) getActivity().getApplication()).get_init_15(), init_15_button.getText().toString(), init_15_button));
-                
+
             }
         });
         final Button init_16_button = (Button)view.findViewById(R.id.init_16_button);
@@ -204,7 +206,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_16(change(((MyApp) getActivity().getApplication()).get_init_16(), init_16_button.getText().toString(), init_16_button));
-                
+
             }
         });
         final Button init_17_button = (Button)view.findViewById(R.id.init_17_button);
@@ -213,7 +215,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_17(change(((MyApp) getActivity().getApplication()).get_init_17(), init_17_button.getText().toString(), init_17_button));
-                
+
             }
         });
         final Button init_18_button = (Button)view.findViewById(R.id.init_18_button);
@@ -222,7 +224,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_18(change(((MyApp) getActivity().getApplication()).get_init_18(), init_18_button.getText().toString(), init_18_button));
-                
+
             }
         });
         final Button init_19_button = (Button)view.findViewById(R.id.init_19_button);
@@ -231,7 +233,7 @@ public class InitialFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 ((MyApp)getActivity().getApplication()).set_init_19(change(((MyApp) getActivity().getApplication()).get_init_19(), init_19_button.getText().toString(), init_19_button));
-                
+
             }
         });
 

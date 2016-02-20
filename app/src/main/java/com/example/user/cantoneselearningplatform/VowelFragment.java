@@ -58,6 +58,8 @@ public class VowelFragment extends DialogFragment {
                         }else {
                             tv.setText(((MyApp)getActivity().getApplication()).getVowelList().toString());
                         }
+                        ((MyApp) getActivity().getApplication()).setQuantityFlag(0);
+
                     }
                 });
 
