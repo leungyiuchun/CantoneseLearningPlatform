@@ -12,30 +12,36 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.io.Console;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
-
-
+import java.util.logging.Handler;
 
 
 public class InitialFragment extends DialogFragment {
     public int array_index =0;
     public String[] display = new String[19];
     //    public Boolean init_1_clicked=false;
-
+    public ArrayList<Initobj> initArray = new ArrayList<Initobj>();
+    public ArrayList<String> tmpInitArray = new ArrayList<String>();
     public Boolean found = false;
     public Integer foundIndex =0;
     public String[] passArray;
-
-
+    TableLayout tl_init;
+    ArrayList<String> init= new ArrayList<String>(Arrays.asList("b","p","m","f","d","t","n","l","g","k","ng","h","gw","kw","w","z","c","s","j"));
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Log.d("TestDialog","OnCreateDialog");
@@ -51,191 +57,29 @@ public class InitialFragment extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        TextView tv = (TextView) getActivity().findViewById(R.id.tv2_initial);
-                        Log.d("InitSize", " " + ((MyApp)getActivity().getApplication()).getInitList().size());
-                        if(((MyApp)getActivity().getApplication()).getInitList().size()==0){
-                            tv.setText("請選擇聲母");
-                        }else {
-                            tv.setText(((MyApp)getActivity().getApplication()).getInitList().toString());
-                        }
-                        sendArray(passArray);
-                        Log.d("Presented", "" + Arrays.toString(passArray));
+                        ((MyApp) getActivity().getApplication()).setInitList(tmpInitArray);
+                        ((MyApp) getActivity().getApplication()).setInitFlag(1);
                         ((MyApp) getActivity().getApplication()).setQuantityFlag(0);
+                        TextView tv = (TextView) getActivity().findViewById(R.id.tv2_initial);
+                        if (((MyApp) getActivity().getApplication()).getInitList().size() == 0) {
+                            tv.setText("請選擇聲母");
+                        } else {
+                            tv.setText(((MyApp) getActivity().getApplication()).getInitList().toString());
+                        }
+
 
                     }
                 });
-        final Button init_1_button = (Button)view.findViewById(R.id.init_1_button);
-        show(((MyApp)getActivity().getApplication()).get_init_1(), init_1_button.getText().toString(), init_1_button);
-        init_1_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_1(change(((MyApp) getActivity().getApplication()).get_init_1(), init_1_button.getText().toString(), init_1_button));
+        tl_init = (TableLayout)view.findViewById(R.id.tl_init);
+        tl_init.setOrientation(LinearLayout.VERTICAL);
+        if(((MyApp) getActivity().getApplication()).getInitflag() -1 == 0) {
+            initArray = ((MyApp) getActivity().getApplication()).getglobalInitobj();
+            tmpInitArray = ((MyApp)getActivity().getApplication()).getInitList();
+        }else {
+            createInitProduct();
+        }
+        addView();
 
-            }
-        });
-        final Button init_2_button = (Button)view.findViewById(R.id.init_2_button);
-        show(((MyApp)getActivity().getApplication()).get_init_2(), init_2_button.getText().toString(), init_2_button);
-        init_2_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_2(change(((MyApp) getActivity().getApplication()).get_init_2(), init_2_button.getText().toString(), init_2_button));
-
-
-            }
-        });
-        final Button init_3_button = (Button)view.findViewById(R.id.init_3_button);
-        show(((MyApp)getActivity().getApplication()).get_init_3(), init_3_button.getText().toString(), init_3_button);
-        init_3_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_3(change(((MyApp) getActivity().getApplication()).get_init_3(), init_3_button.getText().toString(), init_3_button));
-
-            }
-        });
-        final Button init_4_button = (Button)view.findViewById(R.id.init_4_button);
-        show(((MyApp)getActivity().getApplication()).get_init_4(), init_4_button.getText().toString(), init_4_button);
-        init_4_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_4(change(((MyApp) getActivity().getApplication()).get_init_4(), init_4_button.getText().toString(), init_4_button));
-
-            }
-        });
-        final Button init_5_button = (Button)view.findViewById(R.id.init_5_button);
-        show(((MyApp)getActivity().getApplication()).get_init_5(), init_5_button.getText().toString(), init_5_button);
-        init_5_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_5(change(((MyApp) getActivity().getApplication()).get_init_5(), init_5_button.getText().toString(), init_5_button));
-
-            }
-        });
-        final Button init_6_button = (Button)view.findViewById(R.id.init_6_button);
-        show(((MyApp)getActivity().getApplication()).get_init_6(), init_6_button.getText().toString(), init_6_button);
-        init_6_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_6(change(((MyApp) getActivity().getApplication()).get_init_6(), init_6_button.getText().toString(), init_6_button));
-
-            }
-        });
-        final Button init_7_button = (Button)view.findViewById(R.id.init_7_button);
-        show(((MyApp)getActivity().getApplication()).get_init_7(), init_7_button.getText().toString(), init_7_button);
-        init_7_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_7(change(((MyApp) getActivity().getApplication()).get_init_7(), init_7_button.getText().toString(), init_7_button));
-
-            }
-        });
-        final Button init_8_button = (Button)view.findViewById(R.id.init_8_button);
-        show(((MyApp)getActivity().getApplication()).get_init_8(), init_8_button.getText().toString(), init_8_button);
-        init_8_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_8(change(((MyApp) getActivity().getApplication()).get_init_8(), init_8_button.getText().toString(), init_8_button));
-
-            }
-        });
-        final Button init_9_button = (Button)view.findViewById(R.id.init_9_button);
-        show(((MyApp)getActivity().getApplication()).get_init_9(), init_9_button.getText().toString(), init_9_button);
-        init_9_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_9(change(((MyApp) getActivity().getApplication()).get_init_9(), init_9_button.getText().toString(), init_9_button));
-
-            }
-        });
-        final Button init_10_button = (Button)view.findViewById(R.id.init_10_button);
-        show(((MyApp)getActivity().getApplication()).get_init_10(), init_10_button.getText().toString(), init_10_button);
-        init_10_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_10(change(((MyApp) getActivity().getApplication()).get_init_10(), init_10_button.getText().toString(), init_10_button));
-
-            }
-        });
-        final Button init_11_button = (Button)view.findViewById(R.id.init_11_button);
-        show(((MyApp)getActivity().getApplication()).get_init_11(), init_11_button.getText().toString(), init_11_button);
-        init_11_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_11(change(((MyApp) getActivity().getApplication()).get_init_11(), init_11_button.getText().toString(), init_11_button));
-
-            }
-        });
-        final Button init_12_button = (Button)view.findViewById(R.id.init_12_button);
-        show(((MyApp)getActivity().getApplication()).get_init_12(), init_12_button.getText().toString(), init_12_button);
-        init_12_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_12(change(((MyApp) getActivity().getApplication()).get_init_12(), init_12_button.getText().toString(), init_12_button));
-
-            }
-        });
-        final Button init_13_button = (Button)view.findViewById(R.id.init_13_button);
-        show(((MyApp)getActivity().getApplication()).get_init_13(), init_13_button.getText().toString(), init_13_button);
-        init_13_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_13(change(((MyApp) getActivity().getApplication()).get_init_13(), init_13_button.getText().toString(), init_13_button));
-
-            }
-        });
-        final Button init_14_button = (Button)view.findViewById(R.id.init_14_button);
-        show(((MyApp)getActivity().getApplication()).get_init_14(), init_14_button.getText().toString(), init_14_button);
-        init_14_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_14(change(((MyApp) getActivity().getApplication()).get_init_14(), init_14_button.getText().toString(), init_14_button));
-
-            }
-        });
-        final Button init_15_button = (Button)view.findViewById(R.id.init_15_button);
-        show(((MyApp)getActivity().getApplication()).get_init_15(), init_15_button.getText().toString(), init_15_button);
-        init_15_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_15(change(((MyApp) getActivity().getApplication()).get_init_15(), init_15_button.getText().toString(), init_15_button));
-
-            }
-        });
-        final Button init_16_button = (Button)view.findViewById(R.id.init_16_button);
-        show(((MyApp)getActivity().getApplication()).get_init_16(), init_16_button.getText().toString(), init_16_button);
-        init_16_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_16(change(((MyApp) getActivity().getApplication()).get_init_16(), init_16_button.getText().toString(), init_16_button));
-
-            }
-        });
-        final Button init_17_button = (Button)view.findViewById(R.id.init_17_button);
-        show(((MyApp)getActivity().getApplication()).get_init_17(), init_17_button.getText().toString(), init_17_button);
-        init_17_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_17(change(((MyApp) getActivity().getApplication()).get_init_17(), init_17_button.getText().toString(), init_17_button));
-
-            }
-        });
-        final Button init_18_button = (Button)view.findViewById(R.id.init_18_button);
-        show(((MyApp)getActivity().getApplication()).get_init_18(), init_18_button.getText().toString(), init_18_button);
-        init_18_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_18(change(((MyApp) getActivity().getApplication()).get_init_18(), init_18_button.getText().toString(), init_18_button));
-
-            }
-        });
-        final Button init_19_button = (Button)view.findViewById(R.id.init_19_button);
-        show(((MyApp)getActivity().getApplication()).get_init_19(), init_19_button.getText().toString(), init_19_button);
-        init_19_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MyApp)getActivity().getApplication()).set_init_19(change(((MyApp) getActivity().getApplication()).get_init_19(), init_19_button.getText().toString(), init_19_button));
-
-            }
-        });
 
         builder.setView(view);
         return builder.create();
@@ -281,86 +125,190 @@ public class InitialFragment extends DialogFragment {
     public void sendArray(String[] array){
     }
     
-    public Boolean change(Boolean clicked, String msg,Button button){
-        Boolean click_status = clicked;
+//    public Boolean change(Boolean clicked, String msg,Button button){
+//        Boolean click_status = clicked;
+//
+//        if (click_status){
+//            button.setBackgroundColor(Color.parseColor("#F7BCBC"));
+//            button.setTextColor(Color.parseColor("#5E3434"));
+//            ((MyApp)getActivity().getApplication()).delInit(msg);
+//            click_status = false;
+//
+//            return click_status;
+//        }else{
+//            button.setBackgroundColor(Color.parseColor("#7D5050"));
+//            button.setTextColor(Color.parseColor("#FFFFFF"));
+//            click_status = true;
+//            ((MyApp)getActivity().getApplication()).addInit(msg);
+//            return click_status;
+//        }
+//    }
 
-        if (click_status){
-            button.setBackgroundColor(Color.parseColor("#F7BCBC"));
-            button.setTextColor(Color.parseColor("#5E3434"));
-            ((MyApp)getActivity().getApplication()).delInit(msg);
-            click_status = false;
+//    public void show(Boolean clicked,String msg,Button button){
+//        btnArray.add(button);
+//        if (clicked){
+//            button.setBackgroundColor(Color.parseColor("#7D5050"));
+//            button.setTextColor(Color.parseColor("#FFFFFF"));
+//
+//        }else{
+//            button.setBackgroundColor(Color.parseColor("#F7BCBC"));
+//            button.setTextColor(Color.parseColor("#5E3434"));
+//
+//        }
+//    }
 
-            return click_status;
-        }else{
-            button.setBackgroundColor(Color.parseColor("#7D5050"));
-            button.setTextColor(Color.parseColor("#FFFFFF"));
-            click_status = true;
-            ((MyApp)getActivity().getApplication()).addInit(msg);
-            return click_status;
+    public void addView(){
+        Integer looping =0;
+        TableRow row1 = new TableRow(getActivity().getApplicationContext());
+        TableRow row2 = new TableRow(getActivity().getApplicationContext());
+        TableRow row3 = new TableRow(getActivity().getApplicationContext());
+        TableRow row4 = new TableRow(getActivity().getApplicationContext());
+        TableRow row5 = new TableRow(getActivity().getApplicationContext());
+
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        row1.setOrientation(LinearLayout.VERTICAL);
+        row2.setOrientation(LinearLayout.VERTICAL);
+        row3.setOrientation(LinearLayout.VERTICAL);
+        row4.setOrientation(LinearLayout.VERTICAL);
+        row5.setOrientation(LinearLayout.VERTICAL);
+        row1.setHorizontalGravity(1);
+        row1.setLayoutParams(lp);
+        row2.setLayoutParams(lp);
+        row3.setLayoutParams(lp);
+        row4.setLayoutParams(lp);
+        row5.setLayoutParams(lp);
+
+        View view = new View(getActivity().getApplicationContext());
+        view.setBackgroundColor(Color.parseColor("#BCF7F7"));
+        view.setMinimumWidth(5);
+        for(int i=0;i<4;i++ ){
+            final Integer index = i;
+            final Button init1 = new Button(getActivity().getApplicationContext());
+            show(initArray.get(index), init1);
+            init1.setText(initArray.get(i).getButtonString());
+            init1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+            init1.setAllCaps(false);
+            looping +=1;
+            init1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    add(initArray.get(index),init1);
+                }
+            });
+            row1.addView(init1);
         }
+
+        for(int i=4;i<8;i++ ){
+            final Integer index = i;
+            final Button init1 = new Button(getActivity().getApplicationContext());
+            show(initArray.get(index), init1);
+            init1.setText(initArray.get(i).getButtonString());
+            init1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+            init1.setAllCaps(false);
+            looping +=1;
+            init1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    add(initArray.get(index),init1);
+                }
+            });
+            row2.addView(init1);
+        }
+
+        for(int i=8;i<12;i++ ){
+            final Integer index = i;
+            final Button init1 = new Button(getActivity().getApplicationContext());
+            show(initArray.get(index), init1);
+            init1.setText(initArray.get(i).getButtonString());
+            init1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+            init1.setAllCaps(false);
+            looping +=1;
+            init1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    add(initArray.get(index),init1);
+                }
+            });
+            row3.addView(init1);
+        }
+
+        for(int i=12;i<15;i++ ){
+            final Integer index = i;
+            final Button init1 = new Button(getActivity().getApplicationContext());
+            show(initArray.get(index), init1);
+            init1.setText(initArray.get(i).getButtonString());
+            init1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+            init1.setAllCaps(false);
+            looping +=1;
+            init1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    add(initArray.get(index),init1);
+                }
+            });
+            row4.addView(init1);
+        }
+        for(int i=15;i<19;i++ ){
+            final Integer index = i;
+            final Button init1 = new Button(getActivity().getApplicationContext());
+            show(initArray.get(index), init1);
+            init1.setText(initArray.get(i).getButtonString());
+            init1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+            init1.setAllCaps(false);
+            looping +=1;
+            init1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    add(initArray.get(index),init1);
+                }
+            });
+            row5.addView(init1);
+        }
+
+        tl_init.addView(row1);
+        tl_init.addView(row2);
+        tl_init.addView(row3);
+        tl_init.addView(row4);
+        tl_init.addView(row5);
     }
 
-    public void show(Boolean clicked,String msg,Button button){
-        if (clicked){
-            button.setBackgroundColor(Color.parseColor("#7D5050"));
-            button.setTextColor(Color.parseColor("#FFFFFF"));
+    public void add(Initobj initobj,Button btn){
+        if(initobj.getBoolean()){
+            btn.setBackgroundResource(R.drawable.init_button);
+            btn.setTextColor(Color.parseColor("#5E3434"));
+            delInit(btn.getText().toString());
+            initobj.setBoolean(false);
 
         }else{
-            button.setBackgroundColor(Color.parseColor("#F7BCBC"));
-            button.setTextColor(Color.parseColor("#5E3434"));
+            btn.setBackgroundResource(R.drawable.init_button2);
+            btn.setTextColor(Color.parseColor("#ffffff"));
+            addInit(btn.getText().toString());
+            initobj.setBoolean(true);
 
         }
     }
-//    public void addArray(String add) {
-//
-//        display[array_index] = add;
-//        array_index++;
-//
-//        if (Integer.compare(array_index,20) == 0)
-//        {
-//            new AlertDialog.Builder(InitialFragment.this.getContext())
-//                    .setTitle("已選聲母已到限制數量")
-//                    .setMessage("請重按某聲母以刪除 ")
-//                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            // continue with delete
-//                        }
-//                    })
-//
-//                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                    .show();
-//        }
-//    }
-//
-//    public void deleteArray(String del) {
-//        int delIndex;
-//        int i;
-//
-//        for (i = 0; i < array_index; i++) {
-//            if (display[i] == del) {
-//                found = true;
-//                break;
-//            } else {
-//                found = false;
-//
-//            }
-//        }
-//        delIndex = i;
-//        if (found) {
-//            for (int k = delIndex; k < array_index; k++) {
-//                display[k] = display[k+1];
-//                display[k+1]=null;
-//                array_index--;
-//            }
-//        }
-//    }
-//    public String[] ArrayDisplay(String[] DisplayArray){
-//
-//        String[] displayArray = new String[array_index];
-//        for (int i=0;i<array_index;i++){
-//            displayArray[i] = DisplayArray[i];
-//        }
-//
-//        return displayArray;
-//    }
+    public void show(Initobj initobj,Button btn){
+        if(initobj.getBoolean()){
+            btn.setBackgroundResource(R.drawable.init_button2);
+            btn.setTextColor(Color.parseColor("#ffffff"));
+
+        }else {
+            btn.setBackgroundResource(R.drawable.init_button);
+            btn.setTextColor(Color.parseColor("#5E3434"));
+        }
+    }
+    public void addInit(String init){
+        tmpInitArray.add(init);
+    }
+    public void delInit(String init){
+        tmpInitArray.remove(init);
+    }
+
+    public void createInitProduct(){
+        for(int i=0;i<init.size();i++){
+            Initobj initobj = new Initobj(init.get(i),false);
+            initArray.add(initobj);
+        }
+        ((MyApp)getActivity().getApplication()).setglobalInitobj(initArray);
+    }
 }

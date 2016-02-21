@@ -490,7 +490,6 @@ public class VowelFragment extends DialogFragment {
         super.onAttach(context);
     }
 
-
     public void show(Boolean clicked,String msg,TextView tv){
         if (clicked){
             tv.setBackgroundResource(R.drawable.borders_black_and_darkblue);

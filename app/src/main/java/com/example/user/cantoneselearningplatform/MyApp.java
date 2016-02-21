@@ -13,25 +13,7 @@ import java.util.List;
  */
 public class MyApp extends Application {
 
-    public Boolean init_1_clicked=false;
-    public Boolean init_2_clicked=false;
-    public Boolean init_3_clicked=false;
-    public Boolean init_4_clicked=false;
-    public Boolean init_5_clicked=false;
-    public Boolean init_6_clicked=false;
-    public Boolean init_7_clicked=false;
-    public Boolean init_8_clicked=false;
-    public Boolean init_9_clicked=false;
-    public Boolean init_10_clicked=false;
-    public Boolean init_11_clicked=false;
-    public Boolean init_12_clicked=false;
-    public Boolean init_13_clicked=false;
-    public Boolean init_14_clicked=false;
-    public Boolean init_15_clicked=false;
-    public Boolean init_16_clicked=false;
-    public Boolean init_17_clicked=false;
-    public Boolean init_18_clicked=false;
-    public Boolean init_19_clicked=false;
+
     public ArrayList<String> init_List = new ArrayList<String>();
 
     public Boolean vowel_1_clicked=false;
@@ -98,46 +80,7 @@ public class MyApp extends Application {
     public ArrayList<Combination> combination_list = new ArrayList<Combination>();
     public ArrayList<Exer> exercise_list = new ArrayList<Exer>();
 
-    public int global_init_index=0;
-    public int del_init=0;
-    public Boolean get_init_1(){return  this.init_1_clicked;}
-    public void set_init_1(Boolean status){init_1_clicked = status;}
-    public Boolean get_init_2(){return  this.init_2_clicked;}
-    public void set_init_2(Boolean status){init_2_clicked = status;}
-    public Boolean get_init_3(){return  this.init_3_clicked;}
-    public void set_init_3(Boolean status){init_3_clicked = status;}
-    public Boolean get_init_4(){return  this.init_4_clicked;}
-    public void set_init_4(Boolean status){init_4_clicked = status;}
-    public Boolean get_init_5(){return  this.init_5_clicked;}
-    public void set_init_5(Boolean status){init_5_clicked = status;}
-    public Boolean get_init_6(){return  this.init_6_clicked;}
-    public void set_init_6(Boolean status){init_6_clicked = status;}
-    public Boolean get_init_7(){return  this.init_7_clicked;}
-    public void set_init_7(Boolean status){init_7_clicked = status;}
-    public Boolean get_init_8(){return  this.init_8_clicked;}
-    public void set_init_8(Boolean status){init_8_clicked = status;}
-    public Boolean get_init_9(){return  this.init_9_clicked;}
-    public void set_init_9(Boolean status){init_9_clicked = status;}
-    public Boolean get_init_10(){return  this.init_10_clicked;}
-    public void set_init_10(Boolean status){init_10_clicked = status;}
-    public Boolean get_init_11(){return  this.init_11_clicked;}
-    public void set_init_11(Boolean status){init_11_clicked = status;}
-    public Boolean get_init_12(){return  this.init_12_clicked;}
-    public void set_init_12(Boolean status){init_12_clicked = status;}
-    public Boolean get_init_13(){return  this.init_13_clicked;}
-    public void set_init_13(Boolean status){init_13_clicked = status;}
-    public Boolean get_init_14(){return  this.init_14_clicked;}
-    public void set_init_14(Boolean status){init_14_clicked = status;}
-    public Boolean get_init_15(){return  this.init_15_clicked;}
-    public void set_init_15(Boolean status){init_15_clicked = status;}
-    public Boolean get_init_16(){return  this.init_16_clicked;}
-    public void set_init_16(Boolean status){init_16_clicked = status;}
-    public Boolean get_init_17(){return  this.init_17_clicked;}
-    public void set_init_17(Boolean status){init_17_clicked = status;}
-    public Boolean get_init_18(){return  this.init_18_clicked;}
-    public void set_init_18(Boolean status){init_18_clicked = status;}
-    public Boolean get_init_19(){return  this.init_19_clicked;}
-    public void set_init_19(Boolean status){init_19_clicked = status;}
+
 
     public Boolean get_vowel_1(){return this.vowel_1_clicked;}
     public void set_vowel_1(Boolean status){vowel_1_clicked=status;}
@@ -242,12 +185,6 @@ public class MyApp extends Application {
     public Boolean get_vowel_60(){return this.vowel_60_clicked;}
     public void set_vowel_60(Boolean status){vowel_60_clicked=status;}
 
-    public void addInit(String text){
-        init_List.add(text);
-    }
-    public void delInit(String text){
-        init_List.remove(text);
-    }
 
     public void addVowel(String text){
         vowel_List.add(text);
@@ -256,7 +193,9 @@ public class MyApp extends Application {
         vowel_List.remove(text);
     }
 
-    public List getInitList(){return this.init_List;}
+    public ArrayList getInitList(){return this.init_List;}
+    public void setInitList(ArrayList<String> initList){this.init_List = initList;}
+
     public List getVowelList(){return this.vowel_List;}
 
 
@@ -308,5 +247,25 @@ public class MyApp extends Application {
     }
     public Integer getQuantityFlag(){
          return this.quantity_flag;
+    }
+
+    Integer init_flag=0;
+
+    public void setInitFlag(Integer flag){
+        this.init_flag = flag;
+    }
+    public void addInitFlag(){
+        this.init_flag +=1;
+    }
+    public Integer getInitflag(){
+        return this.init_flag;
+    }
+
+    ArrayList<Initobj> globalInitobj =new ArrayList<Initobj>();
+    public void setglobalInitobj(ArrayList<Initobj> initobjs){
+        this.globalInitobj = initobjs;
+    }
+    public ArrayList<Initobj> getglobalInitobj(){
+        return globalInitobj;
     }
 }
