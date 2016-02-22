@@ -148,37 +148,7 @@ public class QuantityFragment extends DialogFragment{
         }
     }
 
-//    public void addRowItem(){
-//        Integer length = ExersList.size();
-//        TableRow row = new TableRow(getActivity().getApplicationContext());
-//        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-//        row.setLayoutParams(lp);
-//
-//        if(length-rowLooping>9){
-//            loop=10;
-//        }
-//        else {
-//            loop = length-rowLooping;
-//        }
-//        Integer abc = rowLooping+loop;
-//
-//        for(Integer i = rowLooping;i<abc;i++){
-//            Button cp = new Button(getActivity().getApplicationContext());
-//            looping = i;
-//            cp.setAllCaps(false);
-//            cp.setText(ExersList.get(i).getCardProduct());
-//            setButtonFunction(cp,button_confirm, i);
-//            cp.setTextSize(30);
-//            cp.setBackgroundResource(R.drawable.borders_black_and_blue);
-//            cp.setGravity(Gravity.CENTER);
-//            row.addView(cp);
-//        }
-//        quantity_tl.addView(row);
-//        if(length-rowLooping>9){
-//            rowLooping +=10;
-//            addRowItem();
-//        }
-//    }
+
     public void addRowItem(Integer i){
         final Integer index =i;
 //        quantity_tl.removeAllViewsInLayout();
@@ -303,6 +273,7 @@ public class QuantityFragment extends DialogFragment{
         final String setVowel = final_List.get(index).getVowel();
         final String CardProduct = final_List.get(index).getCartProduct();
         final TextView tv_int = quantity;
+//        confirm.setText(R.string.action_settings);
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,7 +283,7 @@ public class QuantityFragment extends DialogFragment{
                 cp.setBackgroundResource(R.drawable.borders_black_and_blue);
                 btn_decrease.setVisibility(View.INVISIBLE);
                 btn_increase.setVisibility(View.INVISIBLE);
-
+//                confirm.setText(R.string.action_set);
 //                updateList(builder, ll);
                 total_quantity_tv.setText(getTotalQuantity().toString());
                 tv_int.setText(final_List.get(index).getInt1().toString());
@@ -320,15 +291,7 @@ public class QuantityFragment extends DialogFragment{
             }
         });
     }
-//    public void updateList(AlertDialog.Builder builder, LinearLayout ll){
-//        ListView list = new ListView(builder.getContext());
-//        final ListAdapter customAdapter = new ListAdapter(builder.getContext(),R.layout.itemlistrow,final_List);
-//        ll_list.removeAllViewsInLayout();
-//        list.setAdapter(customAdapter);
-//        ll_list.addView(list);
-//        total_quantity_tv.setText(getTotalQuantity().toString());
-//        Log.d("List","Updated");
-//    }
+
     public Integer getTotalQuantity(){
         Integer total=0;
         for(int i=0;i<final_List.size();i++){
