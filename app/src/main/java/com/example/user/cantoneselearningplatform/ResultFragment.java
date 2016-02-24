@@ -34,11 +34,11 @@ public class ResultFragment extends DialogFragment {
     LinearLayout ll_testList;
     Integer totalQuestion;
     ArrayList<Answer> answerList;
-    ArrayList<Exer> exerList;
+    ArrayList<ChineseExer> chinList;
     ArrayList<Check> checkList = new ArrayList<Check>();
-    public ResultFragment(ArrayList<Answer> answerlist, ArrayList<Exer> exerlist){
+    public ResultFragment(ArrayList<Answer> answerlist, ArrayList<ChineseExer> chineseExerList){
         this.answerList = answerlist;
-        this.exerList = exerlist;
+        this.chinList = chineseExerList;
     }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class ResultFragment extends DialogFragment {
         insertCheck();
         updateList(builder, ll_testList);
         totalCorrect.setText(String.format("%d", correctIndex));
-        percent = Float.intBitsToFloat(correctIndex/totalQuestion);
+        percent = (float)correctIndex/totalQuestion;
         percent_present = percent*100 + "%";
         correctPercent.setText(percent_present);
         builder.setView(view);
@@ -71,11 +71,11 @@ public class ResultFragment extends DialogFragment {
     }
     public void insertCheck(){
         for(Integer i=0;i<totalQuestion;i++){
-            if(answerList.get(i).getUserAnswer().equalsIgnoreCase(exerList.get(i).getCardProduct())){
+            if(answerList.get(i).getUserAnswer().equalsIgnoreCase(chinList.get(i).getChineseExerCardProduct())){
                 correctness = 0;
                 correctIndex +=1;
             }else {correctness = 1;}
-            Check check = new Check(exerList.get(i).getCardProduct(),answerList.get(i).getUserAnswer(),correctness,answerList.get(i).getChin());
+            Check check = new Check(chinList.get(i).getChineseExerCardProduct(),answerList.get(i).getUserAnswer(),correctness,chinList.get(i).getChineseExerWord());
             checkList.add(check);
         }
     }

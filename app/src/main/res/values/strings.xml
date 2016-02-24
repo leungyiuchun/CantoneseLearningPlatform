@@ -17,6 +17,8 @@
     <string name="selected_init">已選聲母</string>
     <string name="selected_vowel">已選韻母</string>
     <string name="select_quantity">請選題目數量</string>
+    <string name="quantity_again">請重新設定題目數量</string>
+
     <string name="init_1">b</string>
     <string name="init_2">p</string>
     <string name="init_3">m</string>
@@ -122,6 +124,7 @@
     <string name="homepage">主頁</string>
     <string name="cancel">取消</string>
     <string name="ok">確定</string>
+    <string name = "save">儲存變更</string>
     <string name="correct">正確</string>
     <string name="wrong">錯誤</string>
     <string name="slash">/</string>

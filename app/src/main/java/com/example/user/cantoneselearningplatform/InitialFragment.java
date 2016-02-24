@@ -54,9 +54,10 @@ public class InitialFragment extends DialogFragment {
                 InitialFragment.this.getDialog().cancel();
             }
         })
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ((MyApp) getActivity().getApplication()).addInitReopenFlag();
                         ((MyApp) getActivity().getApplication()).setInitList(tmpInitArray);
                         ((MyApp) getActivity().getApplication()).setInitFlag(1);
                         ((MyApp) getActivity().getApplication()).setQuantityFlag(0);
@@ -82,7 +83,18 @@ public class InitialFragment extends DialogFragment {
 
 
         builder.setView(view);
-        return builder.create();
+        final AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button btnPositive = alert.getButton(Dialog.BUTTON_POSITIVE);
+                btnPositive.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
+                Button btnNegative = alert.getButton(Dialog.BUTTON_NEGATIVE);
+                btnNegative.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            }
+        });
+        return alert;
     }
 
     @Nullable
@@ -310,5 +322,13 @@ public class InitialFragment extends DialogFragment {
             initArray.add(initobj);
         }
         ((MyApp)getActivity().getApplication()).setglobalInitobj(initArray);
+    }
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        final Activity activity = getActivity();
+        if (activity instanceof DialogInterface.OnDismissListener) {
+            ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
+        }
     }
 }

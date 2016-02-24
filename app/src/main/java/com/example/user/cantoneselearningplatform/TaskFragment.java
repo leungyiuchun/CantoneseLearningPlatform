@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class TaskFragment extends DialogFragment {
                         TaskFragment.this.getDialog().cancel();
                     }
                 })
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         TextView tv = (TextView) getActivity().findViewById(R.id.tv2_task);
@@ -90,7 +91,18 @@ public class TaskFragment extends DialogFragment {
                     break;
         }
         builder.setView(view);
-        return builder.create();
+        final AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button btnPositive = alert.getButton(Dialog.BUTTON_POSITIVE);
+                btnPositive.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
+                Button btnNegative = alert.getButton(Dialog.BUTTON_NEGATIVE);
+                btnNegative.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            }
+        });
+        return alert;
 
 
     }

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,10 +43,11 @@ public class VowelFragment extends DialogFragment {
                 VowelFragment.this.getDialog().cancel();
             }
         })
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         TextView tv = (TextView) getActivity().findViewById(R.id.tv2_vowel);
+                        ((MyApp) getActivity().getApplication()).addVowelReopenFlag();
                         ((MyApp) getActivity().getApplication()).setVowelList(tmpVowel);
                         ((MyApp) getActivity().getApplication()).setVowelFlag(1);
                         ((MyApp) getActivity().getApplication()).setQuantityFlag(0);
@@ -76,7 +78,18 @@ public class VowelFragment extends DialogFragment {
 
         builder.setView(view);
 
-        return builder.create();
+        final AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button btnPositive = alert.getButton(Dialog.BUTTON_POSITIVE);
+                btnPositive.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
+                Button btnNegative = alert.getButton(Dialog.BUTTON_NEGATIVE);
+                btnNegative.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            }
+        });
+        return alert;
     }
     @Override
     public void onAttach(Context context) {
@@ -235,6 +248,15 @@ public class VowelFragment extends DialogFragment {
                     Log.d("aa","a");
                 }
             });
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        final Activity activity = getActivity();
+        if (activity instanceof DialogInterface.OnDismissListener) {
+            ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
         }
     }
 }

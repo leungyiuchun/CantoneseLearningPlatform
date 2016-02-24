@@ -10,9 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -35,7 +37,7 @@ public class HintsFragment extends DialogFragment {
                 HintsFragment.this.getDialog().cancel();
             }
         })
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (((MyApp)getActivity().getApplication()).getHintInt()==4){
@@ -133,7 +135,18 @@ public class HintsFragment extends DialogFragment {
             case 4: switch1.setChecked(true);
                     break;
         }
-        return builder.create();
+        final AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button btnPositive = alert.getButton(Dialog.BUTTON_POSITIVE);
+                btnPositive.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
+                Button btnNegative = alert.getButton(Dialog.BUTTON_NEGATIVE);
+                btnNegative.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            }
+        });
+        return alert;
     }
 
     @Override

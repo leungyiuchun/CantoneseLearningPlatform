@@ -9,8 +9,10 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     public Boolean test;
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if(cm.getActiveNetworkInfo() != null){
         }else {
-            new AlertDialog.Builder(MainActivity.this)
+            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("無法連到網路")
                     .setMessage("請開啟Wi-Fi或數據連線 ")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -93,13 +95,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }
 
     }
     public void checkInit(){
         if(((MyApp)this.getApplication()).init_List.isEmpty()){
             test = false;
-            new AlertDialog.Builder(MainActivity.this)
+            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("未設定聲母")
                     .setMessage("未設定練習聲母")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -107,12 +111,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
     public void checkVowel(){
         if(((MyApp)this.getApplication()).vowel_List.isEmpty()){
             test = false;
-            new AlertDialog.Builder(MainActivity.this)
+            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("未設定韻母")
                     .setMessage("未設定練習韻母")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -120,12 +126,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
     public void checkTask(){
         if(((MyApp)this.getApplication()).globalTaskString.equalsIgnoreCase("請選擇任務") ){
             test = false;
-            new AlertDialog.Builder(MainActivity.this)
+            AlertDialog dialog =new  AlertDialog.Builder(MainActivity.this)
                     .setTitle("未設定任務")
                     .setMessage("未設定練習任務")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -133,12 +141,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
     public void checkHints(){
         if(((MyApp)this.getApplication()).globalHintsString.equalsIgnoreCase("請選擇提示")){
             test = false;
-            new AlertDialog.Builder(MainActivity.this)
+            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("未設定提示")
                     .setMessage("未設定練習提示")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -146,12 +156,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
     public void checkQuantityInt(){
         if(((MyApp) this.getApplication()).quantityInt ==0){
             test = false;
-            new AlertDialog.Builder(MainActivity.this)
+            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("未設定數量")
                     .setMessage("未設定練習數量")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -159,12 +171,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
     public void checkMode(){
         if(((MyApp)this.getApplication()).globalModeString.equalsIgnoreCase("請選擇模式")){
             test = false;
-            new AlertDialog.Builder(MainActivity.this)
+            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("未設定模式")
                     .setMessage("未設定練習模式")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -172,12 +186,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
     public void checkExer(){
         if(((MyApp)this.getApplication()).getRandomlizeList().size() == 0) {
             test = false;
-            new AlertDialog.Builder(MainActivity.this)
+            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("未設定練習")
                     .setMessage("未設定練習")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -185,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })
                     .show();
-
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
 

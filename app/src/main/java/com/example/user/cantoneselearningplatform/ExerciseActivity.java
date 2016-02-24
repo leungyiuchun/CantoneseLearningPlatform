@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +66,7 @@ public class ExerciseActivity extends Activity{
     public TextView tv_mode;
     public ArrayList<Exer> exerciseList = new ArrayList<Exer>();
     public ArrayList<Answer> AnswerList = new ArrayList<Answer>();
+    public ArrayList<ChineseExer> chineseExerList = new ArrayList<ChineseExer>();
     Button soundButton;
     Button confirmButton;
     LinearLayout ll_exercise1;
@@ -93,9 +95,7 @@ public class ExerciseActivity extends Activity{
         tv_mode = (TextView)findViewById(R.id.tv_mode);
         globalTaskInt =  ((MyApp)getApplication()).getTaskInt();
         globalHintInt =  ((MyApp)getApplication()).getHintInt();
-        Log.d("task", "" + globalTaskInt.toString());
         final ImageView img = (ImageView) findViewById(R.id.imageView);
-//        img2.setImageAlpha(1);
         ll_exercise1 = (LinearLayout)findViewById(R.id.ll_exercise1);
         ll_exercise2 = (LinearLayout)findViewById(R.id.ll_exercise2);
         ll_exercise3 = (LinearLayout)findViewById(R.id.ll_exercise3);
@@ -108,7 +108,7 @@ public class ExerciseActivity extends Activity{
                 v.getLocationInWindow(abc);
                 home_clicked += 1;
                 if (home_clicked.intValue() == 3) {
-                    new AlertDialog.Builder(ExerciseActivity.this)
+                    AlertDialog dialog = new AlertDialog.Builder(ExerciseActivity.this)
                             .setTitle("確定離開")
                             .setMessage("確定離開？")
                             .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -124,6 +124,8 @@ public class ExerciseActivity extends Activity{
                                 }
                             })
                             .show();
+                    TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
                     home_clicked = 0;
                 }
             }
@@ -181,7 +183,7 @@ public class ExerciseActivity extends Activity{
                     AnswerList.add(ans);
 
                     if (currentQuestion.intValue() == totalQuestion.intValue()) {
-                        DialogFragment resultDialog = new ResultFragment(AnswerList, exerciseList);
+                        DialogFragment resultDialog = new ResultFragment(AnswerList, chineseExerList);
                         resultDialog.show(getFragmentManager(), "dialog");
                     } else {
                         updateExercise();
@@ -191,7 +193,11 @@ public class ExerciseActivity extends Activity{
             }
         });
 
+        exerciseList = ((MyApp)this.getApplication()).getRandomlizeList();
+        translate(exerciseList);
+        Log.d("ChinList Size", " " + chineseExerList.size());
         soundButton = (Button) findViewById(R.id.soundButton);
+        soundButton.setText(chineseExerList.get(index).getChineseExerWord());
         soundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +208,6 @@ public class ExerciseActivity extends Activity{
                 et1.setVisibility(View.VISIBLE);
                 et2.setVisibility(View.VISIBLE);
                 setFocus(et1, et2, globalTaskInt);
-                Log.d("img2","before animation "+img2.getVisibility());
                 switch (globalTaskInt) {
                     case 0:
                         break;
@@ -216,16 +221,14 @@ public class ExerciseActivity extends Activity{
                         animation(soundbtnCoord[0], soundbtnCoord[1], et1Coord[0], et1Coord[1]);
                         break;
                 }
-                Log.d("img2","after animation "+img2.getVisibility());
+                Log.d("img2", "after animation " + img2.getVisibility());
 
             }
         });
 
-        exerciseList = ((MyApp)this.getApplication()).getRandomlizeList();
-        for(int i =0;i<exerciseList.size();i++){
-        Log.d("random_list",""+exerciseList.get(i).getCardProduct());}
-        ans_init = exerciseList.get(index).getInit();
-        ans_vowel = exerciseList.get(index).getVowel();
+
+        ans_init = chineseExerList.get(index).getChineseExerInit();
+        ans_vowel = chineseExerList.get(index).getChineseExerVowel();
         totalQuestion= ((MyApp)this.getApplication()).getQuantityInt();
         tv_totalQuestion.setText(String.format("%d", totalQuestion));
         tv_mode.setText(((MyApp) getApplication()).getModeString());
@@ -238,15 +241,35 @@ public class ExerciseActivity extends Activity{
     @Override
     protected void onResume() {
         Log.d("img2","on resume before "+img2.getVisibility());
-        img2.setVisibility(View.GONE);
+        img2.setVisibility(View.INVISIBLE);
         Log.d("img2", "on resume after " + img2.getVisibility());
 
         super.onResume();
     }
 
     @Override public void onBackPressed() {
-//        if( mCustomKeyboard.isCustomKeyboardVisible() ) mCustomKeyboard.hideCustomKeyboard(); else this.finish();
-    }
+        home_clicked += 1;
+        if (home_clicked.intValue() == 3) {
+            AlertDialog dialog = new AlertDialog.Builder(ExerciseActivity.this)
+                    .setTitle("確定離開")
+                    .setMessage("確定離開？")
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(ExerciseActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            home_clicked = 0;
+        }    }
 
     public boolean checkAnswer(String init, String vowel, String ans_init_check,String ans_vowel_check) {
 
@@ -328,8 +351,10 @@ public class ExerciseActivity extends Activity{
         currentQuestion +=1;
         index += 1;
         tv_currentQuestion.setText(String.format("%d", currentQuestion));
-        ans_init = exerciseList.get(index).getInit();
-        ans_vowel = exerciseList.get(index).getVowel();
+        ans_init = chineseExerList.get(index).getChineseExerInit();
+        ans_vowel = chineseExerList.get(index).getChineseExerVowel();
+        soundButton.setText(chineseExerList.get(index).getChineseExerWord());
+        removeTextListener();
         et1.getText().clear();
         et1.setTextColor(Color.BLACK);
         et2.getText().clear();
@@ -456,5 +481,33 @@ public class ExerciseActivity extends Activity{
     protected void onStart() {
 
         super.onStart();
+    }
+    public void translate(ArrayList<Exer> exerciseArrayList){
+        for (int i =0;i<exerciseArrayList.size();i++){
+            Log.d("exerList Size"," "+exerciseArrayList.size());
+            ChineseExer chineseExer = new ChineseExer(exerciseArrayList.get(i), tmpAddChinese(exerciseArrayList.get(i).getCardProduct()));
+            chineseExerList.add(chineseExer);
+        }
+    }
+    public String tmpAddChinese(String cardProduct){
+        String product = cardProduct;
+        String chinese;
+        switch (product){
+            case "baa":
+                chinese = "爸";
+                break;
+            case "maa":
+                chinese="媽";
+                break;
+            case "saa":
+                chinese="沙";
+                break;
+            case "haa":
+                chinese="哈";
+                break;
+            default:
+                chinese="花";
+        }
+        return chinese;
     }
 }

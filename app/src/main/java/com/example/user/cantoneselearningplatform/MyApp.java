@@ -92,9 +92,6 @@ public class MyApp extends Application {
     public void setInitFlag(Integer flag){
         this.init_flag = flag;
     }
-    public void addInitFlag(){
-        this.init_flag +=1;
-    }
     public Integer getInitflag(){
         return this.init_flag;
     }
@@ -103,12 +100,19 @@ public class MyApp extends Application {
     public void setVowelFlag(Integer flag){
         this.vowel_flag = flag;
     }
-    public void addVowelFlag(){
-        this.vowel_flag +=1;
-    }
     public Integer getVowel_flag(){
         return this.vowel_flag;
     }
+
+    Integer reopen_init_flag=0;
+    public void setInitReopenFlag(Integer flag){this.reopen_init_flag = flag;}
+    public Integer getInitReopenFlag(){return this.reopen_init_flag;}
+    public void addInitReopenFlag(){this.reopen_init_flag+=1;}
+
+    Integer reopen_vowel_flag=0;
+    public void setVowelReopenFlag(Integer flag){this.reopen_vowel_flag = flag;}
+    public Integer getVowelReopenFlag(){return this.reopen_vowel_flag;}
+    public void addVowelReopenFlag(){this.reopen_vowel_flag+=1;}
 
     ArrayList<Initobj> globalInitobj =new ArrayList<Initobj>();
     public void setglobalInitobj(ArrayList<Initobj> initobjs){

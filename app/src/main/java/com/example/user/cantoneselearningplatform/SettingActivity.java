@@ -2,17 +2,20 @@ package com.example.user.cantoneselearningplatform;
 
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DialerFilter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity implements DialogInterface.OnDismissListener{
 
     String ssssss[];
     TextView init_tv;
@@ -21,12 +24,21 @@ public class SettingActivity extends AppCompatActivity {
     TextView hints_tv;
     TextView quantity_tv;
     TextView mode_tv;
+    LinearLayout setting_quantity;
+    LinearLayout setting_task;
+    LinearLayout setting_hints;
+    LinearLayout setting_mode;
 
     Integer quantity_flag = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        setting_quantity = (LinearLayout)findViewById(R.id.setting_quantity);
+        setting_task = (LinearLayout)findViewById(R.id.setting_task);
+        setting_hints = (LinearLayout)findViewById(R.id.setting_hints);
+        setting_mode = (LinearLayout)findViewById(R.id.setting_mode);
 
         init_tv = (TextView)findViewById(R.id.tv2_initial);
         vowel_tv = (TextView)findViewById(R.id.tv2_vowel);
@@ -59,10 +71,8 @@ public class SettingActivity extends AppCompatActivity {
         init_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 DialogFragment InitialDialog = new InitialFragment();
                 InitialDialog.show(getFragmentManager(), "dialog");
-//                startActivity(intent);
             }
         });
 
@@ -114,6 +124,8 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
+
         if(((MyApp)getApplication()).getInitList().size()==0){
             init_tv.setText("請選擇聲母");
         }else {
@@ -125,23 +137,26 @@ public class SettingActivity extends AppCompatActivity {
         }else {
             vowel_tv.setText(((MyApp)getApplication()).getVowelList().toString());
         }
-//        if(((MyApp)getApplication()).getVowelList().size()==0){
-//            task_tv.setText("請選擇任務");
-//        }else {
-            task_tv.setText(((MyApp)getApplication()).getTaskString());
-//        }
-//        if(((MyApp)getApplication()).getVowelList().size()==0){
-//            hints_tv.setText("請選擇韻母");
-//        }else {
-            hints_tv.setText(((MyApp)getApplication()).getHintsString());
-            if(((MyApp)getApplication()).getQuantityInt()==0){
-                quantity_tv.setText(((MyApp) getApplication()).getQuantityString());}
-            else {
-                quantity_tv.setText(((MyApp) getApplication()).getQuantityInt().toString());
-            }
-            mode_tv.setText(((MyApp)getApplication()).getModeString());
-            Log.d("globalTaskLis","SettingActivity"+((MyApp)getApplication()).getCombinationList().size());
-//        }
+        if (((MyApp) getApplication()).getVowel_flag().intValue()==1&&((MyApp) getApplication()).getInitflag().intValue()==1){
+            setting_mode.setVisibility(View.VISIBLE);
+            setting_quantity.setVisibility(View.VISIBLE);
+            setting_task.setVisibility(View.VISIBLE);
+            setting_hints.setVisibility(View.VISIBLE);
+        }else {
+            setting_mode.setVisibility(View.INVISIBLE);
+            setting_quantity.setVisibility(View.INVISIBLE);
+            setting_task.setVisibility(View.INVISIBLE);
+            setting_hints.setVisibility(View.INVISIBLE);
+        }
+
+        task_tv.setText(((MyApp)getApplication()).getTaskString());
+        hints_tv.setText(((MyApp)getApplication()).getHintsString());
+        if(((MyApp)getApplication()).getQuantityInt()==0){
+            quantity_tv.setText(((MyApp) getApplication()).getQuantityString());}
+        else {
+            quantity_tv.setText(((MyApp) getApplication()).getQuantityInt().toString());
+        }
+        mode_tv.setText(((MyApp)getApplication()).getModeString());
         super.onResume();
 
 
@@ -177,5 +192,25 @@ public class SettingActivity extends AppCompatActivity {
         super.onRestart();
     }
 
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        Log.d("Init reopen"," "+((MyApp) getApplication()).getInitReopenFlag().toString());
+        Log.d("vowel reopen"," "+((MyApp) getApplication()).getVowelReopenFlag().toString());
 
+        if (((MyApp) getApplication()).getVowel_flag().intValue()==1&&((MyApp) getApplication()).getInitflag().intValue()==1){
+            setting_mode.setVisibility(View.VISIBLE);
+            setting_quantity.setVisibility(View.VISIBLE);
+            setting_task.setVisibility(View.VISIBLE);
+            setting_hints.setVisibility(View.VISIBLE);
+        }else {
+            setting_mode.setVisibility(View.INVISIBLE);
+            setting_quantity.setVisibility(View.INVISIBLE);
+            setting_task.setVisibility(View.INVISIBLE);
+            setting_hints.setVisibility(View.INVISIBLE);
+        }
+        if (((MyApp) getApplication()).getInitReopenFlag().intValue()==2|((MyApp) getApplication()).getVowelReopenFlag().intValue()==2){
+            quantity_tv.setText(R.string.quantity_again);
+        }
+
+    }
 }
