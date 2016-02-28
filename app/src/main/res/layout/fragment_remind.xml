@@ -71,5 +71,6 @@
         android:layout_width="wrap_content"
         android:id="@+id/ll_remindList"
         android:orientation="vertical">
+
     </LinearLayout>
 </LinearLayout>

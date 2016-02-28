@@ -81,9 +81,19 @@ public class ResultFragment extends DialogFragment {
     }
     public void updateList(AlertDialog.Builder builder, LinearLayout ll){
         ListView list = new ListView(builder.getContext());
-        final checkListAdapter customAdapter = new checkListAdapter(builder.getContext(),R.layout.checklistrow,checkList);
+        final checkListAdapter customAdapter = new checkListAdapter(builder.getContext(),R.layout.checklistrow,getDisplayCheckList());
         ll.removeAllViewsInLayout();
         list.setAdapter(customAdapter);
         ll.addView(list);
+    }
+    public ArrayList<Check> getDisplayCheckList(){
+        ArrayList<Check> newCheckList = new ArrayList<Check>();
+        Integer intC = 5;
+        Check newCheck = new Check("拼音答案","學生答案",intC,"中文答案");
+        newCheckList.add(newCheck);
+        for (int i =0;i<checkList.size();i++){
+            newCheckList.add(checkList.get(i));
+        }
+        return newCheckList;
     }
 }

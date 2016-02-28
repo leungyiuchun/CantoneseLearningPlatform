@@ -198,10 +198,14 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
         Log.d("vowel reopen"," "+((MyApp) getApplication()).getVowelReopenFlag().toString());
 
         if (((MyApp) getApplication()).getVowel_flag().intValue()==1&&((MyApp) getApplication()).getInitflag().intValue()==1){
-            setting_mode.setVisibility(View.VISIBLE);
-            setting_quantity.setVisibility(View.VISIBLE);
-            setting_task.setVisibility(View.VISIBLE);
-            setting_hints.setVisibility(View.VISIBLE);
+            if(((MyApp) getApplication()).getInitList().size()==0|((MyApp) getApplication()).getVowelList().size()==0){
+
+            }else{
+                setting_mode.setVisibility(View.VISIBLE);
+                setting_quantity.setVisibility(View.VISIBLE);
+                setting_task.setVisibility(View.VISIBLE);
+                setting_hints.setVisibility(View.VISIBLE);
+            }
         }else {
             setting_mode.setVisibility(View.INVISIBLE);
             setting_quantity.setVisibility(View.INVISIBLE);

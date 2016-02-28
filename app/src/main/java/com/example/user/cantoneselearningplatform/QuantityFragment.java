@@ -160,7 +160,7 @@ public class QuantityFragment extends DialogFragment{
         cp.setAllCaps(false);
         cp.setText(final_List.get(i).getCartProduct());
         cp.setBackgroundResource(R.drawable.borders_black_and_blue);
-        cp.setTextSize(30);
+        cp.setTextSize(40);
         cp.setGravity(Gravity.CENTER);
         row.addView(cp);
 
@@ -195,7 +195,7 @@ public class QuantityFragment extends DialogFragment{
 
         final Button decreaseBtn = new Button(getActivity().getApplicationContext());
         decreaseBtn.setBackgroundResource(R.drawable.calculator22);
-        decreaseBtn.setLayoutParams(new TableRow.LayoutParams(80, 80));
+        decreaseBtn.setLayoutParams(new TableRow.LayoutParams(70, 70));
         decreaseBtn.setVisibility(View.INVISIBLE);
         row.addView(decreaseBtn);
 
@@ -208,33 +208,11 @@ public class QuantityFragment extends DialogFragment{
 
         final Button increaseBtn = new Button(getActivity().getApplicationContext());
         increaseBtn.setBackgroundResource(R.drawable.add139);
-        increaseBtn.setLayoutParams(new TableRow.LayoutParams(80, 80));
+        increaseBtn.setLayoutParams(new TableRow.LayoutParams(70, 70));
         increaseBtn.setVisibility(View.INVISIBLE);
         row.addView(increaseBtn);
 
-        row.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Row","onClick "+index.toString());
-                v.requestFocus();
-                cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
-                quantity_tv1.setText(final_List.get(index).getInt1().toString());
-                increaseBtn.setVisibility(View.VISIBLE);
-                decreaseBtn.setVisibility(View.VISIBLE);
-            }
-        });
-        row.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                Log.d("Row","OnFocus"+index.toString());
-                increaseBtn.setVisibility(View.INVISIBLE);
-                decreaseBtn.setVisibility(View.INVISIBLE);
-                cp.setBackgroundResource(R.drawable.borders_black_and_blue);
-                quantity_tv1.setText(final_List.get(index).getInt1().toString());
-                setButtonFunction(button_confirm, index, cp, decreaseBtn, increaseBtn, quantity_tv1);
-                button_confirm.setText(R.string.action_settings);
-            }
-        });
+        setRowListner(row,cp,quantity_tv1,increaseBtn,decreaseBtn,index);
 
         increaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,12 +239,11 @@ public class QuantityFragment extends DialogFragment{
         });
 
         quantity_tl.addView(row);
-
     }
-    public void setButtonFunction(final Button confirm,final Integer index,TextView tv_cp,Button decreaseBtn, final Button increaseBtn, final TextView quantity){
+    public void setButtonFunction(final Button confirm,final Integer index,Button tv_cp,Button decreaseBtn, final Button increaseBtn, final TextView quantity){
         final Button btn_decrease = decreaseBtn;
         final Button btn_increase = increaseBtn;
-        final TextView cp = tv_cp;
+        final Button cp = tv_cp;
         final String setInit = final_List.get(index).getInit();
         final String setVowel = final_List.get(index).getVowel();
         final String CardProduct = final_List.get(index).getCartProduct();
@@ -288,7 +265,7 @@ public class QuantityFragment extends DialogFragment{
                 confirm.setText(R.string.action_set);
                 total_quantity_tv.setText(getTotalQuantity().toString());
                 tv_int.setText(final_List.get(index).getInt1().toString());
-
+//                quantity_tl.requestFocus();
             }
         });
     }
@@ -307,5 +284,60 @@ public class QuantityFragment extends DialogFragment{
             combination +=1;
         }
         return combination;
+    }
+    public void setRowListner(TableRow row1,Button tv,TextView quantity_tv,Button increaseB,Button decreaseB,Integer i){
+        final TableRow row = row1;
+        final Button cp = tv;
+        final TextView quantity_tv1 = quantity_tv;
+        final Button increaseBtn = increaseB;
+        final Button decreaseBtn = decreaseB;
+        final Integer index = i;
+        row.setFocusableInTouchMode(true);
+        row.setFocusable(true);
+        row.setClickable(true);
+        row.requestFocus();
+        quantity_tl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                row.requestFocus();
+            }
+        });
+//        row.requestFocus();
+        button_confirm.setText(R.string.action_settings);
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Row", "onClick " + index.toString());
+                Log.d("Row","Clickable "+ row.isClickable());
+                v.requestFocus();
+                cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
+                quantity_tv1.setText(final_List.get(index).getInt1().toString());
+                increaseBtn.setVisibility(View.VISIBLE);
+                decreaseBtn.setVisibility(View.VISIBLE);
+                setButtonFunction(button_confirm, index, cp, decreaseBtn, increaseBtn, quantity_tv1);
+
+            }
+        });
+
+        row.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.d("Row", "OnFocus" + index.toString());
+                increaseBtn.setVisibility(View.INVISIBLE);
+                decreaseBtn.setVisibility(View.INVISIBLE);
+                cp.setBackgroundResource(R.drawable.borders_black_and_blue);
+                quantity_tv1.setText(final_List.get(index).getInt1().toString());
+                row.requestFocus();
+            }
+        });
+//        row.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                                increaseBtn.setVisibility(View.VISIBLE);
+//                decreaseBtn.setVisibility(View.VISIBLE);
+//                                cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
+//
+//            }
+//        });
     }
 }

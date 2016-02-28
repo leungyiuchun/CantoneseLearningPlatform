@@ -3,8 +3,8 @@
     <string name="home_theme">廣東話學習平台</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_play">開始</string>
-    <string name="action_settings">設定</string>
-    <string name="action_set">已設定</string>
+    <string name="action_settings">選擇</string>
+    <string name="action_set">已選擇</string>
     <string name="update_list">更新</string>
     <string name="setting_initial">聲母</string>
     <string name="setting_vowel">韻母</string>
@@ -128,6 +128,9 @@
     <string name="correct">正確</string>
     <string name="wrong">錯誤</string>
     <string name="slash">/</string>
+    <string name="on">開啟</string>
+    <string name="off">關閉</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

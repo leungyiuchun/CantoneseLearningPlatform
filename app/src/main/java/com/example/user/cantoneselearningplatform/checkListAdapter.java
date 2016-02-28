@@ -3,6 +3,7 @@ package com.example.user.cantoneselearningplatform;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +26,15 @@ public class checkListAdapter extends ArrayAdapter<Check>{
     @Override
     public View getView(int position,View convertView, ViewGroup parent){
         View v = convertView;
-
         if(v==null){
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
             v = vi.inflate(R.layout.checklistrow, null);
         }
         Check p = getItem(position);
-        Integer position1 = position + 1;
+        Integer position1 = position;
+        Log.d("Check position",""+position1.toString());
+        Log.d("Check position"," "+position1.equals(1));
         if (p != null) {
             TextView tt1 = (TextView) v.findViewById(R.id.checkPosition);
             TextView tt2 = (TextView) v.findViewById(R.id.checkAnswer);
@@ -40,32 +42,66 @@ public class checkListAdapter extends ArrayAdapter<Check>{
             TextView tt4 = (TextView) v.findViewById(R.id.checkCorrectness);
             TextView tt5 = (TextView) v.findViewById(R.id.checkChineseWord);
             if (tt1 != null) {
-                tt1.setText(String.format("%d", position1));
+                if (position1.toString().equals("0")){
+                    tt1.setText("題數");
+                    tt1.setGravity(Gravity.RIGHT);
+                }else{
+                    tt1.setText(String.format("%d", position));
+                    tt1.setGravity(Gravity.RIGHT);
+                }
 
             }
 
             if (tt2 != null) {
+
                 tt2.setText(p.getCheckAnswer());
+                tt2.setGravity(Gravity.RIGHT);
 
             }
             if (tt3 != null) {
-                tt3.setText(p.getCheckUserAnswer());
-
-
+                if(p.getCorrectDecision().toString().equals("0")){
+                    tt3.setText(p.getCheckUserAnswer());
+                    tt3.setTextColor(Color.BLACK);
+                    tt3.setGravity(Gravity.RIGHT);
+                }else{
+                    if (p.getCorrectDecision().intValue() == 1) {
+                        tt3.setTextColor(Color.RED);
+                        tt3.setGravity(Gravity.RIGHT);
+                    }else{
+                        if (p.getCorrectDecision().intValue() == 0){
+                            tt3.setTextColor(Color.GREEN);
+                            tt3.setGravity(Gravity.RIGHT);
+                        }
+                    }
+                    tt3.setText(p.getCheckUserAnswer());
+                    tt3.setGravity(Gravity.RIGHT);
+                }
             }
             if (tt4 != null) {
 
-                tt4.setText(p.getCorrectDecision().toString());
-                if(p.getCorrectDecision().intValue()==0){
-                    tt4.setTextColor(Color.GREEN);
-                    tt4.setText("正確");
+                if (position1.toString().equals("0")){
+                    tt4.setText("結果");
+                    tt4.setTextColor(Color.BLACK);
+                    tt4.setGravity(Gravity.RIGHT);
+
                 }else{
-                    tt4.setTextColor(Color.RED);
-                    tt4.setText("錯誤");
+                    tt4.setText(p.getCorrectDecision().toString());
+                    if(p.getCorrectDecision().intValue()==0){
+                        tt4.setGravity(Gravity.RIGHT);
+                        tt4.setTextColor(Color.GREEN);
+                        tt4.setText("正確");
+                    }else{
+                        tt4.setGravity(Gravity.RIGHT);
+                        tt4.setTextColor(Color.RED);
+                        tt4.setText("錯誤");
+                    }
                 }
+
+
             }
             if (tt5 !=null){
                 tt5.setText(p.getChinese());
+                tt5.setGravity(Gravity.RIGHT);
             }
         }
         return v;

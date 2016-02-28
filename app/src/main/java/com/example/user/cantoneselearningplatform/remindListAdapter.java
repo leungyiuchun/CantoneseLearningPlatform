@@ -29,13 +29,16 @@ public class remindListAdapter extends ArrayAdapter<Answer>{
             v = vi.inflate(R.layout.remindlistrow, null);
         }
         Answer p = getItem(position);
-        Integer position1 = position + 1;
+        Integer position1 = position;
         if (p != null) {
             TextView tt1 = (TextView) v.findViewById(R.id.remindPosition);
             TextView tt2 = (TextView) v.findViewById(R.id.remindAnswer);
             TextView tt3 = (TextView) v.findViewById(R.id.remindChineseWord);
             if (tt1 != null) {
-                tt1.setText(String.format("%d", position1));
+                if (position1.intValue()+1==1){
+                    tt1.setText("題數");
+                }
+                tt1.setText(String.format("%d", position));
             }
 
             if (tt2 != null) {

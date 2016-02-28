@@ -2,16 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
     >
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:id="@+id/hints_theme"
         android:gravity="center_horizontal">
         <TextView
@@ -39,9 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background= "@android:color/darker_gray"
-            android:layout_below="@+id/hints_theme"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            />
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
@@ -51,20 +48,35 @@
 
     <LinearLayout
         android:id="@+id/rl_hints_1"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/hints_themeSep">
-
+        android:layout_below="@+id/hints_themeSep"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/hints"
+            android:textSize="50sp"
+            android:paddingRight="10sp"/>
+        <TextView
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/off"
+            android:textSize="20sp"/>
         <Switch
-            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:switchMinWidth="200dp"
-            android:text="@string/hints"
-            android:textSize="50dp"
             android:id="@+id/hints_switch1"
             android:layout_gravity="center_horizontal" />
+        <TextView
+            android:paddingLeft="10sp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/on"
+            android:textSize="20sp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -72,9 +84,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_hints_1"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal">
+        android:layout_below="@+id/rl_hints_1">
         <RadioGroup
             android:id="@+id/hints_rg_1"
             android:layout_width="wrap_content"
@@ -84,39 +94,20 @@
                 android:text="@string/setting_initial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="70dp"></RadioButton>>
+                android:textSize="40sp"/>
             <RadioButton
                 android:id="@+id/task_rb_2"
                 android:text="@string/setting_vowel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="70dp"></RadioButton>>
+                android:textSize="40sp"/>
             <RadioButton
                 android:id="@+id/task_rb_3"
                 android:text="@string/ini_vowel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="70dp"></RadioButton>>
+                android:textSize="40sp"/>
         </RadioGroup>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/setting_finish"
-        android:layout_marginBottom="37dp"
-        android:layout_below="@+id/ll_hints_1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:gravity="right">
-        <!--<Button-->
-            <!--android:textSize="45dp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/setting_finish"-->
-            <!--android:id="@+id/setting_button"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentEnd="true" />-->
-    </LinearLayout>
 </RelativeLayout>

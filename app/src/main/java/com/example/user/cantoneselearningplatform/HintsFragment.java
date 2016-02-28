@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -27,6 +28,9 @@ import java.util.Arrays;
 public class HintsFragment extends DialogFragment {
     String hints = "";
     int hintsDecision =0;
+    RadioButton rb1;
+    RadioButton rb2;
+    RadioButton rb3;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -69,18 +73,38 @@ public class HintsFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_hints, null);
         final RadioGroup rg = (RadioGroup)view.findViewById(R.id.hints_rg_1);
-        rg.setVisibility(View.INVISIBLE);
+        rb1 = (RadioButton)view.findViewById(R.id.task_rb_1);
+        rb2 = (RadioButton)view.findViewById(R.id.task_rb_2);
+        rb3 = (RadioButton)view.findViewById(R.id.task_rb_3);
+        rb1.setEnabled(false);
+        rb2.setEnabled(false);
+        rb3.setEnabled(false);
+        rb1.setTextColor(Color.GRAY);
+        rb2.setTextColor(Color.GRAY);
+        rb3.setTextColor(Color.GRAY);
         final Switch switch1 = (Switch)view.findViewById(R.id.hints_switch1);
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    rg.setVisibility(View.VISIBLE);
+                    rg.setEnabled(true);
+                    rb1.setEnabled(true);
+                    rb2.setEnabled(true );
+                    rb3.setEnabled(true);
+                    rb1.setTextColor(Color.BLACK);
+                    rb2.setTextColor(Color.BLACK);
+                    rb3.setTextColor(Color.BLACK);
                     setHintsInt(4);
                     setHintsString("請選擇提示");
 
                 } else {
-                    rg.setVisibility(View.INVISIBLE);
+                    rg.setEnabled(false);
+                    rb1.setEnabled(false);
+                    rb2.setEnabled(false);
+                    rb3.setEnabled(false);
+                    rb1.setTextColor(Color.GRAY);
+                    rb2.setTextColor(Color.GRAY);
+                    rb3.setTextColor(Color.GRAY);
                     setHintsInt(0);
                     setHintsString("沒有提示");
                 }

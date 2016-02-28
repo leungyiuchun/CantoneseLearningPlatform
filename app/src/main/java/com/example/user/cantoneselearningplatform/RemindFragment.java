@@ -51,9 +51,18 @@ public class RemindFragment extends DialogFragment {
     }
     public void updateList(AlertDialog.Builder builder, LinearLayout ll){
         ListView list = new ListView(builder.getContext());
-        final remindListAdapter customAdapter = new remindListAdapter(builder.getContext(),R.layout.remindlistrow,answerList);
+        final remindListAdapter customAdapter = new remindListAdapter(builder.getContext(),R.layout.remindlistrow,getDisplayAnswerList());
         ll.removeAllViewsInLayout();
         list.setAdapter(customAdapter);
         ll.addView(list);
+    }
+    public ArrayList<Answer> getDisplayAnswerList(){
+        ArrayList<Answer> displayAnswer = new ArrayList<Answer>();
+        Answer answer = new Answer(null,null,"拼音答案","中文答案");
+        displayAnswer.add(answer);
+        for(int i = 0;i<answerList.size();i++){
+            displayAnswer.add(answerList.get(i));
+        }
+        return displayAnswer;
     }
 }

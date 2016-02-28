@@ -25,7 +25,9 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -80,6 +82,7 @@ public class ExerciseActivity extends Activity{
     TextWatcher textWatcher2;
     ImageView img2;
     Animation animation;
+    Animation animation2;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,6 +211,7 @@ public class ExerciseActivity extends Activity{
                 et1.setVisibility(View.VISIBLE);
                 et2.setVisibility(View.VISIBLE);
                 setFocus(et1, et2, globalTaskInt);
+                Log.d("coord2", "" + soundbtnCoord[0] + soundbtnCoord[1]);
                 switch (globalTaskInt) {
                     case 0:
                         break;
@@ -240,7 +244,7 @@ public class ExerciseActivity extends Activity{
 
     @Override
     protected void onResume() {
-        Log.d("img2","on resume before "+img2.getVisibility());
+        Log.d("img2", "on resume before " + img2.getVisibility());
         img2.setVisibility(View.INVISIBLE);
         Log.d("img2", "on resume after " + img2.getVisibility());
 
@@ -368,6 +372,9 @@ public class ExerciseActivity extends Activity{
         setFocus(et1, et2, globalTaskInt);
         setTask(et1, et2, globalTaskInt);
         addTextListener();
+        animation(soundbtnCoord[0], soundbtnCoord[1], soundbtnCoord[0], soundbtnCoord[1]);
+        initAnimation(soundbtnCoord[0], soundbtnCoord[1], submitCoord[0], submitCoord[1]);
+
     }
 
     public void executeAnimation(ImageView image,Context context1,Integer int1){
@@ -409,6 +416,10 @@ public class ExerciseActivity extends Activity{
         et2.getLocationOnScreen(et2Coord);
         soundButton.getLocationOnScreen(soundbtnCoord);
         confirmButton.getLocationOnScreen(submitCoord);
+        Log.d("coord1",""+soundbtnCoord[0] + soundbtnCoord[1]);
+        animation(soundbtnCoord[0], soundbtnCoord[1], soundbtnCoord[0], soundbtnCoord[1]);
+        initAnimation(soundbtnCoord[0], soundbtnCoord[1], submitCoord[0], submitCoord[1]);
+
         super.onWindowFocusChanged(hasFocus);
 
     }
@@ -420,8 +431,24 @@ public class ExerciseActivity extends Activity{
         animation.setRepeatCount(0);
         animation.setRepeatMode(1);
         img2.startAnimation(animation);
-        img2.setVisibility(View.GONE);
+        img2.setVisibility(View.INVISIBLE);
 
+    }
+    public void initAnimation(int x1,int y1,int x2, int y2){
+        img2.setVisibility(View.VISIBLE);
+        Log.d("InitAnimation", "");
+        animation = new TranslateAnimation(x1,x1,y1,y1);
+        animation.setDuration(1000);
+        animation2 = new AlphaAnimation(1, 0);
+        animation2.setDuration(1000);
+        animation2.setRepeatCount(5);
+        animation2.setRepeatMode(1);
+        AnimationSet am = new AnimationSet(false);
+        am.addAnimation(animation);
+        am.addAnimation(animation2);
+        img2.setAnimation(am);
+        am.startNow();
+        img2.setVisibility(View.INVISIBLE);
     }
     public void declareTextListener(){
         textWatcher1 = new TextWatcher() {
