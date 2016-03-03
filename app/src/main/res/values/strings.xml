@@ -8,7 +8,7 @@
     <string name="update_list">更新</string>
     <string name="setting_initial">聲母</string>
     <string name="setting_vowel">韻母</string>
-    <string name="setting_task">選填</string>
+    <string name="setting_task_and_hints">選填和提示</string>
     <string name="setting_hints">提示</string>
     <string name="setting_initial1">聲母:</string>
     <string name="setting_vowel1">韻母:</string>
@@ -18,7 +18,7 @@
     <string name="selected_vowel">已選韻母</string>
     <string name="select_quantity">請選題目數量</string>
     <string name="quantity_again">請重新設定題目數量</string>
-
+    <string name="settings">設定</string>
     <string name="init_1">b</string>
     <string name="init_2">p</string>
     <string name="init_3">m</string>
@@ -103,7 +103,7 @@
     <string name="vowel_2">a</string>
     <string name="vowel_theme">請選擇是次練習的韻母</string>
 
-    <string name="task_theme">請選擇是次練習的題目</string>
+    <string name="task_theme">請選擇是次練習的題目和提示</string>
     <string name="hints_theme">請選擇是次練習的提示</string>
     <string name="quantity_theme">請選擇以下組合數量</string>
     <string name="mode_theme">請選擇是次練習的模式</string>
@@ -115,8 +115,8 @@
     <string name="test_mode">測驗模式</string>
     <string name="total_quantity">總題數：</string>
     <string name="total_combination">組合數量：</string>
-    <string name="total_correct">答對題數</string>
-    <string name="correct_percent">答對率</string>
+    <string name="total_correct">答對題數：</string>
+    <string name="correct_percent">答對率：</string>
     <string name="ini_vowel">聲母 + 韻母</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
     <string name="title_setting_exercise">SettingActivity</string>

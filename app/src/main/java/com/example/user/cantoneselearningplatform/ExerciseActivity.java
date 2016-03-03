@@ -19,6 +19,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -83,7 +84,6 @@ public class ExerciseActivity extends Activity{
     ImageView img2;
     Animation animation;
     Animation animation2;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -128,7 +128,7 @@ public class ExerciseActivity extends Activity{
                             })
                             .show();
                     TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     home_clicked = 0;
                 }
             }
@@ -205,7 +205,7 @@ public class ExerciseActivity extends Activity{
             @Override
             public void onClick(View v) {
                 String toSpeak = soundButton.getText().toString();
-                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                 t1.setSpeechRate(0.3f); //larger it is, faster it would be.
                 t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 et1.setVisibility(View.VISIBLE);
@@ -217,12 +217,27 @@ public class ExerciseActivity extends Activity{
                         break;
                     case 1:
                         animation(soundbtnCoord[0], soundbtnCoord[1], et1Coord[0], et1Coord[1]);
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                initAnimation(et1Coord[0], et1Coord[1], 0, 0);
+                            }
+                        }, 4000);
                         break;
                     case 2:
                         animation(soundbtnCoord[0], soundbtnCoord[1], et2Coord[0], et2Coord[1]);
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                initAnimation(et2Coord[0], et2Coord[1], 0, 0);
+                            }
+                        }, 4000);
                         break;
                     case 3:
                         animation(soundbtnCoord[0], soundbtnCoord[1], et1Coord[0], et1Coord[1]);
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                initAnimation(et1Coord[0], et1Coord[1], 0, 0);
+                            }
+                        }, 4000);
                         break;
                 }
                 Log.d("img2", "after animation " + img2.getVisibility());
@@ -236,6 +251,10 @@ public class ExerciseActivity extends Activity{
         totalQuestion= ((MyApp)this.getApplication()).getQuantityInt();
         tv_totalQuestion.setText(String.format("%d", totalQuestion));
         tv_mode.setText(((MyApp) getApplication()).getModeString());
+        if(((MyApp) getApplication()).getModeInt() == 0){
+            et1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_init.length())});
+            et2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_vowel.length())});
+        }
 
         setTask(et1, et2, globalTaskInt);
         setHints(et1, et2, globalHintInt);
@@ -271,7 +290,7 @@ public class ExerciseActivity extends Activity{
                     })
                     .show();
             TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             home_clicked = 0;
         }    }
 
@@ -365,6 +384,12 @@ public class ExerciseActivity extends Activity{
         et2.setTextColor(Color.BLACK);
         et1.setVisibility(View.GONE);
         et2.setVisibility(View.GONE);
+        if(((MyApp) getApplication()).getModeInt() == 0){
+            et1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_init.length())});
+            et2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_vowel.length())});
+        }
+        et1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_init.length())});
+        et2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_vowel.length())});
         ll_exercise1.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
@@ -372,6 +397,9 @@ public class ExerciseActivity extends Activity{
         setFocus(et1, et2, globalTaskInt);
         setTask(et1, et2, globalTaskInt);
         addTextListener();
+        String toSpeak1 = soundButton.getText().toString();
+        t1.setSpeechRate(0.3f); //larger it is, faster it would be.
+        t1.speak(toSpeak1, TextToSpeech.QUEUE_FLUSH, null);
         animation(soundbtnCoord[0], soundbtnCoord[1], soundbtnCoord[0], soundbtnCoord[1]);
         initAnimation(soundbtnCoord[0], soundbtnCoord[1], submitCoord[0], submitCoord[1]);
 
@@ -416,7 +444,7 @@ public class ExerciseActivity extends Activity{
         et2.getLocationOnScreen(et2Coord);
         soundButton.getLocationOnScreen(soundbtnCoord);
         confirmButton.getLocationOnScreen(submitCoord);
-        Log.d("coord1",""+soundbtnCoord[0] + soundbtnCoord[1]);
+        Log.d("coord1", "" + soundbtnCoord[0] + soundbtnCoord[1]);
         animation(soundbtnCoord[0], soundbtnCoord[1], soundbtnCoord[0], soundbtnCoord[1]);
         initAnimation(soundbtnCoord[0], soundbtnCoord[1], submitCoord[0], submitCoord[1]);
 
@@ -424,16 +452,35 @@ public class ExerciseActivity extends Activity{
 
     }
 
-    public void animation(int x1,int y1,int x2,int y2){
+    public void animation(int x1,int y1,int x2, int y2) {
         img2.setVisibility(View.VISIBLE);
-        animation = new TranslateAnimation(x1,x2,y1,y2);
-        animation.setDuration(1000);
+        animation = new TranslateAnimation(x1,x2, y1, y2);
+        animation.setDuration(4000);
         animation.setRepeatCount(0);
         animation.setRepeatMode(1);
+        animation2 = new AlphaAnimation(1, 0);
+        animation2.setDuration(1000);
+        animation2.setRepeatCount(5);
+        animation2.setRepeatMode(1);
+        animation2.setStartOffset(1000);
+        AnimationSet am = new AnimationSet(false);
+        am.addAnimation(animation2);
+        am.addAnimation(animation);
+        img2.setAnimation(am);
+        am.startNow();
         img2.startAnimation(animation);
         img2.setVisibility(View.INVISIBLE);
 
     }
+//    public void animation2(){
+//        animation2 = new AlphaAnimation(1, 0);
+//        animation2.setDuration(1000);
+//        animation2.setRepeatCount(5);
+//        animation2.setRepeatMode(1);
+//        animation2.setStartOffset(4000);
+//        img2.startAnimation(animation2);
+//        img2.setVisibility(View.INVISIBLE);
+//    }
     public void initAnimation(int x1,int y1,int x2, int y2){
         img2.setVisibility(View.VISIBLE);
         Log.d("InitAnimation", "");
@@ -451,6 +498,7 @@ public class ExerciseActivity extends Activity{
         img2.setVisibility(View.INVISIBLE);
     }
     public void declareTextListener(){
+        final Handler handler = new Handler();
         textWatcher1 = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -459,9 +507,8 @@ public class ExerciseActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                et1.setTextColor(Color.BLACK);
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 switch (globalTaskInt) {
@@ -469,11 +516,21 @@ public class ExerciseActivity extends Activity{
                         break;
                     case 1:
                         animation(et1Coord[0], et1Coord[1], submitCoord[0], submitCoord[1]);
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                initAnimation(submitCoord[0], submitCoord[1], 0, 0);
+                            }
+                        }, 4000);
                         break;
                     case 2:
                         break;
                     case 3:
                         animation(et1Coord[0], et1Coord[1], et2Coord[0], et2Coord[1]);
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                initAnimation(et2Coord[0], et2Coord[1], 0, 0);
+                            }
+                        }, 4000);
                         break;
                 }
             }
@@ -486,12 +543,17 @@ public class ExerciseActivity extends Activity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                et2.setTextColor(Color.BLACK);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 animation(et2Coord[0], et2Coord[1], submitCoord[0], submitCoord[1]);
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        initAnimation(submitCoord[0], submitCoord[1], 0, 0);
+                    }
+                }, 4000);
             }
         };
     }

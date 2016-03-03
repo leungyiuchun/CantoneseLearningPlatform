@@ -12,6 +12,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -48,6 +49,7 @@ public class QuantityFragment extends DialogFragment{
     Button button_confirm;
     String init;
     String vowel;
+    Integer status =0;
     AlertDialog.Builder builder;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -292,6 +294,7 @@ public class QuantityFragment extends DialogFragment{
         final Button increaseBtn = increaseB;
         final Button decreaseBtn = decreaseB;
         final Integer index = i;
+//        Integer status = 0;
         row.setFocusableInTouchMode(true);
         row.setFocusable(true);
         row.setClickable(true);
@@ -304,30 +307,44 @@ public class QuantityFragment extends DialogFragment{
         });
 //        row.requestFocus();
         button_confirm.setText(R.string.action_settings);
-        row.setOnClickListener(new View.OnClickListener() {
+//        row.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("Row", "onClick " + index.toString());
+//                Log.d("Row", "Clickable " + row.isClickable());
+//                cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
+//                quantity_tv1.setText(final_List.get(index).getInt1().toString());
+//                increaseBtn.setVisibility(View.VISIBLE);
+//                decreaseBtn.setVisibility(View.VISIBLE);
+//                setButtonFunction(button_confirm, index, cp, decreaseBtn, increaseBtn, quantity_tv1);
+//                row.requestFocus();
+//
+//            }
+//        });
+        row.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
                 Log.d("Row", "onClick " + index.toString());
-                Log.d("Row","Clickable "+ row.isClickable());
-                v.requestFocus();
+                Log.d("Row", "Clickable " + row.isClickable());
                 cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
                 quantity_tv1.setText(final_List.get(index).getInt1().toString());
                 increaseBtn.setVisibility(View.VISIBLE);
                 decreaseBtn.setVisibility(View.VISIBLE);
                 setButtonFunction(button_confirm, index, cp, decreaseBtn, increaseBtn, quantity_tv1);
-
+                row.requestFocus();
+                return false;
             }
         });
-
         row.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Log.d("Row", "OnFocus" + index.toString());
+//                v.requestFocus();
+                Log.d("Row","onFocus "+index.toString());
                 increaseBtn.setVisibility(View.INVISIBLE);
                 decreaseBtn.setVisibility(View.INVISIBLE);
                 cp.setBackgroundResource(R.drawable.borders_black_and_blue);
                 quantity_tv1.setText(final_List.get(index).getInt1().toString());
-                row.requestFocus();
+//                row.requestFocus();
             }
         });
 //        row.setOnFocusChangeListener(new View.OnFocusChangeListener() {

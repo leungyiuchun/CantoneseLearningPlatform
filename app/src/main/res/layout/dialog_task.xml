@@ -46,54 +46,121 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_task_1"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/task_themeSep"
-        android:gravity="center_horizontal">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <RadioButton
-                android:id="@+id/task_rb_1"
-                android:text="@string/setting_initial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"/>
-            <RadioButton
-                android:id="@+id/task_rb_2"
-                android:text="@string/setting_vowel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="40sp" />
-            <RadioButton
-                android:id="@+id/task_rb_3"
-                android:text="@string/ini_vowel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"/>
-        </RadioGroup>
-    </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/setting_finish"
-        android:gravity="right"
-        android:layout_below="@+id/ll_task_1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <!--<Button-->
-            <!--android:textSize="45sp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/setting_finish"-->
-            <!--android:id="@+id/task_setting_button"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentEnd="true" />-->
+        android:layout_below="@+id/task_themeSep"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:id="@+id/ll_task_1"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="題目"
+                android:textSize="40sp"
+                android:layout_gravity="left">
+
+            </TextView>
+            <RadioGroup
+                android:layout_gravity="left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/task_rb_1"
+                    android:text="@string/setting_initial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"/>
+                <RadioButton
+                    android:id="@+id/task_rb_2"
+                    android:text="@string/setting_vowel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp" />
+                <RadioButton
+                    android:id="@+id/task_rb_3"
+                    android:text="@string/ini_vowel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"/>
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/rl_hints_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hints_themeSep"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/hints"
+                    android:textSize="40sp"
+                    android:paddingRight="10sp"/>
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/off"
+                    android:textSize="15sp"/>
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:switchMinWidth="100sp"
+                    android:id="@+id/hints_switch1"
+                    android:layout_gravity="center_horizontal" />
+                <TextView
+                    android:paddingLeft="10sp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/on"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_hints_1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_hints_1">
+                <RadioGroup
+                    android:id="@+id/hints_rg_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/hints_rb_1"
+                        android:text="@string/setting_initial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="40sp"/>
+                    <RadioButton
+                        android:id="@+id/hints_rb_2"
+                        android:text="@string/setting_vowel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="40sp"/>
+                    <RadioButton
+                        android:id="@+id/hints_rb_3"
+                        android:text="@string/ini_vowel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="40sp"/>
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

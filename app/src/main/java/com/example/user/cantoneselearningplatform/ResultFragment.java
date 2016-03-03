@@ -10,9 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -66,8 +68,16 @@ public class ResultFragment extends DialogFragment {
         percent_present = percent*100 + "%";
         correctPercent.setText(percent_present);
         builder.setView(view);
-        return builder.create();
+        final AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button btnPositive = alert.getButton(Dialog.BUTTON_POSITIVE);
+                btnPositive.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
+            }
+        });
+        return alert;
     }
     public void insertCheck(){
         for(Integer i=0;i<totalQuestion;i++){

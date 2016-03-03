@@ -125,4 +125,12 @@ public class MyApp extends Application {
     ArrayList<Vowelobj>globalVowelobj = new ArrayList<Vowelobj>();
     public void setGlobalVowelobj(ArrayList<Vowelobj> vowelobj){this.globalVowelobj = vowelobj;}
     public ArrayList<Vowelobj> getGlobalVowelobj(){ return globalVowelobj;}
+
+    String globalStudentName= " ";
+    public void setStudentName(String name){
+        this.globalStudentName = name;
+    }
+    public String getStudentName(){
+        return globalStudentName;
+    }
 }

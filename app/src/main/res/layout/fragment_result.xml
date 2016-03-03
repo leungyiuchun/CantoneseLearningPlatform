@@ -57,27 +57,27 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingLeft="8sp" android:textSize="40sp" android:id="@+id/tv_totalQuantity2"
+                android:paddingLeft="10sp" android:textSize="40sp" android:id="@+id/tv_totalQuantity2"
                 >
             </TextView>
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingLeft="8sp" android:textSize="40sp"
+                android:paddingLeft="10sp" android:textSize="40sp"
                 android:text="@string/total_correct">
             </TextView>
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingLeft="8sp" android:textSize="40sp" android:id="@+id/tv_totalCorrect">
+                android:paddingLeft="10sp" android:textSize="40sp" android:id="@+id/tv_totalCorrect">
             </TextView>
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingLeft="8sp" android:textSize="40sp" android:text="@string/correct_percent">
+                android:paddingLeft="10sp" android:textSize="40sp" android:text="@string/correct_percent">
             </TextView>
 
             <TextView

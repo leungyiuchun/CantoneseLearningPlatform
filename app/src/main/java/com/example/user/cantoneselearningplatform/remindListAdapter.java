@@ -37,8 +37,9 @@ public class remindListAdapter extends ArrayAdapter<Answer>{
             if (tt1 != null) {
                 if (position1.intValue()+1==1){
                     tt1.setText("題數");
+                }else{
+                    tt1.setText(String.format("%d", position));
                 }
-                tt1.setText(String.format("%d", position));
             }
 
             if (tt2 != null) {

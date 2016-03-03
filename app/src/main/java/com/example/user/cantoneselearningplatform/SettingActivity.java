@@ -54,7 +54,7 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
             vowel_tv.setText("請選擇韻母");
         }
         if(((MyApp)getApplication()).getTaskInt()==0){
-            task_tv.setText("請選擇任務");
+            task_tv.setText("請選擇任務和提示");
         }
         if(((MyApp)getApplication()).getHintInt()==0){
             hints_tv.setText("請選擇提示");
