@@ -133,4 +133,8 @@ public class MyApp extends Application {
     public String getStudentName(){
         return globalStudentName;
     }
+
+    Integer color_index = 0;
+    public void setColorIndex(Integer index){this.color_index = index;}
+    public Integer getColorIndex(){return this.color_index;}
 }

@@ -9,7 +9,7 @@
     <string name="setting_initial">聲母</string>
     <string name="setting_vowel">韻母</string>
     <string name="setting_task_and_hints">選填和提示</string>
-    <string name="setting_hints">提示</string>
+    <string name="setting_advanced">高階</string>
     <string name="setting_initial1">聲母:</string>
     <string name="setting_vowel1">韻母:</string>
     <string name="setting_quantity">數量</string>
@@ -130,6 +130,7 @@
     <string name="slash">/</string>
     <string name="on">開啟</string>
     <string name="off">關閉</string>
+    <string name="adv_theme">高階設定</string>
 
 
 

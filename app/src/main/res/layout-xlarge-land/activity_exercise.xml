@@ -36,7 +36,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                    android:id="@+id/ll_exercise2"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -44,10 +44,11 @@
                     android:background="@drawable/borders_black_and_white_big">
 
                         <LinearLayout
+                            android:id="@+id/ll_exercise2"
+                            android:background="@drawable/borders_black_and_white_big"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-
                             >
 
                             <EditText

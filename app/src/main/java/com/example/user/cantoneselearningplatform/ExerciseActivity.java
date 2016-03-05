@@ -6,9 +6,12 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.Image;
@@ -152,7 +155,6 @@ public class ExerciseActivity extends Activity{
                 }
             }
         });
-
         confirmButton = (Button) findViewById(R.id.confirmButton);
         final Handler handler = new Handler();
 
@@ -259,6 +261,9 @@ public class ExerciseActivity extends Activity{
         setTask(et1, et2, globalTaskInt);
         setHints(et1, et2, globalHintInt);
 
+//        ll_exercise2.setBackgroundResource(R.drawable.borders_blue_and_white_big);
+//        ll_exercise3.setBackgroundResource(R.drawable.borders_blue_and_white_big);
+
     }
 
     @Override
@@ -304,14 +309,21 @@ public class ExerciseActivity extends Activity{
             }else {
                 et1.setTextColor(Color.BLACK);
                 et2.setTextColor(Color.RED);
+                ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
+                ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_red);
                 return false;
             }
         }else {
             et1.setTextColor(Color.RED);
+            ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
+            ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_red);
+
             et2.setTextColor(Color.BLACK);
             if (vowel.equalsIgnoreCase(ans_vowel_check)){
             }else {
                 et2.setTextColor(Color.RED);
+                ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_red);
+
             }
             return false;
         }
@@ -390,6 +402,9 @@ public class ExerciseActivity extends Activity{
         }
         et1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_init.length())});
         et2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_vowel.length())});
+        String toSpeak1 = soundButton.getText().toString();
+        t1.setSpeechRate(0.3f); //larger it is, faster it would be.
+        t1.speak(toSpeak1, TextToSpeech.QUEUE_FLUSH, null);
         ll_exercise1.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
@@ -397,9 +412,6 @@ public class ExerciseActivity extends Activity{
         setFocus(et1, et2, globalTaskInt);
         setTask(et1, et2, globalTaskInt);
         addTextListener();
-        String toSpeak1 = soundButton.getText().toString();
-        t1.setSpeechRate(0.3f); //larger it is, faster it would be.
-        t1.speak(toSpeak1, TextToSpeech.QUEUE_FLUSH, null);
         animation(soundbtnCoord[0], soundbtnCoord[1], soundbtnCoord[0], soundbtnCoord[1]);
         initAnimation(soundbtnCoord[0], soundbtnCoord[1], submitCoord[0], submitCoord[1]);
 

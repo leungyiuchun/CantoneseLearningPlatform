@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="5sp"
+    android:paddingRight="5sp"
+    android:paddingTop="5sp"
+    android:paddingBottom="5sp"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hints_theme"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:textColor="#5E3434"
+            android:text="@string/adv_theme"
+            android:id="@+id/task_tv_theme" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/hints_themeSep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hints_theme"
+        android:gravity="center_horizontal">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:background="@android:color/transparent" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10sp"
+            android:background= "@android:color/darker_gray"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10sp"
+            android:background="@android:color/transparent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/hints_themeSep">
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text="錯誤提示顏色" />
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:orientation="horizontal"
+                android:paddingLeft="30sp">
+                <Button
+                    android:layout_width="97sp"
+                    android:layout_height="60sp"
+                    android:id="@+id/red_button"
+                    android:background="#FF0000"/>
+                <View android:layout_height="match_parent" android:layout_width="10sp" />
+                <Button
+                    android:layout_width="97sp"
+                    android:layout_height="60sp"
+                    android:id="@+id/green_button"
+                    android:background="#00FF00"/>
+                <View android:layout_height="match_parent" android:layout_width="10sp" />
+                <Button
+                    android:layout_width="97sp"
+                    android:layout_height="60sp"
+                    android:id="@+id/orange_button"
+                    android:background="#FFA500"/>
+                <View android:layout_height="match_parent" android:layout_width="10sp" />
+
+                <Button
+                    android:layout_width="97sp"
+                    android:layout_height="60sp"
+                    android:id="@+id/purple_button"
+                    android:background="#00FFFF"/>
+            </LinearLayout>
+            <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:paddingLeft="20sp">
+                <TextView
+                    android:id="@+id/color_example_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="示例"
+                    android:textSize="60sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

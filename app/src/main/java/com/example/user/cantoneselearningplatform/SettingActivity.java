@@ -1,7 +1,6 @@
 package com.example.user.cantoneselearningplatform;
 
 import android.app.DialogFragment;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DialerFilter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.Arrays;
 
 public class SettingActivity extends AppCompatActivity implements DialogInterface.OnDismissListener{
 
@@ -26,7 +22,7 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
     TextView mode_tv;
     LinearLayout setting_quantity;
     LinearLayout setting_task;
-    LinearLayout setting_hints;
+    LinearLayout setting_adv;
     LinearLayout setting_mode;
 
     Integer quantity_flag = 0;
@@ -37,7 +33,7 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
 
         setting_quantity = (LinearLayout)findViewById(R.id.setting_quantity);
         setting_task = (LinearLayout)findViewById(R.id.setting_task);
-        setting_hints = (LinearLayout)findViewById(R.id.setting_hints);
+        setting_adv = (LinearLayout)findViewById(R.id.setting_adv);
         setting_mode = (LinearLayout)findViewById(R.id.setting_mode);
 
         init_tv = (TextView)findViewById(R.id.tv2_initial);
@@ -95,11 +91,11 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
             }
         });
 
-        final Button hints_button = (Button)this.findViewById(R.id.tv_hints);
-        hints_button.setOnClickListener(new View.OnClickListener() {
+        final Button adv_button = (Button)this.findViewById(R.id.tv_adv);
+        adv_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment hintsDialog = new HintsFragment();
+                DialogFragment hintsDialog = new AdvFragment();
                 hintsDialog.show(getFragmentManager(), "dialog");
 
             }
@@ -141,12 +137,12 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
             setting_mode.setVisibility(View.VISIBLE);
             setting_quantity.setVisibility(View.VISIBLE);
             setting_task.setVisibility(View.VISIBLE);
-            setting_hints.setVisibility(View.VISIBLE);
+            setting_adv.setVisibility(View.VISIBLE);
         }else {
             setting_mode.setVisibility(View.INVISIBLE);
             setting_quantity.setVisibility(View.INVISIBLE);
             setting_task.setVisibility(View.INVISIBLE);
-            setting_hints.setVisibility(View.INVISIBLE);
+            setting_adv.setVisibility(View.INVISIBLE);
         }
 
         task_tv.setText(((MyApp)getApplication()).getTaskString());
@@ -204,13 +200,13 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
                 setting_mode.setVisibility(View.VISIBLE);
                 setting_quantity.setVisibility(View.VISIBLE);
                 setting_task.setVisibility(View.VISIBLE);
-                setting_hints.setVisibility(View.VISIBLE);
+                setting_adv.setVisibility(View.VISIBLE);
             }
         }else {
             setting_mode.setVisibility(View.INVISIBLE);
             setting_quantity.setVisibility(View.INVISIBLE);
             setting_task.setVisibility(View.INVISIBLE);
-            setting_hints.setVisibility(View.INVISIBLE);
+            setting_adv.setVisibility(View.INVISIBLE);
         }
         if (((MyApp) getApplication()).getInitReopenFlag().intValue()==2|((MyApp) getApplication()).getVowelReopenFlag().intValue()==2){
             quantity_tv.setText(R.string.quantity_again);
