@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content" android:orientation="vertical"
+    android:layout_width="match_parent">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:textColor="#000000"
+            android:id="@+id/checkPosition"
+            android:layout_width="100px"
+            android:layout_height="wrap_content"
+            android:textSize="30px"
+            android:layout_column="0"/>
+        <TextView
+            android:gravity="left"
+            android:layout_gravity="left"
+            android:layout_height="wrap_content"
+            android:layout_width="150px"
+            android:textColor="#000000"
+            android:id="@+id/checkAnswer"
+            android:textSize="30px"
+            android:layout_column="0"/>
+        <TextView
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:layout_height="wrap_content"
+            android:layout_width="150px"
+            android:textSize="30px"
+            android:id="@+id/checkChineseWord"
+            android:layout_column="0"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_height="wrap_content"
+            android:layout_width="150px"
+            android:textColor="#000000"
+            android:id="@+id/checkUserAnswer"
+            android:textSize="30px"
+            android:layout_column="0"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_height="wrap_content"
+            android:layout_width="150px"
+            android:id="@+id/checkCorrectness"
+            android:textSize="30px"
+            android:layout_column="0"/>
+    </TableRow>
+
+</TableLayout>
+    </ScrollView>
