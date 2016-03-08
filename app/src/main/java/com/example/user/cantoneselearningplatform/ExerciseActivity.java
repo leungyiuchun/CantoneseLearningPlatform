@@ -6,28 +6,16 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
-import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
-import android.media.Image;
-import android.net.ConnectivityManager;
 import android.os.Handler;
-import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -36,17 +24,15 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
-import java.util.zip.Inflater;
+import java.util.StringTokenizer;
 
 public class ExerciseActivity extends Activity{
 
@@ -67,6 +53,8 @@ public class ExerciseActivity extends Activity{
     public Integer globalHintInt = 1;
     public EditText et1;
     public EditText et2;
+    public TextView tv1;
+    public TextView tv2;
     public TextView tv_currentQuestion;
     public TextView tv_totalQuestion;
     public TextView tv_mode;
@@ -76,8 +64,8 @@ public class ExerciseActivity extends Activity{
     Button soundButton;
     Button confirmButton;
     LinearLayout ll_exercise1;
-    LinearLayout ll_exercise2;
-    LinearLayout ll_exercise3;
+    RelativeLayout ll_exercise2;
+    RelativeLayout ll_exercise3;
     int[] et1Coord = new int[2];
     int[] et2Coord = new int[2];
     int[] soundbtnCoord = new int[2];
@@ -96,6 +84,8 @@ public class ExerciseActivity extends Activity{
         index = 0;
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
+        tv1 = (TextView) findViewById(R.id.textView);
+        tv2 = (TextView) findViewById(R.id.textView2);
         tv_currentQuestion = (TextView)findViewById(R.id.tv_currentQuestion);
         tv_totalQuestion = (TextView)findViewById(R.id.tv_totalQuestion);
         tv_mode = (TextView)findViewById(R.id.tv_mode);
@@ -103,8 +93,8 @@ public class ExerciseActivity extends Activity{
         globalHintInt =  ((MyApp)getApplication()).getHintInt();
         final ImageView img = (ImageView) findViewById(R.id.imageView);
         ll_exercise1 = (LinearLayout)findViewById(R.id.ll_exercise1);
-        ll_exercise2 = (LinearLayout)findViewById(R.id.ll_exercise2);
-        ll_exercise3 = (LinearLayout)findViewById(R.id.ll_exercise3);
+        ll_exercise2 = (RelativeLayout)findViewById(R.id.ll_exercise2);
+        ll_exercise3 = (RelativeLayout)findViewById(R.id.ll_exercise3);
         home_clicked = 0;
         final Button home_button = (Button) this.findViewById(R.id.homeButton);
         home_button.setOnClickListener(new View.OnClickListener() {
@@ -137,15 +127,18 @@ public class ExerciseActivity extends Activity{
             }
         });
 
-
         mCustomKeyboard= new CustomKeyboard(ExerciseActivity.this, R.id.keyboardview, R.xml.keyboard );
         mCustomKeyboard.registerEditText(R.id.editText);
         mCustomKeyboard.registerEditText(R.id.editText2);
 
+
+
+        tv1.setEnabled(false);
+        tv2.setEnabled(false);
+        tv1.setVisibility(View.GONE);
+        tv2.setVisibility(View.GONE);
         et1.setVisibility(View.GONE);
         et2.setVisibility(View.GONE);
-        declareTextListener();
-        addTextListener();
         tv_currentQuestion.setText(String.format("%d", currentQuestion));
         t1 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -169,8 +162,11 @@ public class ExerciseActivity extends Activity{
                         Answer ans = new Answer(initial, vowel, userAnswer, soundButton.getText().toString());
                         AnswerList.add(ans);
                         if (currentQuestion.intValue() == totalQuestion.intValue()) {
-                            DialogFragment remindDialog = new RemindFragment(AnswerList);
-                            remindDialog.show(getFragmentManager(), "dialog");
+                            Intent intent2 = new Intent(ExerciseActivity.this, RemindActivity.class);
+                            intent2.putExtra("Arraylist", AnswerList);
+
+                            startActivity(intent2);
+
                         } else {
                             executeAnimation(img, getApplicationContext(), getRandomNumber(1, 5));
                             ll_exercise1.setBackgroundResource(R.drawable.borders_blue_and_white_big);
@@ -188,8 +184,11 @@ public class ExerciseActivity extends Activity{
                     AnswerList.add(ans);
 
                     if (currentQuestion.intValue() == totalQuestion.intValue()) {
-                        DialogFragment resultDialog = new ResultFragment(AnswerList, chineseExerList);
-                        resultDialog.show(getFragmentManager(), "dialog");
+
+                        Intent intent3 = new Intent(ExerciseActivity.this, ResultActivity.class);
+                        intent3.putExtra("Answerlist", AnswerList);
+                        intent3.putExtra("chineseExerList",chineseExerList);
+                        startActivity(intent3);
                     } else {
                         updateExercise();
                     }
@@ -200,7 +199,19 @@ public class ExerciseActivity extends Activity{
 
         exerciseList = ((MyApp)this.getApplication()).getRandomlizeList();
         translate(exerciseList);
-        Log.d("ChinList Size", " " + chineseExerList.size());
+        ans_init = chineseExerList.get(index).getChineseExerInit();
+        ans_vowel = chineseExerList.get(index).getChineseExerVowel();
+        totalQuestion= ((MyApp)this.getApplication()).getQuantityInt();
+        tv_totalQuestion.setText(String.format("%d", totalQuestion));
+        tv_mode.setText(((MyApp) getApplication()).getModeString());
+        if(((MyApp) getApplication()).getModeInt() == 0){
+            et1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_init.length())});
+            et2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_vowel.length())});
+        }
+
+        declareTextListener();
+        addTextListener();
+
         soundButton = (Button) findViewById(R.id.soundButton);
         soundButton.setText(chineseExerList.get(index).getChineseExerWord());
         soundButton.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +221,8 @@ public class ExerciseActivity extends Activity{
 //                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                 t1.setSpeechRate(0.3f); //larger it is, faster it would be.
                 t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.VISIBLE);
                 et1.setVisibility(View.VISIBLE);
                 et2.setVisibility(View.VISIBLE);
                 setFocus(et1, et2, globalTaskInt);
@@ -248,22 +261,14 @@ public class ExerciseActivity extends Activity{
         });
 
 
-        ans_init = chineseExerList.get(index).getChineseExerInit();
-        ans_vowel = chineseExerList.get(index).getChineseExerVowel();
-        totalQuestion= ((MyApp)this.getApplication()).getQuantityInt();
-        tv_totalQuestion.setText(String.format("%d", totalQuestion));
-        tv_mode.setText(((MyApp) getApplication()).getModeString());
-        if(((MyApp) getApplication()).getModeInt() == 0){
-            et1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_init.length())});
-            et2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_vowel.length())});
-        }
-
         setTask(et1, et2, globalTaskInt);
         setHints(et1, et2, globalHintInt);
 
 //        ll_exercise2.setBackgroundResource(R.drawable.borders_blue_and_white_big);
 //        ll_exercise3.setBackgroundResource(R.drawable.borders_blue_and_white_big);
-
+        Log.d("GetMode",""+((MyApp)getApplication()).getModeString());
+        Log.d("GetTask", "" + ((MyApp) getApplication()).getTaskString());
+        Log.d("GetHint",""+(((MyApp) getApplication()).getHintsString()));
     }
 
     @Override
@@ -300,7 +305,29 @@ public class ExerciseActivity extends Activity{
         }    }
 
     public boolean checkAnswer(String init, String vowel, String ans_init_check,String ans_vowel_check) {
+        Integer textColor_resource=0;
+        Integer frameColor_resource=0;
+        Integer decision = ((MyApp)getApplication()).getColorIndex();
 
+        switch (decision){
+            case 0:
+                textColor_resource = getResources().getColor(R.color.myRed);
+                frameColor_resource = R.drawable.borders_red_and_white_big;
+                break;
+            case 1:
+                textColor_resource = getResources().getColor(R.color.myGreen);
+                frameColor_resource = R.drawable.borders_green_and_white_big;
+                break;
+            case 2:
+                textColor_resource = getResources().getColor(R.color.myOrange);
+                frameColor_resource = R.drawable.borders_orange_and_white_big;
+                break;
+            case 3:
+                textColor_resource = getResources().getColor(R.color.myPurple);
+                frameColor_resource = R.drawable.borders_purple_and_white_big;
+                break;
+
+        }
         if (init.equalsIgnoreCase(ans_init_check)){
             if (vowel.equalsIgnoreCase(ans_vowel_check)){
                 et1.setTextColor(Color.BLACK);
@@ -308,21 +335,22 @@ public class ExerciseActivity extends Activity{
                 return true;
             }else {
                 et1.setTextColor(Color.BLACK);
-                et2.setTextColor(Color.RED);
                 ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
-                ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_red);
+                et2.setTextColor(textColor_resource);
+                ll_exercise3.setBackgroundResource(frameColor_resource);
                 return false;
             }
         }else {
-            et1.setTextColor(Color.RED);
-            ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
-            ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_red);
-
             et2.setTextColor(Color.BLACK);
+            ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
+
+            et1.setTextColor(textColor_resource);
+            ll_exercise2.setBackgroundResource(frameColor_resource);
+
             if (vowel.equalsIgnoreCase(ans_vowel_check)){
             }else {
-                et2.setTextColor(Color.RED);
-                ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_red);
+                et2.setTextColor(textColor_resource);
+                ll_exercise3.setBackgroundResource(frameColor_resource);
 
             }
             return false;
@@ -369,14 +397,14 @@ public class ExerciseActivity extends Activity{
                 //do nothing
                 break;
             case 1:
-                et1.setHint(ans_init);
+                tv1.setText(ans_init);
                 break;
             case 2:
-                et2.setHint(ans_vowel);
+                tv2.setText(ans_vowel);
                 break;
             case 3:
-                et2.setHint(ans_vowel);
-                et1.setHint(ans_init);
+                tv2.setText(ans_vowel);
+                tv1.setText(ans_init);
                 break;
         }
     }
@@ -520,9 +548,11 @@ public class ExerciseActivity extends Activity{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 et1.setTextColor(Color.BLACK);
+                Log.d("et1 string ", " " + et1.getText().length());
             }
             @Override
             public void afterTextChanged(Editable s) {
+                tv1.setText(floatingHint(et1.getText().length(), et1, ans_init));
                 switch (globalTaskInt) {
                     case 0:
                         break;
@@ -556,10 +586,13 @@ public class ExerciseActivity extends Activity{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 et2.setTextColor(Color.BLACK);
+                Log.d("et2 string ", " " + et2.getText().length());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                tv2.setText(floatingHint(et2.getText().length(),et2,ans_vowel));
+
                 animation(et2Coord[0], et2Coord[1], submitCoord[0], submitCoord[1]);
                 handler.postDelayed(new Runnable() {
                     public void run() {
@@ -610,5 +643,12 @@ public class ExerciseActivity extends Activity{
                 chinese="花";
         }
         return chinese;
+    }
+    public String floatingHint(Integer textLength,EditText et1Hint,String ansString) {
+        String returnString;
+        String text = et1Hint.getText().toString();
+        String edit = ansString.substring(textLength,ansString.length());
+        returnString = text + edit;
+        return returnString;
     }
 }

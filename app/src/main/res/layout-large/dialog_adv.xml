@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
+    android:paddingLeft="5px"
+    android:paddingRight="5px"
+    android:paddingTop="5px"
+    android:paddingBottom="5px"
     >
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/hints_theme"
         android:gravity="center_horizontal">
         <TextView
+            android:gravity="left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50dp"
+            android:textSize="50px"
             android:textColor="#5E3434"
             android:text="@string/adv_theme"
             android:id="@+id/task_tv_theme" />
@@ -32,16 +33,16 @@
         android:gravity="center_horizontal">
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="20px"
             android:background="@android:color/transparent" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="10px"
             android:background= "@android:color/darker_gray"
             />
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="10px"
             android:background="@android:color/transparent" />
 
     </LinearLayout>
@@ -55,17 +56,47 @@
             android:orientation="horizontal"
             >
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="50px"
-                android:text="錯誤提示顏色"/>
+                android:textSize="30px"
+                android:text="錯誤提示顏色" />
             <LinearLayout android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:orientation="horizontal">
+                android:layout_height="wrap_content" android:orientation="horizontal"
+                android:paddingLeft="30px">
                 <Button
-                    android:layout_width="60px"
-                    android:layout_height="30px"
+                    android:layout_width="97px"
+                    android:layout_height="60px"
                     android:id="@+id/red_button"
-                    android:textColor="@android:color/holo_red_light"/>
+                    android:background="#FF0000"/>
+                <View android:layout_height="match_parent" android:layout_width="10px" />
+                <Button
+                    android:layout_width="97px"
+                    android:layout_height="60px"
+                    android:id="@+id/green_button"
+                    android:background="#00FF00"/>
+                <View android:layout_height="match_parent" android:layout_width="10px" />
+                <Button
+                    android:layout_width="97px"
+                    android:layout_height="60px"
+                    android:id="@+id/orange_button"
+                    android:background="#FFA500"/>
+                <View android:layout_height="match_parent" android:layout_width="10px" />
+
+                <Button
+                    android:layout_width="97px"
+                    android:layout_height="60px"
+                    android:id="@+id/purple_button"
+                    android:background="#00FFFF"/>
+            </LinearLayout>
+            <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:paddingLeft="20px">
+                <TextView
+                    android:id="@+id/color_example_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="示例"
+                    android:textSize="40px"
+                    android:textStyle="bold"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

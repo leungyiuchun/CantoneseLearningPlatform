@@ -12,18 +12,18 @@
     <LinearLayout
         android:layout_weight="2"
         android:orientation="horizontal"
-        android:id="@+id/spp"
+        android:id="@+id/pxp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="10px">
+        android:paddingBottom="10dp">
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
+            android:layout_width="50px"
+            android:layout_height="50px"
             android:src="@drawable/finger"
             android:layout_gravity="top"
             />
-        <LinearLayout android:layout_height="match_parent" android:layout_width="0sp">
+        <LinearLayout android:layout_height="match_parent" android:layout_width="0px">
 
         </LinearLayout>
 
@@ -36,37 +36,55 @@
             android:orientation="vertical">
 
             <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     android:background="@drawable/borders_black_and_white_big">
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:id="@+id/ll_exercise2"
                             android:background="@drawable/borders_black_and_white_big"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             >
-
-                            <EditText
-                                android:id="@+id/editText"
-                                android:paddingRight="20px"
+                            <TextView
+                                android:paddingLeft="50px"
+                                android:id="@+id/textView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:gravity="right|center_vertical"
-                                android:layout_gravity="center_vertical"
-                                android:textSize="70sp"
+                                android:textSize="70px"
                                 android:maxLength="2"
-                                android:textColorHint="#BDBDBD"
+                                android:textColor="#BDBDBD"
                                 android:fontFamily="sans-serif"
-                                android:textColor="#000000"
+                                android:gravity="center_vertical|right"
+                                android:layout_alignParentRight="true"
+                                android:paddingRight="20dp"
                                 />
-                            </LinearLayout>
+                            <RelativeLayout
+                                android:layout_height="match_parent"
+                                android:layout_width="match_parent"
+                                android:layout_alignParentRight="true"
+                                >
+                                <EditText
+                                    android:id="@+id/editText"
+                                    android:paddingRight="20dp"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="match_parent"
+                                    android:textSize="70px"
+                                    android:maxLength="2"
+                                    android:gravity="right|center_vertical"
+                                    android:layout_alignParentRight="true"
+                                    android:textColorHint="#BDBDBD"
+                                    android:fontFamily="sans-serif"
+                                    android:textColor="#000000"
+                                    />
+                            </RelativeLayout>
 
-                        <LinearLayout
+                        </RelativeLayout>
+
+                        <RelativeLayout
                             android:id="@+id/ll_exercise3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -74,19 +92,31 @@
                             android:background="@drawable/borders_black_and_white_big"
                             android:gravity="left"
                             >
+                            <TextView
+                                android:paddingLeft="20dp"
+                                android:id="@+id/textView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="70px"
+                                android:fontFamily="sans-serif－condensed"
+                                android:textColor="#BDBDBD"
+                                android:maxLength="4"
+                                android:gravity="center_vertical"
+                                />
                             <EditText
                                 android:textColor="#000000"
-                                android:paddingLeft="20px"
+                                android:paddingLeft="20dp"
                                 android:id="@+id/editText2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
-                                android:textSize="70sp"
+                                android:textSize="70px"
                                 android:fontFamily="sans-serif－condensed"
                                 android:textColorHint="#BDBDBD"
                                 android:maxLength="4"
                                 />
-                            </LinearLayout>
+
+                            </RelativeLayout>
                 </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,7 +132,7 @@
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:id="@+id/soundButton"
-                    android:textSize="150sp"
+                    android:textSize="150px"
                     android:textColor="#000000"
                     android:background="@drawable/soundbutton"
                     />
@@ -138,23 +168,23 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1" android:id="@+id/tv_mode"
                         android:gravity="center"
-                        android:textSize="30sp"/>
+                        android:textSize="30px"/>
                     <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1" android:id="@+id/tv_currentQuestion"
                         android:gravity="bottom|center_horizontal"
-                        android:textSize="50sp"/>
-                    <View android:layout_height="12sp"
+                        android:textSize="50px"/>
+                    <View android:layout_height="12px"
                         android:layout_width="match_parent"
                         android:background="#000000"
-                        android:paddingTop="5sp"
-                        android:paddingBottom="5sp"/>
+                        android:paddingTop="5px"
+                        android:paddingBottom="5px"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1" android:id="@+id/tv_totalQuestion"
-                        android:textSize="50sp" android:gravity="top|center_horizontal"/>
+                        android:textSize="50px" android:gravity="top|center_horizontal"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,7 +195,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="@string/submit"
-                        android:textSize="50sp"
+                        android:textSize="50px"
                         android:id="@+id/confirmButton"
                         />
                     <Button android:layout_width="match_parent"
@@ -173,7 +203,7 @@
                         android:layout_weight="1"
                         android:id="@+id/homeButton"
                         android:text="@string/homepage"
-                        android:textSize="50sp"
+                        android:textSize="50px"
                         />
                 </LinearLayout>
 
@@ -194,7 +224,7 @@
         <android.inputmethodservice.KeyboardView
             android:id="@+id/keyboardview"
             android:background="#000000"
-            android:keyTextSize="60sp"
+            android:keyTextSize="60px"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

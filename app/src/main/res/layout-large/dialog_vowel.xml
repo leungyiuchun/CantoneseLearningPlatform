@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_centerHorizontal="true"
-    android:paddingLeft="5px"
+    android:paddingLeft="5dp"
     android:paddingTop="5px"
     android:paddingBottom="5px">
 

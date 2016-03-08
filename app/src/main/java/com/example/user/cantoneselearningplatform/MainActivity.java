@@ -14,7 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+    public ArrayList<Answer> abc = new ArrayList<Answer>();
     public Boolean test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 checkVowel();
                 checkTask();
 //                checkHints();
-                checkQuantityInt();
                 checkMode();
+                checkQuantityInt();
 
                 if (test) {
                     Intent intent = new Intent(MainActivity.this, ExerciseActivity.class);
@@ -160,21 +163,7 @@ public class MainActivity extends AppCompatActivity {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
-    public void checkQuantityInt(){
-        if(((MyApp) this.getApplication()).quantityInt ==0){
-            test = false;
-            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("未設定數量")
-                    .setMessage("未設定練習數量")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .show();
-            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-        }else{test = true;}
-    }
+
     public void checkMode(){
         if(((MyApp)this.getApplication()).globalModeString.equalsIgnoreCase("請選擇模式")){
             test = false;
@@ -205,7 +194,21 @@ public class MainActivity extends AppCompatActivity {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
         }else{test = true;}
     }
-
+    public void checkQuantityInt(){
+        if(((MyApp) this.getApplication()).quantityInt ==0){
+            test = false;
+            AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("未設定數量")
+                    .setMessage("未設定練習數量")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+        }else{test = true;}
+    }
     public Boolean checkSetting(){
 
         return true;

@@ -21,7 +21,7 @@ public class MyApp extends Application {
     String globalTaskString = "請選擇任務";
     String globalHintsString = "請選擇提示";
     String globalModeString = "請選擇模式";
-    String globalQuantityString = "請選擇各組合數量";
+    String globalQuantityString = "請設定已各組合數量";
     Integer globalTaskInt = 1;
     Integer globalHintInt = 0;
     Integer globalModeInt=0;

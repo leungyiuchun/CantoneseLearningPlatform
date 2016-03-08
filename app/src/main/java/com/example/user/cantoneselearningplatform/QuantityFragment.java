@@ -18,8 +18,10 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -37,7 +39,7 @@ public class QuantityFragment extends DialogFragment{
     Integer total_number;
     Integer looping;
     ArrayList<Integer> number_array = new ArrayList<Integer>();
-//    Spinner mSpinner;
+    //    Spinner mSpinner;
     Integer rowLooping=0;
     Integer loop=0;
     public ArrayList<Combination> final_List = new ArrayList<Combination>();
@@ -46,10 +48,11 @@ public class QuantityFragment extends DialogFragment{
     TextView total_quantity_tv;
     TextView total_combination_tv;
     Integer total_combination;
-    Button button_confirm;
+//    Button button_confirm;
     String init;
     String vowel;
     Integer status =0;
+    Switch switch1;
     AlertDialog.Builder builder;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -58,9 +61,10 @@ public class QuantityFragment extends DialogFragment{
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_quantity, null);
         quantity_tl = (TableLayout)view.findViewById(R.id.quantity_tl);
-        button_confirm = (Button)view.findViewById(R.id.number_confirm);
+//        button_confirm = (Button)view.findViewById(R.id.number_confirm);
         total_quantity_tv = (TextView)view.findViewById(R.id.tv_totalQuantity);
         total_combination_tv = (TextView)view.findViewById(R.id.tv_totalCombination);
+        switch1 = (Switch)view.findViewById(R.id.quantity_switch1);
         final TextView tv = (TextView) getActivity().findViewById(R.id.tv2_quantity);
         init_number = ((MyApp)getActivity().getApplication()).getInitList().size();
         vowel_number = ((MyApp)getActivity().getApplication()).getVowelList().size();
@@ -92,13 +96,30 @@ public class QuantityFragment extends DialogFragment{
                         ((MyApp) getActivity().getApplication()).setQuantityFlag(1);
                     }
                 });
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                quantity_tl.removeAllViews();
+                if (isChecked) {
+//                    button_confirm.setVisibility(View.VISIBLE);
+                    for(Integer j=0;j<final_List.size();j++){
+                        addRowItem(j);
+                    }
+                } else {
+//                    button_confirm.setVisibility(View.INVISIBLE);
+                    for(Integer j=0;j<final_List.size();j++){
+                        addRowItem2(j);
+                    }
+                }
+            }
+        });
 
-        for(Integer j=0;j<final_List.size();j++){
-            addRowItem(j);
-        }
         total_quantity_tv.setText(getTotalQuantity().toString());
         total_combination_tv.setText(getTotalCombination().toString());
-
+//        button_confirm.setVisibility(View.INVISIBLE);
+        for(Integer j=0;j<final_List.size();j++){
+            addRowItem2(j);
+        }
         builder.setView(view);
         final AlertDialog alert = builder.create();
         alert.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -214,7 +235,8 @@ public class QuantityFragment extends DialogFragment{
         increaseBtn.setVisibility(View.INVISIBLE);
         row.addView(increaseBtn);
 
-        setRowListner(row,cp,quantity_tv1,increaseBtn,decreaseBtn,index);
+        setRowListner(row, cp, quantity_tv1, increaseBtn, decreaseBtn, index);
+
 
         increaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,6 +248,9 @@ public class QuantityFragment extends DialogFragment{
                     innumber = 10;
                 }
                 quantity_tv1.setText(innumber.toString());
+                final_List.set(index, new Combination(new Exer(final_List.get(index).getInit(), final_List.get(index).getVowel(), final_List.get(index).getCartProduct()), innumber, true));
+                total_quantity_tv.setText(getTotalQuantity().toString());
+
             }
         });
         decreaseBtn.setOnClickListener(new View.OnClickListener() {
@@ -237,40 +262,42 @@ public class QuantityFragment extends DialogFragment{
                     denumber = 1;
                 }
                 quantity_tv1.setText(denumber.toString());
+                final_List.set(index, new Combination(new Exer(final_List.get(index).getInit(), final_List.get(index).getVowel(), final_List.get(index).getCartProduct()), denumber, true));
+                total_quantity_tv.setText(getTotalQuantity().toString());
+
             }
         });
 
         quantity_tl.addView(row);
     }
-    public void setButtonFunction(final Button confirm,final Integer index,Button tv_cp,Button decreaseBtn, final Button increaseBtn, final TextView quantity){
-        final Button btn_decrease = decreaseBtn;
-        final Button btn_increase = increaseBtn;
-        final Button cp = tv_cp;
-        final String setInit = final_List.get(index).getInit();
-        final String setVowel = final_List.get(index).getVowel();
-        final String CardProduct = final_List.get(index).getCartProduct();
-        final TextView tv_int = quantity;
-        if(final_List.get(index).getClicked()){
-            confirm.setText(R.string.action_set);
-        }else{
-            confirm.setText(R.string.action_settings);
-        }
-
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Integer number = Integer.parseInt(quantity.getText().toString());
-                final_List.set(index, new Combination(new Exer(setInit, setVowel, CardProduct), number,true));
-                cp.setBackgroundResource(R.drawable.borders_black_and_blue);
-                btn_decrease.setVisibility(View.INVISIBLE);
-                btn_increase.setVisibility(View.INVISIBLE);
-                confirm.setText(R.string.action_set);
-                total_quantity_tv.setText(getTotalQuantity().toString());
-                tv_int.setText(final_List.get(index).getInt1().toString());
-//                quantity_tl.requestFocus();
-            }
-        });
-    }
+//    public void setButtonFunction(final Button confirm,final Integer index,Button tv_cp,Button decreaseBtn, final Button increaseBtn, final TextView quantity){
+//        final Button btn_decrease = decreaseBtn;
+//        final Button btn_increase = increaseBtn;
+//        final Button cp = tv_cp;
+//        final String setInit = final_List.get(index).getInit();
+//        final String setVowel = final_List.get(index).getVowel();
+//        final String CardProduct = final_List.get(index).getCartProduct();
+//        final TextView tv_int = quantity;
+//        if(final_List.get(index).getClicked()){
+//            confirm.setText(R.string.action_set);
+//        }else{
+//            confirm.setText(R.string.action_settings);
+//        }
+//
+//        confirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Integer number = Integer.parseInt(quantity.getText().toString());
+//                final_List.set(index, new Combination(new Exer(setInit, setVowel, CardProduct), number, true));
+//                cp.setBackgroundResource(R.drawable.borders_black_and_blue);
+//                btn_decrease.setVisibility(View.INVISIBLE);
+//                btn_increase.setVisibility(View.INVISIBLE);
+//                confirm.setText(R.string.action_set);
+//                tv_int.setText(final_List.get(index).getInt1().toString());
+////                quantity_tl.requestFocus();
+//            }
+//        });
+//    }
 
     public Integer getTotalQuantity(){
         Integer total=0;
@@ -306,21 +333,8 @@ public class QuantityFragment extends DialogFragment{
             }
         });
 //        row.requestFocus();
-        button_confirm.setText(R.string.action_settings);
-//        row.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("Row", "onClick " + index.toString());
-//                Log.d("Row", "Clickable " + row.isClickable());
-//                cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
-//                quantity_tv1.setText(final_List.get(index).getInt1().toString());
-//                increaseBtn.setVisibility(View.VISIBLE);
-//                decreaseBtn.setVisibility(View.VISIBLE);
-//                setButtonFunction(button_confirm, index, cp, decreaseBtn, increaseBtn, quantity_tv1);
-//                row.requestFocus();
-//
-//            }
-//        });
+//        button_confirm.setText(R.string.action_settings);
+
         row.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -330,7 +344,7 @@ public class QuantityFragment extends DialogFragment{
                 quantity_tv1.setText(final_List.get(index).getInt1().toString());
                 increaseBtn.setVisibility(View.VISIBLE);
                 decreaseBtn.setVisibility(View.VISIBLE);
-                setButtonFunction(button_confirm, index, cp, decreaseBtn, increaseBtn, quantity_tv1);
+//                setButtonFunction(button_confirm, index, cp, decreaseBtn, increaseBtn, quantity_tv1);
                 row.requestFocus();
                 return false;
             }
@@ -347,14 +361,73 @@ public class QuantityFragment extends DialogFragment{
 //                row.requestFocus();
             }
         });
-//        row.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                                increaseBtn.setVisibility(View.VISIBLE);
-//                decreaseBtn.setVisibility(View.VISIBLE);
-//                                cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
-//
-//            }
-//        });
+
+    }
+    public void addRowItem2(Integer i){
+        final Integer index =i;
+        TableRow row = new TableRow(getActivity().getApplicationContext());
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        row.setLayoutParams(lp);
+
+        row.setFocusable(true);
+        row.setFocusableInTouchMode(true);
+        final Button cp = new Button(getActivity().getApplicationContext());
+        cp.setAllCaps(false);
+        cp.setText(final_List.get(i).getCartProduct());
+        cp.setBackgroundResource(R.drawable.borders_black_and_blue);
+        cp.setTextSize(40);
+        cp.setGravity(Gravity.CENTER);
+        row.addView(cp);
+
+        TextView init= new TextView(getActivity().getApplicationContext());
+
+        init.setText(R.string.setting_initial1);
+        init.setTextSize(30);
+        init.setPadding(10, 0, 10, 0);
+        init.setTextColor(Color.BLACK);
+        row.addView(init);
+
+        final TextView init2 = new TextView(getActivity().getApplicationContext());
+        init2.setText(final_List.get(i).getInit());
+        init2.setTextSize(30);
+        init2.setPadding(10, 0, 10, 0);
+        init2.setTextColor(Color.BLACK);
+        row.addView(init2);
+
+        TextView vowel = new TextView(getActivity().getApplicationContext());
+        vowel.setText(R.string.setting_vowel1);
+        vowel.setTextSize(30);
+        vowel.setPadding(10, 0, 10, 0);
+        vowel.setTextColor(Color.BLACK);
+        row.addView(vowel);
+
+        TextView vowel2 = new TextView(getActivity().getApplicationContext());
+        vowel2.setText(final_List.get(i).getVowel());
+        vowel2.setTextSize(30);
+        vowel2.setPadding(10, 0, 10, 0);
+        vowel2.setTextColor(Color.BLACK);
+        row.addView(vowel2);
+
+        final Button decreaseBtn = new Button(getActivity().getApplicationContext());
+        decreaseBtn.setBackgroundResource(R.drawable.calculator22);
+        decreaseBtn.setLayoutParams(new TableRow.LayoutParams(70, 70));
+        decreaseBtn.setVisibility(View.INVISIBLE);
+        row.addView(decreaseBtn);
+
+        final TextView quantity_tv1 = new TextView(getActivity().getApplicationContext());
+        quantity_tv1.setTextSize(30);
+        quantity_tv1.setText(final_List.get(index).getInt1().toString());
+        quantity_tv1.setTextColor(Color.BLACK);
+        quantity_tv1.setPadding(10, 0, 10, 0);
+        row.addView(quantity_tv1);
+
+        final Button increaseBtn = new Button(getActivity().getApplicationContext());
+        increaseBtn.setBackgroundResource(R.drawable.add139);
+        increaseBtn.setLayoutParams(new TableRow.LayoutParams(70, 70));
+        increaseBtn.setVisibility(View.INVISIBLE);
+        row.addView(increaseBtn);
+
+        quantity_tl.addView(row);
+
     }
 }

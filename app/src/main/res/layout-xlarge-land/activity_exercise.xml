@@ -5,8 +5,7 @@
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:paddingTop="10dp"
-    >
+    android:paddingTop="10dp">
 
 
     <LinearLayout
@@ -36,37 +35,55 @@
             android:orientation="vertical">
 
             <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     android:background="@drawable/borders_black_and_white_big">
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:id="@+id/ll_exercise2"
                             android:background="@drawable/borders_black_and_white_big"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             >
-
-                            <EditText
-                                android:id="@+id/editText"
-                                android:paddingRight="20dp"
+                            <TextView
+                                android:paddingLeft="50sp"
+                                android:id="@+id/textView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:gravity="right|center_vertical"
-                                android:layout_gravity="center_vertical"
                                 android:textSize="70sp"
                                 android:maxLength="2"
-                                android:textColorHint="#BDBDBD"
+                                android:textColor="#BDBDBD"
                                 android:fontFamily="sans-serif"
-                                android:textColor="#000000"
+                                android:gravity="center_vertical|right"
+                                android:layout_alignParentRight="true"
+                                android:paddingRight="20dp"
                                 />
-                            </LinearLayout>
+                            <RelativeLayout
+                                android:layout_height="match_parent"
+                                android:layout_width="match_parent"
+                                android:layout_alignParentRight="true"
+                                >
+                                <EditText
+                                    android:id="@+id/editText"
+                                    android:paddingRight="20dp"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="match_parent"
+                                    android:textSize="70sp"
+                                    android:maxLength="2"
+                                    android:gravity="right|center_vertical"
+                                    android:layout_alignParentRight="true"
+                                    android:textColorHint="#BDBDBD"
+                                    android:fontFamily="sans-serif"
+                                    android:textColor="#000000"
+                                    />
+                            </RelativeLayout>
 
-                        <LinearLayout
+                        </RelativeLayout>
+
+                        <RelativeLayout
                             android:id="@+id/ll_exercise3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -74,6 +91,17 @@
                             android:background="@drawable/borders_black_and_white_big"
                             android:gravity="left"
                             >
+                            <TextView
+                                android:paddingLeft="20dp"
+                                android:id="@+id/textView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="70sp"
+                                android:fontFamily="sans-serif－condensed"
+                                android:textColor="#BDBDBD"
+                                android:maxLength="4"
+                                android:gravity="center_vertical"
+                                />
                             <EditText
                                 android:textColor="#000000"
                                 android:paddingLeft="20dp"
@@ -86,7 +114,8 @@
                                 android:textColorHint="#BDBDBD"
                                 android:maxLength="4"
                                 />
-                            </LinearLayout>
+
+                            </RelativeLayout>
                 </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
