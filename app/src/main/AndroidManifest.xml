@@ -34,9 +34,14 @@
             android:name=".ExerciseActivity"
             android:screenOrientation="landscape" >
         </activity>
-        <activity android:name=".RemindActivity" >
+        <activity android:name=".RemindActivity"
+            android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ResultActivity" >
+        <activity android:name=".ResultActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".DBActivity"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 

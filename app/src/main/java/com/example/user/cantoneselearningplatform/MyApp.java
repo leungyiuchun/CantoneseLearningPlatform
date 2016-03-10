@@ -134,7 +134,7 @@ public class MyApp extends Application {
         return globalStudentName;
     }
 
-    Integer color_index = 0;
+    Integer color_index = 1;
     public void setColorIndex(Integer index){this.color_index = index;}
     public Integer getColorIndex(){return this.color_index;}
 }

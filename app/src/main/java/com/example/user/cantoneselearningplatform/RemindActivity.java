@@ -30,6 +30,7 @@ public class RemindActivity extends AppCompatActivity {
     TextView studentTask;
     TextView studentHint;
     TextView time;
+    TextView path;
     String currentTime = " ";
     Button leaveBtn;
     Button saveBtn;
@@ -49,6 +50,8 @@ public class RemindActivity extends AppCompatActivity {
         studentMode = (TextView) findViewById(R.id.remind_mode);
         studentTask = (TextView)findViewById(R.id.remind_task);
         studentHint = (TextView)findViewById(R.id.remind_hints);
+        path = (TextView)findViewById(R.id.path_tv);
+        path.setText(Environment.getExternalStorageDirectory().toString());
         time = (TextView)findViewById(R.id.remind_date);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         currentTime = sdf.format(new Date());

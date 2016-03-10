@@ -37,6 +37,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView studentTask;
     TextView studentHint;
     TextView time;
+    TextView path;
     Button leaveBtn;
     Button saveBtn;
     String currentTime = " ";
@@ -61,6 +62,8 @@ public class ResultActivity extends AppCompatActivity {
         studentMode = (TextView)findViewById(R.id.result_mode);
         studentTask = (TextView)findViewById(R.id.result_task);
         studentHint = (TextView)findViewById(R.id.result_hints);
+        path = (TextView)findViewById(R.id.path_tv);
+        path.setText(Environment.getExternalStorageDirectory().toString());
         time = (TextView)findViewById(R.id.result_date);
         studentName.setText(((MyApp) getApplication()).getStudentName());
         studentMode.setText(((MyApp) getApplication()).getModeString());

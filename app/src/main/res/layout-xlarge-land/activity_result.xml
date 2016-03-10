@@ -197,7 +197,24 @@
             android:textSize="40sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="離開並離開"
+            android:text="儲存並離開"
             android:id="@+id/leave_and_save_button" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|right"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="路徑："
+            android:textSize="40sp"/>
+        <TextView
+            android:paddingLeft="30sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/path_tv"
+            android:textSize="40sp"/>
     </LinearLayout>
 </LinearLayout>

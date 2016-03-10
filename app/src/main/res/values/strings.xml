@@ -131,7 +131,10 @@
     <string name="on">開啟</string>
     <string name="off">關閉</string>
     <string name="adv_theme">高階設定</string>
-
+    <string name="mgt_db">管理數據庫</string>
+    <string name="combination">組合</string>
+    <string name="mgt_word">管理文字</string>
+    <string name="mgt_picture">管理圖片</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

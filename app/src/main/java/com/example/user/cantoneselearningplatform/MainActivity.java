@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Button  play_button ;
         Button  setting_button;
+        Button db_button;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setting_button = (Button)findViewById(R.id.setting_button);
@@ -55,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                 }
+            }
+        });
+        db_button = (Button)findViewById(R.id.db_button);
+        db_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DBActivity.class);
+                startActivity(intent);
             }
         });
     }

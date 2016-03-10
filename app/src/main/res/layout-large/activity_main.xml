@@ -40,6 +40,14 @@
                 android:text="@string/settings"
                 android:textSize="45px"
                 android:id="@+id/setting_button"/>
+        <Button
+            android:layout_gravity=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mgt_db"
+            android:textSize="45px"
+            android:gravity="bottom|right"
+            android:id="@+id/db_button"/>
 
     </LinearLayout>
 
