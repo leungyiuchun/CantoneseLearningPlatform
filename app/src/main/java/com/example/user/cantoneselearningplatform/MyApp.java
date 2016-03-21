@@ -134,7 +134,15 @@ public class MyApp extends Application {
         return globalStudentName;
     }
 
-    Integer color_index = 1;
+    Integer color_index = 0;
     public void setColorIndex(Integer index){this.color_index = index;}
     public Integer getColorIndex(){return this.color_index;}
+
+    Boolean animBoolean =false;
+    public void  setAnimBoolean(Boolean animBool){this.animBoolean = animBool;}
+    public Boolean getAnimBoolean(){return this.animBoolean;}
+
+    Float speakSpeed = 0.3f;
+    public void setSpeakSpeed(Float speed){this.speakSpeed = speed;}
+    public Float getSpearSpeed(){return this.speakSpeed;}
 }

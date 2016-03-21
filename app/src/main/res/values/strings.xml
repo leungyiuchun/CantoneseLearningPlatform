@@ -9,7 +9,7 @@
     <string name="setting_initial">聲母</string>
     <string name="setting_vowel">韻母</string>
     <string name="setting_task_and_hints">選填和提示</string>
-    <string name="setting_advanced">高階</string>
+    <string name="setting_advanced">進階設定</string>
     <string name="setting_initial1">聲母:</string>
     <string name="setting_vowel1">韻母:</string>
     <string name="setting_quantity">數量</string>
@@ -130,11 +130,14 @@
     <string name="slash">/</string>
     <string name="on">開啟</string>
     <string name="off">關閉</string>
-    <string name="adv_theme">高階設定</string>
+    <string name="adv_theme">進階設定</string>
     <string name="mgt_db">管理數據庫</string>
     <string name="combination">組合</string>
     <string name="mgt_word">管理文字</string>
     <string name="mgt_picture">管理圖片</string>
+    <string name="amend_record">修改記錄</string>
+    <string name="add_record">增加記錄</string>
+    <string name="del_record">刪除記錄</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

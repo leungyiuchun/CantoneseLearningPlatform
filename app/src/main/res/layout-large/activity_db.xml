@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="10px"
-            android:background="@android:color/tranpxarent" />
+            android:background="@android:color/transparent" />
         <View
             android:layout_width="match_parent"
             android:layout_height="10px"

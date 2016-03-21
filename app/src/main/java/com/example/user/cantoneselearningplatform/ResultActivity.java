@@ -129,7 +129,7 @@ public class ResultActivity extends AppCompatActivity {
     }
     public void capScreen(){
         try{
-            String name = Environment.getExternalStorageDirectory().toString() + "/" + "Test_" +currentTime +".jpg";
+            String name = Environment.getExternalStorageDirectory().toString() + "/" + "Test_" + studentName + " " +currentTime +".jpg";
             View v1 = getWindow().getDecorView();
             v1.setDrawingCacheEnabled(true);
             Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());

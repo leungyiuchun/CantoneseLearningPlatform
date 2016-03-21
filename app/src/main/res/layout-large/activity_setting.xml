@@ -162,14 +162,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/setting_advanced"
+                    android:text="錯誤顏色提示"
                     android:layout_below="@+id/setting_task"
                     android:id="@+id/tv_adv"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv2_adv"
-                    android:textSize="40px"
+                <Button
+                    android:layout_width="150px"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btn_adv"
                     android:paddingLeft="10px"/>
 
             </LinearLayout>
@@ -191,6 +190,13 @@
             android:layout_height="wrap_content"
             android:text="@string/setting_finish"
             android:id="@+id/setting_button" />
+
+        <Button
+            android:layout_gravity="right"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:text="@string/setting_finish"
+            android:id="@+id/abv_button" />
     </LinearLayout>
 
 

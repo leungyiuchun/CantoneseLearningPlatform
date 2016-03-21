@@ -20,6 +20,7 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
     TextView hints_tv;
     TextView quantity_tv;
     TextView mode_tv;
+    Button advBtn;
     LinearLayout setting_quantity;
     LinearLayout setting_task;
     LinearLayout setting_adv;
@@ -35,13 +36,13 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
         setting_task = (LinearLayout)findViewById(R.id.setting_task);
         setting_adv = (LinearLayout)findViewById(R.id.setting_adv);
         setting_mode = (LinearLayout)findViewById(R.id.setting_mode);
-
         init_tv = (TextView)findViewById(R.id.tv2_initial);
         vowel_tv = (TextView)findViewById(R.id.tv2_vowel);
         task_tv = (TextView)findViewById(R.id.tv2_task);
         hints_tv = (TextView)findViewById(R.id.tv2_hints);
         quantity_tv = (TextView)findViewById(R.id.tv2_quantity);
         mode_tv = (TextView)findViewById(R.id.tv2_mode);
+        advBtn = (Button)findViewById(R.id.btn_adv);
         if(((MyApp)getApplication()).getInitList().size()==0){
             init_tv.setText("請選擇聲母");
         }
@@ -116,6 +117,20 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
                 modeDialog.show(getFragmentManager(), "dialog");
             }
         });
+        switch ((((MyApp) getApplication()).getColorIndex())){
+            case 0:
+                advBtn.setBackgroundColor(getResources().getColor(R.color.myRed));
+                break;
+            case 1:
+                advBtn.setBackgroundColor(getResources().getColor(R.color.myGreen));
+                break;
+            case 2:
+                advBtn.setBackgroundColor(getResources().getColor(R.color.myOrange));
+                break;
+            case 3:
+                advBtn.setBackgroundColor(getResources().getColor(R.color.myPurple));
+                break;
+        }
     }
 
     @Override

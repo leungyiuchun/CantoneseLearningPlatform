@@ -164,12 +164,11 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/setting_advanced"
                     android:id="@+id/tv_adv"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv2_adv"
-                    android:textSize="40sp"
-                    android:paddingLeft="10sp"/>
+                <Button
+                    android:layout_width="150px"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btn_adv"
+                    android:paddingLeft="10px"/>
 
             </LinearLayout>
 

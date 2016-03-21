@@ -49,7 +49,7 @@ public class TaskFragment extends DialogFragment {
                         TextView tv2 = (TextView) getActivity().findViewById(R.id.tv2_hints);
 
                         if(((MyApp)getActivity().getApplication()).getHintInt()==0){
-                            tv.setText("沒有提示");
+                            tv2.setText("沒有提示");
                         }else {
                             if(((MyApp)getActivity().getApplication()).getHintsString().isEmpty()){
                             }else {

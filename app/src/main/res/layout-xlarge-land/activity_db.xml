@@ -45,7 +45,7 @@
             android:background="@android:color/transparent" />
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_height="fill_parent"
         android:layout_width="match_parent"
         >
@@ -53,13 +53,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="3">
             <LinearLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
@@ -70,13 +70,13 @@
                         android:paddingRight="30dp"
                         android:gravity="center"/>
                     <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="160sp"
+                        android:layout_height="80sp"
                         android:id="@+id/init_spinner"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:orientation="horizontal">
                     <TextView
                         android:paddingRight="30dp"
@@ -86,17 +86,17 @@
                         android:text="@string/setting_vowel"
                         android:gravity="center"/>
                     <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="160sp"
+                        android:layout_height="80sp"
                         android:id="@+id/vowel_spinner"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textSize="40sp"
                         android:text="@string/combination"
                         android:gravity="center"/>
@@ -107,23 +107,7 @@
                         android:textSize="40sp"
                         android:id="@+id/db_combination"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mgt_word"
-                        android:id="@+id/mgt_word"
-                        android:textSize="40sp"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mgt_picture"
-                        android:id="@+id/mgt_picture"
-                        android:textSize="40sp"/>
-                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
@@ -132,6 +116,47 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal">
+                <Button android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/add_record"
+                    android:textSize="40sp"
+                    android:id="@+id/btn_addRecord"/>
+                <Button android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/amend_record"
+                    android:textSize="40sp"
+                    android:id="@+id/btn_amendRecord"/>
+                <Button android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/del_record"
+                    android:textSize="40sp"
+                    android:id="@+id/btn_delRecord"/>
+            </LinearLayout>
+            <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tl_record"></TableLayout>
+            </ScrollView>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_alignParentBottom="true">
+            <Button
+                android:layout_gravity="right"
+                android:textSize="50sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_finish"
+                android:id="@+id/setting_button" />
         </LinearLayout>
     </LinearLayout>
 

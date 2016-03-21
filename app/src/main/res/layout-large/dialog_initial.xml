@@ -45,13 +45,22 @@
             android:layout_height="10dp"
             android:background="@android:color/transparent" />
     </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/init_themeSep">
+        <ScrollView android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TableLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:gravity="center_horizontal" android:layout_below="@+id/init_themeSep"
+                android:id="@+id/tl_init" android:orientation="vertical"
+                >
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
 
-    <TableLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
-        android:gravity="center_horizontal" android:layout_below="@+id/init_themeSep"
-        android:id="@+id/tl_init" android:orientation="vertical"
-        >
 
-    </TableLayout>
+
+
     <!--<RelativeLayout-->
         <!--android:id="@+id/rl_init"-->
         <!--android:layout_width="wrap_content"-->

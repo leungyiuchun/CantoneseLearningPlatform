@@ -6,7 +6,11 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.inputmethodservice.Keyboard;
+import android.inputmethodservice.KeyboardView;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
@@ -58,6 +62,7 @@ public class ExerciseActivity extends Activity{
     public TextView tv_currentQuestion;
     public TextView tv_totalQuestion;
     public TextView tv_mode;
+    public float speakSpeed;
     public ArrayList<Exer> exerciseList = new ArrayList<Exer>();
     public ArrayList<Answer> AnswerList = new ArrayList<Answer>();
     public ArrayList<ChineseExer> chineseExerList = new ArrayList<ChineseExer>();
@@ -82,6 +87,7 @@ public class ExerciseActivity extends Activity{
         img2 = (ImageView)findViewById(R.id.imageView2);
         img2.setVisibility(View.INVISIBLE);
         index = 0;
+        speakSpeed = ((MyApp)getApplication()).getSpearSpeed();
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
         tv1 = (TextView) findViewById(R.id.textView);
@@ -219,7 +225,7 @@ public class ExerciseActivity extends Activity{
             public void onClick(View v) {
                 String toSpeak = soundButton.getText().toString();
 //                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
-                t1.setSpeechRate(0.3f); //larger it is, faster it would be.
+                t1.setSpeechRate(speakSpeed); //larger it is, faster it would be.
                 t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.VISIBLE);
@@ -392,6 +398,7 @@ public class ExerciseActivity extends Activity{
         }
     }
     public void setHints(EditText et1,EditText et2, Integer decision) {
+        Log.d("globalHint"," "+decision.toString());
         switch (decision) {
             case 0:
                 //do nothing
@@ -413,6 +420,10 @@ public class ExerciseActivity extends Activity{
     public void updateExercise(){
         currentQuestion +=1;
         index += 1;
+        String toSpeak1 = soundButton.getText().toString();
+        t1.setSpeechRate(speakSpeed); //larger it is, faster it would be.
+        t1.speak(toSpeak1, TextToSpeech.QUEUE_FLUSH, null);
+
         tv_currentQuestion.setText(String.format("%d", currentQuestion));
         ans_init = chineseExerList.get(index).getChineseExerInit();
         ans_vowel = chineseExerList.get(index).getChineseExerVowel();
@@ -430,9 +441,7 @@ public class ExerciseActivity extends Activity{
         }
         et1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_init.length())});
         et2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_vowel.length())});
-        String toSpeak1 = soundButton.getText().toString();
-        t1.setSpeechRate(0.3f); //larger it is, faster it would be.
-        t1.speak(toSpeak1, TextToSpeech.QUEUE_FLUSH, null);
+
         ll_exercise1.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
@@ -549,31 +558,40 @@ public class ExerciseActivity extends Activity{
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 et1.setTextColor(Color.BLACK);
                 Log.d("et1 string ", " " + et1.getText().length());
+                if(et1.getText().length() == ans_init.length()){
+//                    et2.requestFocus();
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
-                tv1.setText(floatingHint(et1.getText().length(), et1, ans_init));
-                switch (globalTaskInt) {
-                    case 0:
-                        break;
-                    case 1:
-                        animation(et1Coord[0], et1Coord[1], submitCoord[0], submitCoord[1]);
-                        handler.postDelayed(new Runnable() {
-                            public void run() {
-                                initAnimation(submitCoord[0], submitCoord[1], 0, 0);
-                            }
-                        }, 4000);
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        animation(et1Coord[0], et1Coord[1], et2Coord[0], et2Coord[1]);
-                        handler.postDelayed(new Runnable() {
-                            public void run() {
-                                initAnimation(et2Coord[0], et2Coord[1], 0, 0);
-                            }
-                        }, 4000);
-                        break;
+                if (globalHintInt.intValue() == 0){
+                }else {
+                    tv1.setText(floatingHint(et1.getText().length(), et1, ans_init));
+
+                }
+                if(((MyApp)getApplication()).getAnimBoolean()) {
+                    switch (globalTaskInt) {
+                        case 0:
+                            break;
+                        case 1:
+                            animation(et1Coord[0], et1Coord[1], submitCoord[0], submitCoord[1]);
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    initAnimation(submitCoord[0], submitCoord[1], 0, 0);
+                                }
+                            }, 4000);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            animation(et1Coord[0], et1Coord[1], et2Coord[0], et2Coord[1]);
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    initAnimation(et2Coord[0], et2Coord[1], 0, 0);
+                                }
+                            }, 4000);
+                            break;
+                    }
                 }
             }
         };
@@ -586,19 +604,21 @@ public class ExerciseActivity extends Activity{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 et2.setTextColor(Color.BLACK);
-                Log.d("et2 string ", " " + et2.getText().length());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                tv2.setText(floatingHint(et2.getText().length(),et2,ans_vowel));
-
-                animation(et2Coord[0], et2Coord[1], submitCoord[0], submitCoord[1]);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        initAnimation(submitCoord[0], submitCoord[1], 0, 0);
-                    }
-                }, 4000);
+                if (globalHintInt.intValue() ==0){
+                    tv2.setText(floatingHint(et2.getText().length(),et2,ans_vowel));
+                }
+                if(((MyApp)getApplication()).getAnimBoolean()) {
+                    animation(et2Coord[0], et2Coord[1], submitCoord[0], submitCoord[1]);
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            initAnimation(submitCoord[0], submitCoord[1], 0, 0);
+                        }
+                    }, 4000);
+                }
             }
         };
     }
@@ -626,6 +646,20 @@ public class ExerciseActivity extends Activity{
     public String tmpAddChinese(String cardProduct){
         String product = cardProduct;
         String chinese;
+//        Cursor cursor = db.rawQuery("SELECT chin_word FROM DETAIL_TABLE LEFT JOIN COMBINATION_TABLE ON DETAIL_TABLE.c_id=COMBINATION_TABLE._id WHERE COMBINATION_TABLE.combination =" + "'"+product+"'" + ";)",null);
+//        String [] data = new String[cursor.getCount()];
+//        Integer sum = cursor.getCount();
+//        Log.d("sumsums",""+sum.toString());
+//        if(sum != 0) {
+//            cursor.moveToFirst();
+//            for (int i = 0; i < sum; i++) {
+//                String strCr = cursor.getString(0);
+//                data[i] = strCr;
+//                cursor.moveToNext();
+//            }
+//        }
+//        Integer random1 = getRandomNumber(1,sum);
+//        chinese = data[random1];
         switch (product){
             case "baa":
                 chinese = "爸";
@@ -650,5 +684,8 @@ public class ExerciseActivity extends Activity{
         String edit = ansString.substring(textLength,ansString.length());
         returnString = text + edit;
         return returnString;
+    }
+    public void addKey(){
+
     }
 }
