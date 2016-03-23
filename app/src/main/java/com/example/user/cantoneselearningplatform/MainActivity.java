@@ -41,11 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         total_number_init = init_array.length;
 
-
-        ContentValues values = new ContentValues();
-
-
-
         setting_button = (Button)findViewById(R.id.setting_button);
         setting_button.setOnClickListener(new View.OnClickListener() {
             @Override

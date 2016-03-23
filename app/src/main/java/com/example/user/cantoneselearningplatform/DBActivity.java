@@ -1,10 +1,17 @@
 package com.example.user.cantoneselearningplatform;
 
+import android.app.ActionBar;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Picture;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TabHost;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -23,7 +31,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBActivity extends AppCompatActivity {
+public class DBActivity extends AppCompatActivity{
     public String table1_name = "COMBINATION_TABLE";
     public String table2_name = "DETAIL_TABLE";
     Spinner spinnerInit;
@@ -34,14 +42,17 @@ public class DBActivity extends AppCompatActivity {
     private String displayVowel = "";
     String display;
     String[] init_array = {"b","p","m","f","d","t","n","l","g","k","ng","h","gw","kw","w","z","c","s","j"};
-    String[] vowel_array = {"aa","aai","aau","aan","aang","aap","aat","aak","ai","au","am","an","ang","ap","at","ak","e","ei","eng","ek","i","iu","im","in","ing","ip","it","ik","o","oi","ou","on","ong","ot","ok","oe","oeng","oek","eoi","eon","eot","u","ui","un","ung","ut","uk","yu","yun","yut"};
+    String[] vowel_array = {"aa","aai","aau","aam","aan","aang","aap","aat","aak","ai","au","am","an","ang","ap","at","ak","e","ei","eng","ek","i","iu","im","in","ing","ip","it","ik","o","oi","ou","on","ong","ot","ok","oe","oeng","oek","eoi","eon","eot","u","ui","un","ung","ut","uk","yu","yun","yut"};
     ArrayAdapter<String> initList;
     ArrayAdapter<String> vowelList;
     ArrayList<Record> recordList;
-    Button add_record;
+//    Button add_record;
     Button edit_record;
     Button del_record;
     dataAdapter mDbHelper;
+    TmpHelper tmpHelper;
+    FragmentPagerAdapter adapterViewPager;
+
     //HAVE TO CLOSE THE DB BY ADDING .CLOSE() IN SOMEWHERE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +61,51 @@ public class DBActivity extends AppCompatActivity {
         spinnerInit = (Spinner)findViewById(R.id.init_spinner);
         spinnerVowel = (Spinner)findViewById(R.id.vowel_spinner);
         combination = (TextView)findViewById(R.id.db_combination);
-        add_record = (Button)findViewById(R.id.btn_addRecord);
-        edit_record = (Button)findViewById(R.id.btn_amendRecord);
-        del_record = (Button)findViewById(R.id.btn_delRecord);
-        tl_record = (TableLayout)findViewById(R.id.tl_record);
+
         initList = new ArrayAdapter<String>(this.getApplicationContext(),R.layout.spinner,init_array);
         spinnerInit.setAdapter(initList);
-        mDbHelper = new dataAdapter(this.getApplicationContext());
-        try{
-            mDbHelper.createDatabase();
-            mDbHelper.open();
-        }catch (SQLException e){
-            Log.d("mDbhelper",""+e);
-        }
+
+        ViewPager vpPager = (ViewPager) findViewById(R.id.pager);
+        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+        vpPager.setAdapter(adapterViewPager);
+        vpPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+//        tmpHelper = new TmpHelper(this.getApplicationContext());
+//        SQLiteDatabase db = tmpHelper.getWritableDatabase();
+//        mDbHelper = new dataAdapter(this.getApplicationContext());
+//        try{
+//            mDbHelper.createDatabase();
+//            mDbHelper.open();
+//        }catch (SQLException e){
+//            Log.d("mDbhelper",""+e);
+//        }
+/*        for(int i=0;i<init_array.length;i++){
+//            for (int j=0;j<vowel_array.length;j++){
+//                Log.d("",""+init_array[i].toString() + " " + vowel_array[i] );
+//                String product = init_array[i] + vowel_array[j];
+//                ContentValues values = new ContentValues();
+//                values.put("syllable",product);
+//                values.put("consonant",init_array[i]);
+//                values.put("vowel",vowel_array[j]);
+//                db.insert("TMP_TABLE", null, values);
+//            }
+//        }
+//        db.close();
+*/
         vowelList = new ArrayAdapter<String>(this.getApplicationContext(),R.layout.spinner,vowel_array);
 
         Button pass_button = (Button)this.findViewById(R.id.setting_button);
@@ -112,14 +155,10 @@ public class DBActivity extends AppCompatActivity {
 
             }
         });
-        add_record.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
-//    public void getTable(String product){
+
+    //    public void getTable(String product){
 //        tl_record.removeAllViews();
 //        Integer sum = cursor.getCount();
 //        Log.d("sumsums",""+sum.toString());
@@ -170,4 +209,9 @@ public class DBActivity extends AppCompatActivity {
 //    public String getData(String combination_text){
 //        Cursor cursor = db.rawQuery("SELECT chin_word FROM COMBINATION_TABLE,DETAIL_TABLE WHERE COMBINATION_TABLE.combination = " + combination_text + " AND COMBINATION_TABLE.id" ,null);
 //    }
+
+
+
 }
+
+

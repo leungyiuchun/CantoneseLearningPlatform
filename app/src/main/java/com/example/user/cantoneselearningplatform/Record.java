@@ -10,9 +10,9 @@ public class Record {
     Integer id;
     String chin_word;
     Integer tone;
-    byte[] picture;
+    Blob picture;
 
-    public Record(String combination1,Integer id1,String chin_word1,Integer tone1,byte[] picture1) {
+    public Record(String combination1,Integer id1,String chin_word1,Integer tone1,Blob picture1) {
         this.combination = combination1;
         this.id = id1;
         this.chin_word = chin_word1;
@@ -43,10 +43,10 @@ public class Record {
     public void setTone(Integer tone1){
         this.tone = tone1;
     }
-    public byte[] getPicture(){
+    public Blob getPicture(){
         return this.picture;
     }
-    public void setPicture(byte[] picture1){
+    public void setPicture(Blob picture1){
         this.picture = picture1;
     }
 }

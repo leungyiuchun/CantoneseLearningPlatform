@@ -59,5 +59,9 @@ public class dataAdapter {
         mDbHelper.close();
     }
 
+//    public Cursor getWordList(String product){
+//        String cardProduct = product;
+//        String query = "SELECT COMBINATION.combination";
+//    }
 
 }

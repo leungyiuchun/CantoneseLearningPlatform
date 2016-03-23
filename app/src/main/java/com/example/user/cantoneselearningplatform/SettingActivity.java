@@ -96,8 +96,8 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
         adv_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment hintsDialog = new AdvFragment();
-                hintsDialog.show(getFragmentManager(), "dialog");
+                DialogFragment advDialog = new AdvFragment();
+                advDialog.show(getFragmentManager(), "dialog");
 
             }
         });

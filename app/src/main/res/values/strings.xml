@@ -135,9 +135,9 @@
     <string name="combination">組合</string>
     <string name="mgt_word">管理文字</string>
     <string name="mgt_picture">管理圖片</string>
-    <string name="amend_record">修改記錄</string>
-    <string name="add_record">增加記錄</string>
-    <string name="del_record">刪除記錄</string>
+    <string name="amend_Picrecord">修改記錄</string>
+    <string name="add_Picrecord">增加記錄</string>
+    <string name="del_Picrecord">刪除記錄</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
