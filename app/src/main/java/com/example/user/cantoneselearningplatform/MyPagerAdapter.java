@@ -3,15 +3,19 @@ package com.example.user.cantoneselearningplatform;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 /**
  * Created by user on 23/3/16.
  */
-public class MyPagerAdapter extends FragmentPagerAdapter {
+public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private static int NUM_ITEMS = 2;
-
-    public MyPagerAdapter(FragmentManager fragmentManager) {
+    String word_product;
+    public MyPagerAdapter(FragmentManager fragmentManager,String word_product1) {
         super(fragmentManager);
+        this.word_product = word_product1;
+
     }
 
     // Returns total number of pages
@@ -23,7 +27,8 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0: // Fragment # 0 - This will show FirstFragment
-                return wordfragment.newInstance(0, "ABC");
+                Log.d("syllable1 on Adapter", "" + word_product);
+                return new wordfragment(word_product);
             case 1: // Fragment # 0 - This will show FirstFragment different title
                 return picturefragment.newInstance(1, "文字");
 //            case 2: // Fragment # 0 - This will show FirstFragment different title

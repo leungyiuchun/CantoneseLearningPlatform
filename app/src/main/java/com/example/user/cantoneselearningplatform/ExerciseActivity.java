@@ -33,6 +33,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.sql.SQLClientInfoException;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
@@ -80,10 +83,19 @@ public class ExerciseActivity extends Activity{
     ImageView img2;
     Animation animation;
     Animation animation2;
+    dataAdapter dataAdapter1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_exercise);
+        dataAdapter1 = new dataAdapter(this.getApplicationContext());
+        try{
+            dataAdapter1.createDatabase();
+            dataAdapter1.open();
+        }catch (SQLException e){
+            Log.d("sql error",""+e);
+        }
+
         img2 = (ImageView)findViewById(R.id.imageView2);
         img2.setVisibility(View.INVISIBLE);
         index = 0;
@@ -170,7 +182,8 @@ public class ExerciseActivity extends Activity{
                         if (currentQuestion.intValue() == totalQuestion.intValue()) {
                             Intent intent2 = new Intent(ExerciseActivity.this, RemindActivity.class);
                             intent2.putExtra("Arraylist", AnswerList);
-
+                            Log.d("Arraylist",String.valueOf(AnswerList.size()));
+                            
                             startActivity(intent2);
 
                         } else {
@@ -401,12 +414,16 @@ public class ExerciseActivity extends Activity{
         Log.d("globalHint"," "+decision.toString());
         switch (decision) {
             case 0:
-                //do nothing
+                tv2.setVisibility(View.INVISIBLE);
+                tv1.setVisibility(View.INVISIBLE);
+
                 break;
             case 1:
                 tv1.setText(ans_init);
+                tv2.setVisibility(View.INVISIBLE);
                 break;
             case 2:
+                tv1.setVisibility(View.INVISIBLE);
                 tv2.setText(ans_vowel);
                 break;
             case 3:
@@ -420,10 +437,15 @@ public class ExerciseActivity extends Activity{
     public void updateExercise(){
         currentQuestion +=1;
         index += 1;
-        String toSpeak1 = soundButton.getText().toString();
-        t1.setSpeechRate(speakSpeed); //larger it is, faster it would be.
-        t1.speak(toSpeak1, TextToSpeech.QUEUE_FLUSH, null);
-
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                String toSpeak = soundButton.getText().toString();
+////                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+//                t1.setSpeechRate(speakSpeed); //larger it is, faster it would be.
+//                t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+//            }
+//        }, 2000);
         tv_currentQuestion.setText(String.format("%d", currentQuestion));
         ans_init = chineseExerList.get(index).getChineseExerInit();
         ans_vowel = chineseExerList.get(index).getChineseExerVowel();
@@ -637,6 +659,7 @@ public class ExerciseActivity extends Activity{
         super.onStart();
     }
     public void translate(ArrayList<Exer> exerciseArrayList){
+        chineseExerList.clear();
         for (int i =0;i<exerciseArrayList.size();i++){
             Log.d("exerList Size"," "+exerciseArrayList.size());
             ChineseExer chineseExer = new ChineseExer(exerciseArrayList.get(i), tmpAddChinese(exerciseArrayList.get(i).getCardProduct()));
@@ -646,36 +669,37 @@ public class ExerciseActivity extends Activity{
     public String tmpAddChinese(String cardProduct){
         String product = cardProduct;
         String chinese;
-//        Cursor cursor = db.rawQuery("SELECT chin_word FROM DETAIL_TABLE LEFT JOIN COMBINATION_TABLE ON DETAIL_TABLE.c_id=COMBINATION_TABLE._id WHERE COMBINATION_TABLE.combination =" + "'"+product+"'" + ";)",null);
-//        String [] data = new String[cursor.getCount()];
-//        Integer sum = cursor.getCount();
-//        Log.d("sumsums",""+sum.toString());
-//        if(sum != 0) {
-//            cursor.moveToFirst();
-//            for (int i = 0; i < sum; i++) {
-//                String strCr = cursor.getString(0);
-//                data[i] = strCr;
-//                cursor.moveToNext();
-//            }
-//        }
-//        Integer random1 = getRandomNumber(1,sum);
-//        chinese = data[random1];
-        switch (product){
-            case "baa":
-                chinese = "爸";
-                break;
-            case "maa":
-                chinese="媽";
-                break;
-            case "saa":
-                chinese="沙";
-                break;
-            case "haa":
-                chinese="哈";
-                break;
-            default:
-                chinese="花";
+        Cursor cursor = dataAdapter1.getWordList(product);
+        Integer sum = cursor.getCount();
+
+        String [] data = new String[sum];
+        Log.d("sumsums",""+sum.toString());
+        if(sum != 0) {
+            cursor.moveToFirst();
+            for (int i = 0; i < sum; i++) {
+                String strCr = cursor.getString(0);
+                data[i] = strCr;
+                cursor.moveToNext();
+            }
         }
+        Integer random1 = getRandomNumber(1,sum-1);
+        chinese = data[random1];
+//        switch (product){
+//            case "baa":
+//                chinese = "爸";
+//                break;
+//            case "maa":
+//                chinese="媽";
+//                break;
+//            case "saa":
+//                chinese="沙";
+//                break;
+//            case "haa":
+//                chinese="哈";
+//                break;
+//            default:
+//                chinese="花";
+//        }
         return chinese;
     }
     public String floatingHint(Integer textLength,EditText et1Hint,String ansString) {

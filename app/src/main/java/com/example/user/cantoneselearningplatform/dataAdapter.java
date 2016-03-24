@@ -59,9 +59,26 @@ public class dataAdapter {
         mDbHelper.close();
     }
 
-//    public Cursor getWordList(String product){
-//        String cardProduct = product;
-//        String query = "SELECT COMBINATION.combination";
-//    }
-
+    public Cursor getWordList(String product){
+        String cardProduct = product;
+        String query = "SELECT CHAR_TABLE.chin_word  FROM CHAR_TABLE LEFT JOIN SYLLABLE_TABLE ON SYLLABLE_TABLE.s_id = CHAR_TABLE.s_id WHERE SYLLABLE_TABLE.syllable = " + "'"+product+"'";
+            Cursor cursor = mDb.rawQuery(query,null);
+        cursor.moveToFirst();
+            if (cursor!=null)
+            {
+                cursor.moveToNext();
+            }
+            return cursor;
+    }
+    public Cursor getWord_Tone(String product){
+        String cardProduct = product;
+        String query = "SELECT CHAR_TABLE.chin_word,CHAR_TABLE.tone  FROM CHAR_TABLE LEFT JOIN SYLLABLE_TABLE ON SYLLABLE_TABLE.s_id = CHAR_TABLE.s_id WHERE SYLLABLE_TABLE.syllable = " + "'"+product+"'";
+        Cursor cursor = mDb.rawQuery(query,null);
+        cursor.moveToFirst();
+        if (cursor!=null)
+        {
+            cursor.moveToNext();
+        }
+        return cursor;
+    }
 }

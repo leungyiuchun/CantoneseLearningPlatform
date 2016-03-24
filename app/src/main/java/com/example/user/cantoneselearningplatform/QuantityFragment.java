@@ -86,6 +86,7 @@ public class QuantityFragment extends DialogFragment{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ((MyApp) getActivity().getApplication()).setQuantityInt(getTotalQuantity());
+                        Log.d("Total Quantity",""+ getTotalQuantity().toString());
                         ((MyApp) getActivity().getApplication()).setCombinationList(final_List);
                         ((MyApp) getActivity().getApplication()).setInitReopenFlag(1);
                         ((MyApp) getActivity().getApplication()).setVowelReopenFlag(1);
@@ -378,14 +379,6 @@ public class QuantityFragment extends DialogFragment{
         cp.setTextSize(40);
         cp.setGravity(Gravity.CENTER);
         row.addView(cp);
-
-        TextView init= new TextView(getActivity().getApplicationContext());
-
-        init.setText(R.string.setting_initial1);
-        init.setTextSize(30);
-        init.setPadding(10, 0, 10, 0);
-        init.setTextColor(Color.BLACK);
-        row.addView(init);
 
         final TextView init2 = new TextView(getActivity().getApplicationContext());
         init2.setText(final_List.get(i).getInit());
