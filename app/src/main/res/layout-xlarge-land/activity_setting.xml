@@ -107,9 +107,10 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="選填："
+                    android:text="選填:"
                     android:textSize="40sp"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:paddingRight="20sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -119,10 +120,11 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="提示："
+                    android:text="提示:"
                     android:textSize="40sp"
                     android:gravity="center"
-                    android:paddingLeft="10sp"/>
+                    android:paddingLeft="40sp"
+                    android:paddingRight="20sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -164,12 +166,12 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/setting_advanced"
                     android:id="@+id/tv_adv"/>
-                <Button
-                    android:layout_width="150px"
-                    android:layout_height="match_parent"
-                    android:id="@+id/btn_adv"
-                    android:paddingLeft="10px"/>
-
+                <TextView android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textSize="40sp"
+                    android:text="・・・"
+                    android:textColor="@android:color/background_dark"
+                    android:gravity="center"/>
             </LinearLayout>
 
 
@@ -189,6 +191,7 @@
             android:layout_height="wrap_content"
             android:text="@string/setting_finish"
             android:id="@+id/setting_button" />
+
     </LinearLayout>
 
 
