@@ -339,8 +339,7 @@ public class QuantityFragment extends DialogFragment{
         row.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d("Row", "onClick " + index.toString());
-                Log.d("Row", "Clickable " + row.isClickable());
+
                 cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
                 quantity_tv1.setText(final_List.get(index).getInt1().toString());
                 increaseBtn.setVisibility(View.VISIBLE);

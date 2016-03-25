@@ -43,10 +43,10 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         String title = "title";
         if (position==0){
-            title = "設定文字";
+            title = "管理文字";
         }else{
             if(position==1){
-                title ="設定圖片";
+                title ="管理圖片";
             }
         }
         CharSequence cs = title;

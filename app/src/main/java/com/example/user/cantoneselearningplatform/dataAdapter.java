@@ -1,5 +1,6 @@
 package com.example.user.cantoneselearningplatform;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -44,7 +45,7 @@ public class dataAdapter {
         {
             mDbHelper.openDataBase();
             mDbHelper.close();
-            mDb = mDbHelper.getReadableDatabase();
+            mDb = mDbHelper.getWritableDatabase();
         }
         catch (SQLException mSQLException)
         {
@@ -72,7 +73,7 @@ public class dataAdapter {
     }
     public Cursor getWord_Tone(String product){
         String cardProduct = product;
-        String query = "SELECT CHAR_TABLE.chin_word,CHAR_TABLE.tone  FROM CHAR_TABLE LEFT JOIN SYLLABLE_TABLE ON SYLLABLE_TABLE.s_id = CHAR_TABLE.s_id WHERE SYLLABLE_TABLE.syllable = " + "'"+product+"'";
+        String query = "SELECT * FROM CHAR_TABLE LEFT JOIN SYLLABLE_TABLE ON SYLLABLE_TABLE.s_id = CHAR_TABLE.s_id WHERE SYLLABLE_TABLE.syllable = " + "'"+product+"'" + "ORDER BY CHAR_TABLE.tone ASC";
         Cursor cursor = mDb.rawQuery(query,null);
         cursor.moveToFirst();
         if (cursor!=null)
@@ -80,5 +81,31 @@ public class dataAdapter {
             cursor.moveToNext();
         }
         return cursor;
+    }
+    public Boolean insertWord(String chin_word1,Integer tone1,Integer s_id){
+        Boolean successful;
+        ContentValues cv = new ContentValues();
+        cv.put("chin_word",chin_word1);
+        cv.put("tone", tone1);
+        cv.put("s_id", s_id);
+        Long long1 = mDb.insert("CHAR_TABLE",null,cv);
+        if(long1 == -1){
+            successful = false;
+        }else {
+            successful = true;
+        }
+        return successful;
+    }
+    public Boolean delWord(Integer id1){
+        Boolean successful;
+
+        Integer c_id1 = id1;
+        Integer long1 = mDb.delete("CHAR_TABLE","c_id " + "=" + c_id1,null);
+        if(long1 == -1){
+            successful = false;
+        }else {
+            successful = true;
+        }
+        return successful;
     }
 }

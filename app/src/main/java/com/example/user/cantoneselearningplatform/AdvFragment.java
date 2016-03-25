@@ -171,6 +171,9 @@ public class AdvFragment extends DialogFragment {
                     case 10:
                         speakSpeed = 1f;
                         break;
+                    default:
+                        speakSpeed = 0.3f;
+                        break;
                 }
             }
 

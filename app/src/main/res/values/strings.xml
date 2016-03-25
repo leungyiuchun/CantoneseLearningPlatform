@@ -133,12 +133,11 @@
     <string name="adv_theme">進階設定</string>
     <string name="mgt_db">管理數據庫</string>
     <string name="combination">組合</string>
-    <string name="mgt_word">管理文字</string>
+    <string name="mgt_word">管理文字記錄</string>
     <string name="mgt_picture">管理圖片</string>
     <string name="amend_Picrecord">修改記錄</string>
-    <string name="add_Picrecord">增加記錄</string>
-    <string name="del_Picrecord">刪除記錄</string>
-
+    <string name="add_Picrecord">新增記錄</string>
+    <string name="del_Picrecord">點擊並長按記錄以刪除記錄</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

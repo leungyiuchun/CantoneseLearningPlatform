@@ -6,17 +6,139 @@
     <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:orientation="vertical">
-        <ScrollView android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <LinearLayout
             android:layout_width="match_parent"
-            >
-            <TableLayout
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ScrollView android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/word_tl">
+                </TableLayout>
+
+            </ScrollView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/task_theme">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"
+                    android:textColor="#5E3434"
+                    android:text="@string/add_Picrecord"
+                    android:id="@+id/task_tv_theme" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/task_themeSep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20sp"
+                    android:background="@android:color/transparent"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10sp"
+                    android:background= "@android:color/darker_gray"
+                    android:layout_below="@+id/task_theme"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20sp"
+                    android:background="@android:color/transparent" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView android:text="拼音"
+                    android:textSize="30sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView android:textSize="40sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_add_syllable"
+                    android:paddingLeft="30sp"/>
+            </LinearLayout>
+            <View android:layout_height="10sp"
+                android:layout_width="match_parent" />
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/word_tl">
-            </TableLayout>
+                android:orientation="horizontal">
+                <TextView android:text="文字"
+                    android:textSize="30sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20sp"
+                    android:layout_gravity="center_vertical"/>
+                <EditText android:textSize="30sp"
+                    android:layout_width="100sp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_et1_syllable"
+                    android:background= "@color/myGrey"
+                    android:layout_gravity="center_vertical"
+                    android:maxLength="1"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="發音"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/add_syllable_pronunce"/>
+                <TextView android:text="聲調"
+                    android:textSize="30sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="20sp"
+                    android:layout_gravity="center_vertical"/>
 
-        </ScrollView>
+                <EditText android:textSize="30sp"
+                    android:layout_width="100sp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_et2_syllable"
+                    android:background= "@color/myGrey"
+                    android:layout_gravity="center_vertical"
+                    android:inputType="number"
+                    android:maxLength="1"/>
+            </LinearLayout>
+            <View android:layout_height="10sp"
+                android:layout_width="match_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end">
+                <Button android:textSize="30sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="新增"
+                    android:id="@+id/btn_add_syllable"/>
+            </LinearLayout>
+            <View android:layout_height="50sp"
+                android:layout_width="match_parent" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>
