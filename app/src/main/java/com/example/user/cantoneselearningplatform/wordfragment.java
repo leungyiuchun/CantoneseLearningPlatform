@@ -60,7 +60,6 @@ public class wordfragment extends Fragment {
 
     public wordfragment(String syllable1) {
         syllable = syllable1;
-        Log.d("syllable1 on wordFragment", "" + syllable1);
 
     }
 
@@ -87,6 +86,7 @@ public class wordfragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wordfragment, container, false);
         tl_word = (TableLayout)view.findViewById(R.id.word_tl);
+
         btn_pronunce = (Button)view.findViewById(R.id.add_syllable_pronunce);
         btn_submit_syllable = (Button)view.findViewById(R.id.btn_add_syllable);
         add_et1 = (EditText)view.findViewById(R.id.add_et1_syllable);

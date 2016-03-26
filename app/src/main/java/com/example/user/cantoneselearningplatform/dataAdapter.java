@@ -4,9 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.SQLException;
 
 /**
@@ -100,7 +103,43 @@ public class dataAdapter {
         Boolean successful;
 
         Integer c_id1 = id1;
-        Integer long1 = mDb.delete("CHAR_TABLE","c_id " + "=" + c_id1,null);
+        Integer long1 = mDb.delete("CHAR_TABLE", "c_id " + "=" + c_id1, null);
+        if(long1 == -1){
+            successful = false;
+        }else {
+            successful = true;
+        }
+        return successful;
+    }
+    public Cursor getPicture(Integer c_id1){
+        String query = "SELECT * FROM PICTURE_TABLE WHERE PICTURE_TABLE.c_id = " + c_id1;
+        Log.d("Query",""+query.toString());
+        Cursor cursor = mDb.rawQuery(query, null);
+        cursor.moveToFirst();
+        if (cursor!=null)
+        {
+            cursor.moveToNext();
+        }
+        return cursor;
+    }
+    public Boolean insertPicture(Bitmap bitmap1, Integer c_id){
+        Boolean successful;
+        ContentValues cv = new ContentValues();
+
+        cv.put("c_id", c_id);
+        Long long1 = mDb.insert("PICTURE_TABLE", null, cv);
+        if(long1 == -1){
+            successful = false;
+        }else {
+            successful = true;
+        }
+        return successful;
+    }
+    public Boolean delPicture(Integer p_id1){
+        Boolean successful;
+
+        Integer p_id = p_id1;
+        Integer long1 = mDb.delete("PICTURE_TABLE", "p_id " + "=" + p_id, null);
         if(long1 == -1){
             successful = false;
         }else {

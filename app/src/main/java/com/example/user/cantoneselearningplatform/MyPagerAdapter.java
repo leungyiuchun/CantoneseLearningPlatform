@@ -30,7 +30,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
                 Log.d("syllable1 on Adapter", "" + word_product);
                 return new wordfragment(word_product);
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return picturefragment.newInstance(1, "文字");
+                return new picturefragment(word_product);
 //            case 2: // Fragment # 0 - This will show FirstFragment different title
 //                return picturefragment.newInstance(2, "圖片");
             default:

@@ -117,20 +117,7 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
                 modeDialog.show(getFragmentManager(), "dialog");
             }
         });
-        switch ((((MyApp) getApplication()).getColorIndex())){
-            case 0:
-                advBtn.setBackgroundColor(getResources().getColor(R.color.myRed));
-                break;
-            case 1:
-                advBtn.setBackgroundColor(getResources().getColor(R.color.myGreen));
-                break;
-            case 2:
-                advBtn.setBackgroundColor(getResources().getColor(R.color.myOrange));
-                break;
-            case 3:
-                advBtn.setBackgroundColor(getResources().getColor(R.color.myPurple));
-                break;
-        }
+
     }
 
     @Override

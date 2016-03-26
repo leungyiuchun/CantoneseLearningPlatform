@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.user.cantoneselearningplatform.addPictureFragment"
+    android:paddingLeft="20sp"
+    android:paddingRight="20sp"
+    android:paddingTop="20sp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
+            android:text="新增圖片"
+            android:textSize="50sp"
+            android:textColor="#5E3434"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/hints_themeSep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:background="@android:color/transparent" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10sp"
+            android:background= "@android:color/darker_gray"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10sp"
+            android:background="@android:color/transparent" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="拼音"
+                android:textSize="40sp"
+                android:paddingRight="20sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="40sp"
+                android:paddingRight="20sp"
+                android:id="@+id/addPicture_tv1"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="文字"
+                android:textSize="40sp"
+                android:paddingRight="20sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/addPicture_tv2"
+                android:textSize="40sp"
+                android:paddingRight="20sp"
+                android:gravity="center"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="40sp"
+                android:text="新增圖片"
+                android:gravity="center"
+                android:id="@+id/btn_add_pic"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20sp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/addImageView"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
