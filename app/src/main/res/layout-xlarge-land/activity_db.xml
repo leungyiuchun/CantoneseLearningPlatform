@@ -73,7 +73,8 @@
                     <Spinner
                         android:layout_width="160sp"
                         android:layout_height="80sp"
-                        android:id="@+id/init_spinner"/>
+                        android:id="@+id/init_spinner"
+                        android:gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_height="wrap_content"
@@ -90,7 +91,8 @@
                     <Spinner
                         android:layout_width="160sp"
                         android:layout_height="80sp"
-                        android:id="@+id/vowel_spinner"/>
+                        android:id="@+id/vowel_spinner"
+                        android:gravity="center"/>
                 </LinearLayout>
 
                 <LinearLayout
