@@ -33,18 +33,23 @@ import java.io.IOException;
 
 public class addPictureFragment extends DialogFragment {
     static Integer c_id;
+    static String syllable;
     TextView tv_syllable;
     TextView tv_word;
+    TextView tv_tone;
     Button addPic_btn;
     ImageView ivImage;
-
+    Bitmap output;
+    static dataAdapter dataAdapter1;
     public static addPictureFragment newInstance() {
-        addPictureFragment f = new addPictureFragment(c_id);
+        addPictureFragment f = new addPictureFragment(c_id,syllable,dataAdapter1);
         return f;
     }
 
-    public addPictureFragment(Integer c_id1) {
+    public addPictureFragment(Integer c_id1,String syllable1,dataAdapter dataAdapter2) {
         c_id = c_id1;
+        syllable = syllable1;
+        dataAdapter1 = dataAdapter2;
     }
 
     @Override
@@ -66,14 +71,51 @@ public class addPictureFragment extends DialogFragment {
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if (dataAdapter1.insertPicture(output,c_id)){
+                            addPic_btn.setText("新增成功");
+                            AlertDialog dialog2 = new AlertDialog.Builder(getActivity())
+                                    .setTitle("新增成功")
+                                    .setMessage("新增成功")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    })
+
+                                    .show();
+                        }else{
+                            AlertDialog dialog3 = new AlertDialog.Builder(getActivity())
+                                    .setTitle("新增失敗")
+                                    .setMessage("新增失敗")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    })
+
+                                    .show();
+                        }
                     }
                 });
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_add_picture, null);
         tv_syllable = (TextView) view.findViewById(R.id.addPicture_tv1);
         tv_word = (TextView) view.findViewById(R.id.addPicture_tv2);
+        tv_tone = (TextView)view.findViewById(R.id.addPicture_tv3);
         addPic_btn = (Button) view.findViewById(R.id.btn_add_pic);
         ivImage = (ImageView) view.findViewById(R.id.addImageView);
+        tv_syllable.setText(syllable);
+        Cursor cursor = dataAdapter1.getWordByC_id(c_id);
+        Integer sum = cursor.getCount();
+
+        if(sum != 0) {
+            cursor.moveToFirst();
+            for (int i = 0; i < sum; i++) {
+                tv_word.setText(cursor.getString(0));
+                tv_tone.setText(String.valueOf(cursor.getInt(1)));
+                cursor.moveToNext();
+            }
+        }
+
+
         addPic_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +199,7 @@ public class addPictureFragment extends DialogFragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                output = thumbnail;
                 ivImage.setImageBitmap(thumbnail);
             } else if (requestCode == 1) {
                 Uri selectedImageUri = data.getData();
@@ -178,6 +221,7 @@ public class addPictureFragment extends DialogFragment {
                 options.inSampleSize = scale;
                 options.inJustDecodeBounds = false;
                 bm = BitmapFactory.decodeFile(selectedImagePath, options);
+                output = bm;
                 ivImage.setImageBitmap(bm);
             }
         }
