@@ -123,7 +123,7 @@
                     android:text="提示:"
                     android:textSize="40sp"
                     android:gravity="center"
-                    android:paddingLeft="40sp"
+                    android:paddingLeft="60sp"
                     android:paddingRight="20sp"/>
                 <TextView
                     android:layout_width="wrap_content"
