@@ -137,10 +137,10 @@ public class wordfragment extends Fragment {
                                 .show();
                     }
                 }else{
-                    if (add_et1.getText().toString().trim().length()<0){
+                    if (add_et1.getText().toString().trim().length()==0){
                         add_et1.setHint("必填");
                     }
-                    if (add_et2.getText().toString().trim().length()<0){
+                    if (add_et2.getText().toString().trim().length()==0){
                         add_et2.setHint("必填");
                     }
                 }

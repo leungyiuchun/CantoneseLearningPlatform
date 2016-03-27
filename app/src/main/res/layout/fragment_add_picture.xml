@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context="com.example.user.cantoneselearningplatform.addPictureFragment"
     android:paddingLeft="20sp"
@@ -46,35 +46,54 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="拼音"
                 android:textSize="40sp"
                 android:paddingRight="20sp"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:paddingRight="20sp"
                 android:id="@+id/addPicture_tv1"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:text="聲調"
+                android:textSize="40sp"
+                android:paddingRight="20sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:paddingRight="20sp"
+                android:id="@+id/addPicture_tv3"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="文字"
                 android:textSize="40sp"
                 android:paddingRight="20sp"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/addPicture_tv2"
                 android:textSize="40sp"
                 android:paddingRight="20sp"
                 android:gravity="center"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:text="新增圖片"
                 android:gravity="center"

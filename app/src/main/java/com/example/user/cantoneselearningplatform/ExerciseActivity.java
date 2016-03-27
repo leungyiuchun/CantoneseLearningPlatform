@@ -99,7 +99,7 @@ public class ExerciseActivity extends Activity{
         img2 = (ImageView)findViewById(R.id.imageView2);
         img2.setVisibility(View.INVISIBLE);
         index = 0;
-        speakSpeed = ((MyApp)getApplication()).getSpearSpeed();
+        speakSpeed = ((MyApp)getApplication()).getSpeakSpeed();
         et1 = (EditText) findViewById(R.id.editText);
         et2 = (EditText) findViewById(R.id.editText2);
         tv1 = (TextView) findViewById(R.id.textView);

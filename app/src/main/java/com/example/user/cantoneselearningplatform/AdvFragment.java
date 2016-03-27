@@ -28,7 +28,7 @@ public class AdvFragment extends DialogFragment {
     Button orange_btn;
     Button purple_btn;
     Integer color_index;
-    Float speakSpeed;
+    Float speakSpeed = 0.3f;
     Switch animSwitch;
     SeekBar seekBar;
     @Override
@@ -46,20 +46,6 @@ public class AdvFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                         Button advBtn = (Button) getActivity().findViewById(R.id.btn_adv);
-                        switch (color_index){
-                            case 0:
-                                advBtn.setBackgroundColor(getResources().getColor(R.color.myRed));
-                                break;
-                            case 1:
-                                advBtn.setBackgroundColor(getResources().getColor(R.color.myGreen));
-                                break;
-                            case 2:
-                                advBtn.setBackgroundColor(getResources().getColor(R.color.myOrange));
-                                break;
-                            case 3:
-                                advBtn.setBackgroundColor(getResources().getColor(R.color.myPurple));
-                                break;
-                        }
                         ((MyApp) getActivity().getApplication()).setColorIndex(color_index);
                         ((MyApp) getActivity().getApplication()).setSpeakSpeed(speakSpeed);
 
@@ -74,6 +60,9 @@ public class AdvFragment extends DialogFragment {
         purple_btn = (Button)view.findViewById(R.id.purple_button);
         example_tv = (TextView)view.findViewById(R.id.color_example_tv);
         seekBar = (SeekBar)view.findViewById(R.id.seekBar1);
+        speakSpeed = ((MyApp) getActivity().getApplication()).getSpeakSpeed();
+        Integer progress = speakSpeed.intValue()*100;
+        seekBar.setProgress(progress);
         animSwitch = (Switch)view.findViewById(R.id.anim_switch1);
         if (((MyApp)getActivity().getApplication()).getAnimBoolean()){
             animSwitch.setChecked(true);
@@ -133,6 +122,7 @@ public class AdvFragment extends DialogFragment {
                 color_index = 3;
             }
         });
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

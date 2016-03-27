@@ -1,9 +1,11 @@
 package com.example.user.cantoneselearningplatform;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,8 +49,10 @@ public class picturefragment extends Fragment {
     TableLayout tl_picture;
     GridView gv_picture;
     dataAdapter dataAdapter1;
+    ArrayList<Bitmap> bitmapArrayList = new ArrayList<Bitmap>();
     ArrayList<wordRecord> wordRecordArrayList = new ArrayList<wordRecord>();
     public ArrayList<pictureRecord> pictureRecordArrayList = new ArrayList<pictureRecord>();
+    GridViewAdapter customGridAdapter;
     List<Map<String, Object>> items;
     // newInstance constructor for creating fragment with arguments
     public static picturefragment newInstance(int page, String title,String syllable1) {
@@ -148,31 +152,28 @@ public class picturefragment extends Fragment {
         cp.setTextSize(40);
         cp.setGravity(Gravity.CENTER);
         row.addView(cp);
-        Log.d("cp text", "" + cp.getText().toString());
 
 
         TextView tone= new TextView(getActivity().getApplicationContext());
         tone.setText(wordRecordArrayList.get(i).getTone().toString());
         tone.setTextSize(30);
-        tone.setPadding(100, 0, 30, 0);
         tone.setTextColor(Color.BLACK);
-        Log.d("tone", "" + wordRecordArrayList.get(i).getTone().toString());
         row.addView(tone);
 
-        Button addPic = new Button(getActivity().getApplicationContext());
+        TextView addPic = new Button(getActivity().getApplicationContext());
+        addPic.setBackgroundResource(R.color.myPurple);
         addPic.setText("新增圖片");
-        addPic.setTextSize(40);
-        addPic.setPadding(100, 0, 30, 0);
+        addPic.setTextSize(30);
         addPic.setVisibility(View.INVISIBLE);
         row.addView(addPic);
         setListener(row, cp, wordRecordArrayList.get(i).getC_id(), addPic);
         tl_picture.addView(row);
     }
-    public void setListener(TableRow row1, TextView cp1,Integer c_id1,Button addPic1){
+    public void setListener(TableRow row1, TextView cp1, final Integer c_id1,TextView addPic1){
         final TableRow row = row1;
         final TextView cp = cp1;
         final Integer c_id = c_id1;
-        final Button addPic = addPic1;
+        final TextView addPic = addPic1;
 
         row.setFocusableInTouchMode(true);
         row.setFocusable(true);
@@ -183,32 +184,56 @@ public class picturefragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 pictureRecordArrayList.clear();
-                Cursor cursor = dataAdapter1.getPicture(c_id);
-                Integer sum = cursor.getCount();
-
-                items = new ArrayList<Map<String, Object>>();
+                bitmapArrayList.clear();
+                Cursor cursor1 = dataAdapter1.getPicture(c_id1);
+                Integer sum = cursor1.getCount();
+                Log.d("Sum",""+sum.toString());
                 if (sum != 0) {
-                    cursor.moveToFirst();
+                    cursor1.moveToFirst();
                     for (int i = 0; i < sum; i++) {
-                        Integer p_id = cursor.getInt(0);
-                        Integer c_id = cursor.getInt(1);
-                        byte[] picture = cursor.getBlob(2);
+                        Integer p_id = cursor1.getInt(0);
+                        Integer c_id = cursor1.getInt(1);
+                        byte[] picture = cursor1.getBlob(2);
                         Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-                        Timestamp ts = Timestamp.valueOf(cursor.getString(3));
+                        bitmapArrayList.add(bitmap);
+                        Timestamp ts = Timestamp.valueOf(cursor1.getString(3));
                         pictureRecord newRecord = new pictureRecord(p_id, c_id, picture, ts);
                         pictureRecordArrayList.add(newRecord);
-                        cursor.moveToNext();
+                        cursor1.moveToNext();
                     }
                 }
+                customGridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList);
+                gv_picture.setAdapter(customGridAdapter);
+                gv_picture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                .setTitle("刪除記錄？")
+                                .setMessage("刪除記錄？")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dataAdapter1.delPicture(pictureRecordArrayList.get(position).getP_id());
+                                        customGridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList);
+                                        gv_picture.setAdapter(customGridAdapter);
+                                    }
+                                })
+                                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
 
+                                    }
+                                })
+                                .show();
+                    }
+                });
                 cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
                 addPic.setVisibility(View.VISIBLE);
                 addPic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DialogFragment addPictureFragment1 =  new addPictureFragment(c_id);
+                        DialogFragment addPictureFragment1 =  new addPictureFragment(c_id,syllable,dataAdapter1);
                         FragmentManager fm = getActivity().getFragmentManager();
-                        addPictureFragment1.show(fm,"A");
+                        addPictureFragment1.show(fm,"Dialog");
 //                        Dialog abc = new Dialog(getContext());
 //                        abc.show();
                     }

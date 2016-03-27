@@ -112,8 +112,11 @@ public class RemindActivity extends AppCompatActivity {
             fileOutputStream.flush();
             fileOutputStream.close();
             Toast.makeText(this.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+            Log.d("Print","done");
         }catch (Throwable e){
             e.printStackTrace();
+            Log.d("Print", "fail");
+
         }
     }
 }

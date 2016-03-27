@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -123,9 +124,13 @@ public class dataAdapter {
         return cursor;
     }
     public Boolean insertPicture(Bitmap bitmap1, Integer c_id){
+        Bitmap bitmap = bitmap1;
         Boolean successful;
         ContentValues cv = new ContentValues();
-
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,bos);
+        byte[] bArray = bos.toByteArray();
+        cv.put("picture", bArray);
         cv.put("c_id", c_id);
         Long long1 = mDb.insert("PICTURE_TABLE", null, cv);
         if(long1 == -1){
@@ -146,5 +151,16 @@ public class dataAdapter {
             successful = true;
         }
         return successful;
+    }
+    public Cursor getWordByC_id(Integer c_id1){
+        Integer c_id = c_id1;
+        String query = "SELECT chin_word,tone FROM CHAR_TABLE WHERE CHAR_TABLE.c_id = " + c_id1;
+        Cursor cursor = mDb.rawQuery(query,null);
+        cursor.moveToFirst();
+        if (cursor!=null)
+        {
+            cursor.moveToNext();
+        }
+        return cursor;
     }
 }

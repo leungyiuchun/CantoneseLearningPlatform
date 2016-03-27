@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -129,7 +130,7 @@ public class ResultActivity extends AppCompatActivity {
     }
     public void capScreen(){
         try{
-            String name = Environment.getExternalStorageDirectory().toString() + "/" + "Test_" + studentName + " " +currentTime +".jpg";
+            String name = Environment.getExternalStorageDirectory().toString() + "/" + "Test_" + studentName.getText() + " " +currentTime +".jpg";
             View v1 = getWindow().getDecorView();
             v1.setDrawingCacheEnabled(true);
             Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
@@ -141,8 +142,12 @@ public class ResultActivity extends AppCompatActivity {
             fileOutputStream.flush();
             fileOutputStream.close();
             Toast.makeText(this.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+            Log.d("Print", "done");
+
         }catch (Throwable e){
             e.printStackTrace();
+            Log.d("Print", "fail");
+            Log.d("Fail",""+e.toString());
         }
     }
 }
