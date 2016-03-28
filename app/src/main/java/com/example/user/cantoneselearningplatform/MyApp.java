@@ -145,4 +145,5 @@ public class MyApp extends Application {
     Float speakSpeed = 0.3f;
     public void setSpeakSpeed(Float speed){this.speakSpeed = speed;}
     public Float getSpeakSpeed(){return this.speakSpeed;}
+
 }

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -41,14 +42,16 @@ import java.util.List;
 import java.util.Map;
 
 
-public class picturefragment extends Fragment {
+public class picturefragment extends Fragment implements DialogInterface.OnDismissListener{
+    public static Integer globalc_id;
     private String title;
     private int page;
     static String syllable;
     TextView tv_add_picture;
     TableLayout tl_picture;
     GridView gv_picture;
-    dataAdapter dataAdapter1;
+    Context context1;
+    public static dataAdapter dataAdapter1;
     ArrayList<Bitmap> bitmapArrayList = new ArrayList<Bitmap>();
     ArrayList<wordRecord> wordRecordArrayList = new ArrayList<wordRecord>();
     public ArrayList<pictureRecord> pictureRecordArrayList = new ArrayList<pictureRecord>();
@@ -159,6 +162,7 @@ public class picturefragment extends Fragment {
         tone.setTextSize(30);
         tone.setTextColor(Color.BLACK);
         row.addView(tone);
+        tone.setPadding(100, 0, 30, 0);
 
         TextView addPic = new Button(getActivity().getApplicationContext());
         addPic.setBackgroundResource(R.color.myPurple);
@@ -174,7 +178,6 @@ public class picturefragment extends Fragment {
         final TextView cp = cp1;
         final Integer c_id = c_id1;
         final TextView addPic = addPic1;
-
         row.setFocusableInTouchMode(true);
         row.setFocusable(true);
         row.setClickable(true);
@@ -185,9 +188,12 @@ public class picturefragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 pictureRecordArrayList.clear();
                 bitmapArrayList.clear();
+                globalc_id = c_id1;
+                setGlobalc_id(c_id1);
+                Log.d("", "" + globalc_id.toString());
                 Cursor cursor1 = dataAdapter1.getPicture(c_id1);
                 Integer sum = cursor1.getCount();
-                Log.d("Sum",""+sum.toString());
+                Log.d("Sum", "" + sum.toString());
                 if (sum != 0) {
                     cursor1.moveToFirst();
                     for (int i = 0; i < sum; i++) {
@@ -203,6 +209,7 @@ public class picturefragment extends Fragment {
                     }
                 }
                 customGridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList);
+                setContext1(getContext());
                 gv_picture.setAdapter(customGridAdapter);
                 gv_picture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -210,11 +217,31 @@ public class picturefragment extends Fragment {
                         AlertDialog dialog = new AlertDialog.Builder(getContext())
                                 .setTitle("刪除記錄？")
                                 .setMessage("刪除記錄？")
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+                                        ArrayList<Bitmap> bitmapArrayList2 = new ArrayList<Bitmap>();
                                         dataAdapter1.delPicture(pictureRecordArrayList.get(position).getP_id());
-                                        customGridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList);
-                                        gv_picture.setAdapter(customGridAdapter);
+                                        Cursor cursor1 = dataAdapter1.getPicture(c_id1);
+                                        setGlobalc_id(c_id);
+                                        Integer sum = cursor1.getCount();
+                                        Log.d("Sum", "" + sum.toString());
+                                        if (sum != 0) {
+                                            cursor1.moveToFirst();
+                                            for (int i = 0; i < sum; i++) {
+                                                Integer p_id = cursor1.getInt(0);
+                                                Integer c_id = cursor1.getInt(1);
+                                                byte[] picture = cursor1.getBlob(2);
+                                                Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+                                                bitmapArrayList2.add(bitmap);
+                                                Timestamp ts = Timestamp.valueOf(cursor1.getString(3));
+                                                pictureRecord newRecord = new pictureRecord(p_id, c_id, picture, ts);
+                                                pictureRecordArrayList.add(newRecord);
+                                                cursor1.moveToNext();
+                                            }
+                                        }
+                                        gv_picture.setAdapter(null);
+                                        GridViewAdapter customGridAdapter2 = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList2);
+                                        gv_picture.setAdapter(customGridAdapter2);
                                     }
                                 })
                                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -231,11 +258,12 @@ public class picturefragment extends Fragment {
                 addPic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DialogFragment addPictureFragment1 =  new addPictureFragment(c_id,syllable,dataAdapter1);
+                        globalc_id = c_id;
+                        Log.d("globalc_id", "" + globalc_id.toString());
+                        DialogFragment addPictureFragment1 = new addPictureFragment(c_id, syllable, dataAdapter1);
                         FragmentManager fm = getActivity().getFragmentManager();
-                        addPictureFragment1.show(fm,"Dialog");
-//                        Dialog abc = new Dialog(getContext());
-//                        abc.show();
+                        addPictureFragment1.show(fm, "Dialog");
+
                     }
                 });
                 row.requestFocus();
@@ -251,5 +279,50 @@ public class picturefragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        Log.d("addPictureFragment", "receive");
+        Log.d("onDismiss",""+getGlobalc_id().toString());
+        Log.d("onDismiss",""+dataAdapter1.toString());
+        ArrayList<Bitmap> bitmapArrayList3 = new ArrayList<Bitmap>();
+        Cursor cursor2 = dataAdapter1.getPicture(getGlobalc_id());
+        Integer sum = cursor2.getCount();
+        Log.d("Sum", "" + sum.toString());
+        if (sum != 0) {
+            cursor2.moveToFirst();
+            for (int i = 0; i < sum; i++) {
+                Integer p_id = cursor2.getInt(0);
+                Integer c_id = cursor2.getInt(1);
+                byte[] picture = cursor2.getBlob(2);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+                bitmapArrayList3.add(bitmap);
+                Timestamp ts = Timestamp.valueOf(cursor2.getString(3));
+                pictureRecord newRecord = new pictureRecord(p_id, c_id, picture, ts);
+                pictureRecordArrayList.add(newRecord);
+                cursor2.moveToNext();
+            }
+        }
+        if (getContext()!=null) {
+            GridViewAdapter customGridAdapter2 = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList3);
+            gv_picture.setAdapter(customGridAdapter2);
+        }
+    }
+
+    public void setGlobalc_id(Integer c_id1){
+        this.globalc_id = c_id1;
+        Log.d("setClass", "" + globalc_id.toString());
+
+    }
+    public Integer getGlobalc_id(){
+        Log.d("getClass",""+globalc_id.toString());
+        return this.globalc_id;
+    }
+    public void setContext1(Context context){
+        context1 = context;
+    }
+    public Context getContext1(){
+        return context1;
     }
 }

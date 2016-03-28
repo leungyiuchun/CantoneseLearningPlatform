@@ -71,7 +71,7 @@ public class addPictureFragment extends DialogFragment {
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (dataAdapter1.insertPicture(output,c_id)){
+                        if (output!=null && dataAdapter1.insertPicture(output,c_id)){
                             addPic_btn.setText("新增成功");
                             AlertDialog dialog2 = new AlertDialog.Builder(getActivity())
                                     .setTitle("新增成功")
@@ -153,10 +153,10 @@ public class addPictureFragment extends DialogFragment {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {"拍攝照片", "從媒體櫃選擇", "Cancel"};
+        final CharSequence[] items = {"拍攝照片", "從媒體櫃選擇", "取消"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         Log.d("Context", "" + getActivity());
-        builder.setTitle("Add Photo!");
+        builder.setTitle("加入圖片!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
@@ -224,6 +224,16 @@ public class addPictureFragment extends DialogFragment {
                 output = bm;
                 ivImage.setImageBitmap(bm);
             }
+        }
+    }
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        final picturefragment activity = new picturefragment(syllable);
+        if (activity instanceof DialogInterface.OnDismissListener) {
+            ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
+            Log.d("addPictureFragment", "dismiss");
+
         }
     }
 }
