@@ -429,11 +429,12 @@
                     android:textSize="35sp" />
 
                 <TextView
+                    android:id="@+id/vowel_62_TextView"
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/borders_black_and_white"
+                    android:background="@drawable/borders_black_and_blue"
                     android:gravity="center_horizontal"
-                    android:text="  "
+                    android:text="@string/vowel_62"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#49345E"
                     android:textSize="35sp" />
@@ -536,11 +537,12 @@
                     android:textSize="35sp" />
 
                 <TextView
+                    android:id="@+id/vowel_63_TextView"
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/borders_black_and_white"
+                    android:background="@drawable/borders_black_and_blue"
                     android:gravity="center_horizontal"
-                    android:text="  "
+                    android:text="@string/vowel_63"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#49345E"
                     android:textSize="35sp" />
@@ -863,11 +865,12 @@
                     android:textSize="35sp" />
 
                 <TextView
+                    android:id="@+id/vowel_64_TextView"
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/borders_black_and_white"
+                    android:background="@drawable/borders_black_and_blue"
                     android:gravity="center_horizontal"
-                    android:text="  "
+                    android:text="@string/vowel_64"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#49345E"
                     android:textSize="35sp" />

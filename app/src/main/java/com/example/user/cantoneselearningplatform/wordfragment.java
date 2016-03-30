@@ -27,14 +27,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link wordfragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link wordfragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class wordfragment extends Fragment {
     private String title;
     private int page;
@@ -113,8 +105,8 @@ public class wordfragment extends Fragment {
         btn_submit_syllable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(add_et1.getText().toString().trim().length()>0 && add_et2.getText().toString().trim().length()>0){
-                    if(dataAdapter1.insertWord(add_et1.getText().toString(),Integer.parseInt(add_et2.getText().toString()),wordRecordArrayList.get(0).getS_id())){
+                if (add_et1.getText().toString().trim().length() > 0 && add_et2.getText().toString().trim().length() > 0) {
+                    if (dataAdapter1.insertWord(add_et1.getText().toString(), Integer.parseInt(add_et2.getText().toString()), wordRecordArrayList.get(0).getS_id())) {
                         AlertDialog dialog = new AlertDialog.Builder(getContext())
                                 .setTitle("成功新增記錄！")
                                 .setMessage("成功新增記錄！")
@@ -126,7 +118,7 @@ public class wordfragment extends Fragment {
                         add_et1.setText("");
                         add_et2.setText("");
                         setWordList();
-                    }else{
+                    } else {
                         AlertDialog dialog = new AlertDialog.Builder(getContext())
                                 .setTitle("新增失敗！")
                                 .setMessage("新增失敗！")
@@ -136,11 +128,11 @@ public class wordfragment extends Fragment {
                                 })
                                 .show();
                     }
-                }else{
-                    if (add_et1.getText().toString().trim().length()==0){
+                } else {
+                    if (add_et1.getText().toString().trim().length() == 0) {
                         add_et1.setHint("必填");
                     }
-                    if (add_et2.getText().toString().trim().length()==0){
+                    if (add_et2.getText().toString().trim().length() == 0) {
                         add_et2.setHint("必填");
                     }
                 }
@@ -252,5 +244,14 @@ public class wordfragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        if(t1!=null){
+            t1.stop();
+            t1.shutdown();
+        }
+        super.onDestroy();
     }
 }

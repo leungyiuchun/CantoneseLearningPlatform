@@ -101,6 +101,10 @@
     <string name="vowel_53">t</string>
     <string name="vowel_61">k</string>
     <string name="vowel_2">a</string>
+    <string name="vowel_62">eu</string>
+    <string name="vowel_63">em</string>
+    <string name="vowel_64">ep</string>
+
     <string name="vowel_theme">請選擇是次練習的韻母</string>
 
     <string name="task_theme">請選擇是次練習的題目和提示</string>

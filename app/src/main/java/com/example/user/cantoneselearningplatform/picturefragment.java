@@ -2,9 +2,11 @@ package com.example.user.cantoneselearningplatform;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -14,6 +16,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -48,8 +51,8 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
     private int page;
     static String syllable;
     TextView tv_add_picture;
-    TableLayout tl_picture;
-    GridView gv_picture;
+    public static TableLayout tl_picture;
+    public static GridView gv_picture;
     Context context1;
     public static dataAdapter dataAdapter1;
     ArrayList<Bitmap> bitmapArrayList = new ArrayList<Bitmap>();
@@ -99,15 +102,45 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
         tv_add_picture.setText(syllable);
         setWordList();
 
+
         return view;
     }
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+//        Log.d("",""+this.getContext().toString());
+        Log.d("addPictureFragment", "receive");
+//        Log.d("onDismiss",""+getGlobalc_id().toString());
+//        Log.d("onDismiss",""+dataAdapter1.toString());
+//        ArrayList<Bitmap> bitmapArrayList3 = new ArrayList<Bitmap>();
+//        Cursor cursor2 = dataAdapter1.getPicture(getGlobalc_id());
+//        Integer sum = cursor2.getCount();
+//        Log.d("Sum", "" + sum.toString());
+//        if (sum != 0) {
+//            cursor2.moveToFirst();
+//            for (int i = 0; i < sum; i++) {
+//                Integer p_id = cursor2.getInt(0);
+//                Integer c_id = cursor2.getInt(1);
+//                byte[] picture = cursor2.getBlob(2);
+//                Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+//                bitmapArrayList3.add(bitmap);
+//                Timestamp ts = Timestamp.valueOf(cursor2.getString(3));
+//                pictureRecord newRecord = new pictureRecord(p_id, c_id, picture, ts);
+//                pictureRecordArrayList.add(newRecord);
+//                cursor2.moveToNext();
+//            }
+//        }
+
+        Log.d("context",""+getActivity().toString());
+    }
+
     public void setWordList(){
+        Log.d("setWordList","called");
         Cursor cursor = dataAdapter1.getWord_Tone(syllable);
         Integer sum = cursor.getCount();
         wordRecordArrayList.clear();
         tl_picture.removeAllViews();
-
-        TableRow row = new TableRow(getActivity().getApplicationContext());
+        tl_picture.requestFocus();
+        TableRow row = new TableRow(getActivity());
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         TextView tone3= new TextView(getActivity().getApplicationContext());
         tone3.setText("文字");
@@ -115,7 +148,7 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
         tone3.setPadding(20, 0, 30, 0);
         tone3.setTextColor(Color.BLACK);
 
-        TextView tone2 = new TextView(getActivity().getApplicationContext());
+        TextView tone2 = new TextView(getActivity());
         tone2.setText("聲調");
         tone2.setTextSize(40);
         tone2.setPadding(100, 0, 30, 0);
@@ -141,6 +174,8 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
         }
     }
     public void setTable(Integer i){
+        Log.d("setTable","called");
+
         final Integer index =i;
 
         TableRow row = new TableRow(getActivity().getApplicationContext());
@@ -260,7 +295,34 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
                     public void onClick(View v) {
                         globalc_id = c_id;
                         Log.d("globalc_id", "" + globalc_id.toString());
-                        DialogFragment addPictureFragment1 = new addPictureFragment(c_id, syllable, dataAdapter1);
+                        addPictureFragment addPictureFragment1 = new addPictureFragment(c_id, syllable, dataAdapter1);
+                        addPictureFragment1.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                ArrayList<Bitmap> bitmapArrayList3 = new ArrayList<Bitmap>();
+                                Cursor cursor2 = dataAdapter1.getPicture(getGlobalc_id());
+                                Integer sum = cursor2.getCount();
+                                Log.d("Sum", "" + sum.toString());
+                                if (sum != 0) {
+                                    cursor2.moveToFirst();
+                                    for (int i = 0; i < sum; i++) {
+                                        Integer p_id = cursor2.getInt(0);
+                                        Integer c_id = cursor2.getInt(1);
+                                        byte[] picture = cursor2.getBlob(2);
+                                        Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+                                        bitmapArrayList3.add(bitmap);
+                                        Timestamp ts = Timestamp.valueOf(cursor2.getString(3));
+                                        pictureRecord newRecord = new pictureRecord(p_id, c_id, picture, ts);
+                                        pictureRecordArrayList.add(newRecord);
+                                        cursor2.moveToNext();
+                                    }
+                                }
+                                gv_picture.setAdapter(null);
+                                GridViewAdapter gridViewAdapter = new GridViewAdapter(getContext(),R.layout.grid_item,bitmapArrayList3);
+                                gv_picture.setAdapter(gridViewAdapter);
+                            }
+
+                        });
                         FragmentManager fm = getActivity().getFragmentManager();
                         addPictureFragment1.show(fm, "Dialog");
 
@@ -281,34 +343,7 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
 
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        Log.d("addPictureFragment", "receive");
-        Log.d("onDismiss",""+getGlobalc_id().toString());
-        Log.d("onDismiss",""+dataAdapter1.toString());
-        ArrayList<Bitmap> bitmapArrayList3 = new ArrayList<Bitmap>();
-        Cursor cursor2 = dataAdapter1.getPicture(getGlobalc_id());
-        Integer sum = cursor2.getCount();
-        Log.d("Sum", "" + sum.toString());
-        if (sum != 0) {
-            cursor2.moveToFirst();
-            for (int i = 0; i < sum; i++) {
-                Integer p_id = cursor2.getInt(0);
-                Integer c_id = cursor2.getInt(1);
-                byte[] picture = cursor2.getBlob(2);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-                bitmapArrayList3.add(bitmap);
-                Timestamp ts = Timestamp.valueOf(cursor2.getString(3));
-                pictureRecord newRecord = new pictureRecord(p_id, c_id, picture, ts);
-                pictureRecordArrayList.add(newRecord);
-                cursor2.moveToNext();
-            }
-        }
-        if (getContext()!=null) {
-            GridViewAdapter customGridAdapter2 = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList3);
-            gv_picture.setAdapter(customGridAdapter2);
-        }
-    }
+
 
     public void setGlobalc_id(Integer c_id1){
         this.globalc_id = c_id1;
@@ -325,4 +360,28 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
     public Context getContext1(){
         return context1;
     }
+
+    @Override
+    public void onStart() {
+        Log.d("onstart","wuhoo");
+        super.onStart();
+    }
+
+    private Callbacks mCallbacks;
+
+
+    public interface Callbacks {
+        //Callback for when button clicked.
+        public void onButtonClicked();
+    }
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Activities containing this fragment must implement its callbacks
+        mCallbacks = (Callbacks) activity;
+
+    }
+
 }

@@ -39,6 +39,8 @@ public class addPictureFragment extends DialogFragment {
     TextView tv_tone;
     Button addPic_btn;
     ImageView ivImage;
+    private DialogInterface.OnDismissListener onDismissListener;
+
     Bitmap output;
     static dataAdapter dataAdapter1;
     public static addPictureFragment newInstance() {
@@ -50,6 +52,11 @@ public class addPictureFragment extends DialogFragment {
         c_id = c_id1;
         syllable = syllable1;
         dataAdapter1 = dataAdapter2;
+    }
+
+    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+        Log.d("setOnDismissListener","");
+        this.onDismissListener = onDismissListener;
     }
 
     @Override
@@ -226,14 +233,16 @@ public class addPictureFragment extends DialogFragment {
             }
         }
     }
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        final picturefragment activity = new picturefragment(syllable);
-        if (activity instanceof DialogInterface.OnDismissListener) {
-            ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
-            Log.d("addPictureFragment", "dismiss");
 
+    @Override
+    public void onDismiss(final DialogInterface dialog) {
+        super.onDismiss(dialog);
+        Log.d("onDismissListener",""+onDismissListener.toString());
+        if (onDismissListener != null) {
+            onDismissListener.onDismiss(dialog);
         }
     }
+
+
+
 }

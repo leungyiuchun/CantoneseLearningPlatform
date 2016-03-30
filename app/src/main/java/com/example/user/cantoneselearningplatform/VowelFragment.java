@@ -201,6 +201,12 @@ public class VowelFragment extends DialogFragment {
         vowelArray.add(vowelobj59);
         Vowelobj vowelobj60 = new Vowelobj(R.id.vowel_60_TextView,false);
         vowelArray.add(vowelobj60);
+        Vowelobj vowelobj62 = new Vowelobj(R.id.vowel_62_TextView,false);
+        vowelArray.add(vowelobj62);
+        Vowelobj vowelobj63 = new Vowelobj(R.id.vowel_63_TextView,false);
+        vowelArray.add(vowelobj63);
+        Vowelobj vowelobj64 = new Vowelobj(R.id.vowel_64_TextView,false);
+        vowelArray.add(vowelobj64);
 
         ((MyApp)getActivity().getApplication()).setGlobalVowelobj(vowelArray);
 

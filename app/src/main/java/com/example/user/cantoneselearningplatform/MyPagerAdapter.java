@@ -2,6 +2,7 @@ package com.example.user.cantoneselearningplatform;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
@@ -53,6 +54,15 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         return cs;
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return super.getItemPosition(object);
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 }
 
 

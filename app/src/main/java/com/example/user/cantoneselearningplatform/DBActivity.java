@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Picture;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -32,7 +33,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBActivity extends AppCompatActivity{
+public class DBActivity extends FragmentActivity implements picturefragment.Callbacks{
     public String table1_name = "COMBINATION_TABLE";
     public String table2_name = "DETAIL_TABLE";
     Spinner spinnerInit;
@@ -43,7 +44,7 @@ public class DBActivity extends AppCompatActivity{
     private String displayVowel = "";
     String display;
     String[] init_array = {"b","p","m","f","d","t","n","l","g","k","ng","h","gw","kw","w","z","c","s","j"};
-    String[] vowel_array = {"aa","aai","aau","aam","aan","aang","aap","aat","aak","ai","au","am","an","ang","ap","at","ak","e","ei","eng","ek","i","iu","im","in","ing","ip","it","ik","o","oi","ou","on","ong","ot","ok","oe","oeng","oek","eoi","eon","eot","u","ui","un","ung","ut","uk","yu","yun","yut"};
+    String[] vowel_array = {"aa","aai","aau","aam","aan","aang","aap","aat","aak","ai","au","am","an","ang","ap","at","ak","e","ei","eng","eu","em","ek","ep","i","iu","im","in","ing","ip","it","ik","o","oi","ou","on","ong","ot","ok","oe","oeng","oek","eoi","eon","eot","u","ui","un","ung","ut","uk","yu","yun","yut"};
     ArrayAdapter<String> initList;
     ArrayAdapter<String> vowelList;
     Button goButton;
@@ -164,6 +165,13 @@ public class DBActivity extends AppCompatActivity{
         });
     }
 
+    @Override
+    public void onButtonClicked() {
+        FragmentStatePagerAdapter adapterViewPager;
+        MyPagerAdapter myPagerAdapter =  new MyPagerAdapter(getSupportFragmentManager(),display);
+        adapterViewPager = myPagerAdapter;
+        vpPager.setAdapter(adapterViewPager);
+    }
 }
 
 
