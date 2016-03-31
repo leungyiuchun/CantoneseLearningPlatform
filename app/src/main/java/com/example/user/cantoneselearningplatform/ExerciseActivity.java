@@ -416,7 +416,6 @@ public class ExerciseActivity extends Activity{
             case 0:
                 tv2.setVisibility(View.INVISIBLE);
                 tv1.setVisibility(View.INVISIBLE);
-
                 break;
             case 1:
                 tv1.setText(ans_init);
@@ -588,8 +587,10 @@ public class ExerciseActivity extends Activity{
             public void afterTextChanged(Editable s) {
                 if (globalHintInt.intValue() == 0){
                 }else {
-                    tv1.setText(floatingHint(et1.getText().length(), et1, ans_init));
-
+                    if (globalHintInt.intValue() == 0){
+                    }else {
+                        tv1.setText(floatingHint(et1.getText().length(), et1, ans_init));
+                    }
                 }
                 if(((MyApp)getApplication()).getAnimBoolean()) {
                     switch (globalTaskInt) {
