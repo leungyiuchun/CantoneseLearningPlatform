@@ -379,6 +379,13 @@ public class QuantityFragment extends DialogFragment{
         cp.setGravity(Gravity.CENTER);
         row.addView(cp);
 
+        TextView init1 = new TextView(getActivity().getApplicationContext());
+        init1.setText(R.string.setting_initial1);
+        init1.setTextSize(30);
+        init1.setPadding(10, 0, 10, 0);
+        init1.setTextColor(Color.BLACK);
+        row.addView(init1);
+
         final TextView init2 = new TextView(getActivity().getApplicationContext());
         init2.setText(final_List.get(i).getInit());
         init2.setTextSize(30);

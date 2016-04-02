@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
@@ -36,6 +38,7 @@ import android.widget.TextView;
 import java.sql.SQLClientInfoException;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
@@ -69,6 +72,9 @@ public class ExerciseActivity extends Activity{
     public ArrayList<Exer> exerciseList = new ArrayList<Exer>();
     public ArrayList<Answer> AnswerList = new ArrayList<Answer>();
     public ArrayList<ChineseExer> chineseExerList = new ArrayList<ChineseExer>();
+    public ArrayList<Bitmap> bitmapArrayList = new ArrayList<Bitmap>();
+    public ArrayList<Bitmap> tmpBitmapArrayList = new ArrayList<Bitmap>();
+    ImageView img;
     Button soundButton;
     Button confirmButton;
     LinearLayout ll_exercise1;
@@ -109,7 +115,7 @@ public class ExerciseActivity extends Activity{
         tv_mode = (TextView)findViewById(R.id.tv_mode);
         globalTaskInt =  ((MyApp)getApplication()).getTaskInt();
         globalHintInt =  ((MyApp)getApplication()).getHintInt();
-        final ImageView img = (ImageView) findViewById(R.id.imageView);
+        img = (ImageView) findViewById(R.id.imageView);
         ll_exercise1 = (LinearLayout)findViewById(R.id.ll_exercise1);
         ll_exercise2 = (RelativeLayout)findViewById(R.id.ll_exercise2);
         ll_exercise3 = (RelativeLayout)findViewById(R.id.ll_exercise3);
@@ -282,7 +288,14 @@ public class ExerciseActivity extends Activity{
 
         setTask(et1, et2, globalTaskInt);
         setHints(et1, et2, globalHintInt);
+        if(bitmapArrayList.get(currentQuestion)==null){
+            img.setImageResource(R.drawable.flower_icon);
+            Log.d("bitmapArrayList first","null");
+        }else {
+            img.setImageBitmap(bitmapArrayList.get(index));
+            Log.d("bitmapArrayList first", "not null");
 
+        }
 //        ll_exercise2.setBackgroundResource(R.drawable.borders_blue_and_white_big);
 //        ll_exercise3.setBackgroundResource(R.drawable.borders_blue_and_white_big);
         Log.d("GetMode",""+((MyApp)getApplication()).getModeString());
@@ -466,9 +479,20 @@ public class ExerciseActivity extends Activity{
         ll_exercise1.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
         ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
+
         setHints(et1, et2, globalHintInt);
         setFocus(et1, et2, globalTaskInt);
         setTask(et1, et2, globalTaskInt);
+        if(bitmapArrayList.get(index)==null){
+            img.setImageResource(R.drawable.flower_icon);
+            Log.d("bitmapArraylist", "null");
+        }else {
+            img.setImageBitmap(bitmapArrayList.get(index));
+            Log.d("bitmapArraylist", "not null");
+
+
+        }
+
         addTextListener();
         animation(soundbtnCoord[0], soundbtnCoord[1], soundbtnCoord[0], soundbtnCoord[1]);
         initAnimation(soundbtnCoord[0], soundbtnCoord[1], submitCoord[0], submitCoord[1]);
@@ -665,6 +689,7 @@ public class ExerciseActivity extends Activity{
             Log.d("exerList Size"," "+exerciseArrayList.size());
             ChineseExer chineseExer = new ChineseExer(exerciseArrayList.get(i), tmpAddChinese(exerciseArrayList.get(i).getCardProduct()));
             chineseExerList.add(chineseExer);
+            addPicture(chineseExerList.get(i).getChineseExerWord());
         }
     }
     public String tmpAddChinese(String cardProduct){
@@ -674,7 +699,6 @@ public class ExerciseActivity extends Activity{
         Integer sum = cursor.getCount();
 
         String [] data = new String[sum];
-        Log.d("sumsums",""+sum.toString());
         if(sum != 0) {
             cursor.moveToFirst();
             for (int i = 0; i < sum; i++) {
@@ -712,5 +736,32 @@ public class ExerciseActivity extends Activity{
     }
     public void addKey(){
 
+    }
+    public void addPicture(String chin_word1){
+        tmpBitmapArrayList.clear();
+        String chin_word = chin_word1;
+        Cursor cursor1 = dataAdapter1.getPicutrByChinWord(chin_word);
+        Integer sum = cursor1.getCount();
+        Log.d("Add pic Sum", "" + sum.toString());
+        if (sum != 0) {
+            cursor1.moveToFirst();
+            for (int i = 0; i < sum; i++) {
+                byte[] picture = cursor1.getBlob(0);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+                tmpBitmapArrayList.add(bitmap);
+                cursor1.moveToNext();
+            }
+        }
+        Integer random = getRandomNumber(0,sum);
+        Log.d("Random",""+random);
+        if (sum>0){
+            if(sum==1){
+                bitmapArrayList.add(tmpBitmapArrayList.get(0));
+
+            } else
+            bitmapArrayList.add(tmpBitmapArrayList.get(random));
+        }else {
+            bitmapArrayList.add(null);
+        }
     }
 }
