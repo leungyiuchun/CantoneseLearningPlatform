@@ -39,11 +39,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:background="@drawable/borders_black_and_white_big">
+                    >
 
                         <RelativeLayout
                             android:id="@+id/ll_exercise2"
-                            android:background="@drawable/borders_black_and_white_big"
+                            android:background="@drawable/et1_border"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -88,8 +88,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/borders_black_and_white_big"
                             android:gravity="left"
+                            android:background="@drawable/et2_border"
                             >
                             <TextView
                                 android:paddingLeft="20dp"
@@ -145,7 +145,7 @@
             android:layout_weight="1">
             <ImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="500dp"
                 android:layout_height="match_parent"
                 android:id="@+id/imageView"
                 android:background="@drawable/imageview_background"
