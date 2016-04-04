@@ -195,8 +195,8 @@ public class ExerciseActivity extends Activity{
                         } else {
                             executeAnimation(img, getApplicationContext(), getRandomNumber(1, 5));
                             ll_exercise1.setBackgroundResource(R.drawable.borders_blue_and_white_big);
-                            ll_exercise2.setBackgroundResource(R.drawable.borders_blue_and_white_big);
-                            ll_exercise3.setBackgroundResource(R.drawable.borders_blue_and_white_big);
+                            ll_exercise2.setBackgroundResource(R.drawable.et1_border2);
+                            ll_exercise3.setBackgroundResource(R.drawable.et2_border2);
                             handler.postDelayed(new Runnable() {
                                 public void run() {
                                     updateExercise();
@@ -367,14 +367,14 @@ public class ExerciseActivity extends Activity{
                 return true;
             }else {
                 et1.setTextColor(Color.BLACK);
-                ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
+                ll_exercise2.setBackgroundResource(R.drawable.et1_border);
                 et2.setTextColor(textColor_resource);
                 ll_exercise3.setBackgroundResource(frameColor_resource);
                 return false;
             }
         }else {
             et2.setTextColor(Color.BLACK);
-            ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
+            ll_exercise3.setBackgroundResource(R.drawable.et2_border);
 
             et1.setTextColor(textColor_resource);
             ll_exercise2.setBackgroundResource(frameColor_resource);
@@ -477,8 +477,8 @@ public class ExerciseActivity extends Activity{
         et2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ans_vowel.length())});
 
         ll_exercise1.setBackgroundResource(R.drawable.borders_black_and_white_big);
-        ll_exercise2.setBackgroundResource(R.drawable.borders_black_and_white_big);
-        ll_exercise3.setBackgroundResource(R.drawable.borders_black_and_white_big);
+        ll_exercise2.setBackgroundResource(R.drawable.et1_border);
+        ll_exercise3.setBackgroundResource(R.drawable.et2_border);
 
         setHints(et1, et2, globalHintInt);
         setFocus(et1, et2, globalTaskInt);
