@@ -148,23 +148,23 @@ public class wordfragment extends Fragment {
         wordRecordArrayList.clear();
         tl_word.removeAllViews();
 
-        TableRow row = new TableRow(getActivity().getApplicationContext());
-        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-        TextView tone3= new TextView(getActivity().getApplicationContext());
-        tone3.setText("文字");
-        tone3.setTextSize(40);
-        tone3.setPadding(20, 0, 30, 0);
-        tone3.setTextColor(Color.BLACK);
-
-        TextView tone2 = new TextView(getActivity().getApplicationContext());
-        tone2.setText("聲調");
-        tone2.setTextSize(40);
-        tone2.setPadding(100, 0, 30, 0);
-        tone2.setTextColor(Color.BLACK);
-
-        row.addView(tone3);
-        row.addView(tone2);
-        tl_word.addView(row);
+//        TableRow row = new TableRow(getActivity().getApplicationContext());
+//        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+//        TextView tone3= new TextView(getActivity().getApplicationContext());
+//        tone3.setText("  ");
+//        tone3.setTextSize(40);
+//        tone3.setPadding(20, 0, 30, 0);
+//        tone3.setTextColor(Color.BLACK);
+//
+//        TextView tone2 = new TextView(getActivity().getApplicationContext());
+//        tone2.setText("  ");
+//        tone2.setTextSize(40);
+//        tone2.setPadding(100, 0, 30, 0);
+//        tone2.setTextColor(Color.BLACK);
+//
+//        row.addView(tone3);
+//        row.addView(tone2);
+//        tl_word.addView(row);
         if(sum != 0) {
             cursor.moveToFirst();
             for (int i = 0; i < sum; i++) {
@@ -187,10 +187,11 @@ public class wordfragment extends Fragment {
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
 
-        final TextView cp = new TextView(getActivity().getApplicationContext());
+        final Button cp = new Button(getActivity().getApplicationContext());
         cp.setAllCaps(false);
         cp.setText(wordRecordArrayList.get(i).getchin_word());
 //        cp.setText(i.toString());
+        cp.setPadding(20, 0, 30, 0);
         cp.setBackgroundResource(R.drawable.borders_black_and_blue);
         cp.setTextSize(40);
         cp.setGravity(Gravity.CENTER);

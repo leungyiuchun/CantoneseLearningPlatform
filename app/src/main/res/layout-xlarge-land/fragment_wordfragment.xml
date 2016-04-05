@@ -10,7 +10,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView android:text="文字"
+                    android:textSize="40dp"
+
+                    android:paddingRight="30px"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView android:text="聲調"
+                    android:textSize="40dp"
+                    android:paddingLeft="80px"
+                    android:paddingRight="30px"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
             <ScrollView android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 >
