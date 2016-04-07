@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">廣東話學習平台</string>
-    <string name="home_theme">廣東話學習平台</string>
+    <string name="app_name">粵拼學習平台</string>
+    <string name="home_theme">粵拼學習平台</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_play">開始</string>
     <string name="action_settings">選擇</string>
@@ -109,7 +109,7 @@
 
     <string name="task_theme">請選擇是次練習的題目和提示</string>
     <string name="hints_theme">請選擇是次練習的提示</string>
-    <string name="quantity_theme">請設定以下組合數量</string>
+    <string name="quantity_theme">請設定以下各組合數量</string>
     <string name="mode_theme">請選擇是次練習的模式</string>
     <string name="result_theme">測驗結果</string>
     <string name="remind_theme">題目重溫</string>
@@ -118,7 +118,7 @@
     <string name="training_mode">訓練模式</string>
     <string name="test_mode">測驗模式</string>
     <string name="total_quantity">總題數：</string>
-    <string name="total_combination">組合數量：</string>
+    <string name="total_combination">拼音數量：</string>
     <string name="total_correct">答對題數：</string>
     <string name="correct_percent">答對率：</string>
     <string name="ini_vowel">聲母 + 韻母</string>

@@ -757,9 +757,12 @@ public class ExerciseActivity extends Activity{
         if (sum>0){
             if(sum==1){
                 bitmapArrayList.add(tmpBitmapArrayList.get(0));
-
             } else
-            bitmapArrayList.add(tmpBitmapArrayList.get(random));
+            if(sum==random) {
+                bitmapArrayList.add(tmpBitmapArrayList.get(random-1));
+            }else{
+                bitmapArrayList.add(tmpBitmapArrayList.get(random));
+            }
         }else {
             bitmapArrayList.add(null);
         }

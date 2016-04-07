@@ -119,4 +119,8 @@ public class RemindActivity extends AppCompatActivity {
 
         }
     }
+    @Override
+    public void onBackPressed() {
+
+    }
 }

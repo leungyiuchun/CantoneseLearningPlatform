@@ -28,7 +28,7 @@ public class AdvFragment extends DialogFragment {
     Button orange_btn;
     Button purple_btn;
     Integer color_index;
-    Float speakSpeed = 0.3f;
+    Float speakSpeed = 1f;
     Switch animSwitch;
     SeekBar seekBar;
     @Override

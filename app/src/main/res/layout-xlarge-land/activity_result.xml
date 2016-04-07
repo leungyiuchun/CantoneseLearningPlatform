@@ -9,212 +9,230 @@
     android:paddingTop="10dp">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/result_theme"
-        android:gravity="left">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:textColor="#5E3434"
-            android:text="@string/result_theme"
-            android:id="@+id/task_tv_theme" />
-
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-        android:layout_height="20sp"/>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:text="姓名：" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:layout_weight="1"
-            android:id="@+id/result_name" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:layout_weight="1"
-            android:text="練習模式：" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:layout_weight="1"
-            android:id="@+id/result_mode" />
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:text="日期"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:id="@+id/result_date" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:text="選填：" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:layout_weight="1"
-            android:id="@+id/result_task" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:layout_weight="1"
-            android:text="提示：" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:layout_weight="1"
-            android:id="@+id/result_hints" />
-
-    </LinearLayout>
-    <LinearLayout
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/result_themeSep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@android:color/transparent" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background= "@android:color/darker_gray"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/transparent" />
+        android:layout_weight="3">
 
-    </LinearLayout>
-    <TableLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-        <TableRow>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/result_theme"
+            android:gravity="left">
             <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="50sp"
+                android:textColor="#5E3434"
+                android:text="@string/result_theme"
+                android:id="@+id/task_tv_theme" />
+
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+            android:layout_height="20sp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:text="姓名：" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:id="@+id/result_name" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:text="練習模式：" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:id="@+id/result_mode" />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:text="日期"/>
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:id="@+id/result_date" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:text="選填：" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:id="@+id/result_task" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:text="提示：" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:id="@+id/result_hints" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/result_themeSep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@android:color/transparent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background= "@android:color/darker_gray"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@android:color/transparent" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TableLayout android:layout_width="match_parent" android:layout_height="match_parent"
+            android:layout_weight="2">
+            <TableRow>
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="40sp"
+                    android:text="@string/total_quantity">
+                </TextView>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="10sp" android:textSize="40sp" android:id="@+id/tv_totalQuantity2"
+                    >
+                </TextView>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="10sp" android:textSize="40sp"
+                    android:text="@string/total_correct">
+                </TextView>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="10sp" android:textSize="40sp" android:id="@+id/tv_totalCorrect">
+                </TextView>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="10sp" android:textSize="40sp" android:text="@string/correct_percent">
+                </TextView>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="8sp" android:textSize="40sp" android:id="@+id/tv_correctPercent">
+                </TextView></TableRow>
+        </TableLayout>
+
+
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:id="@+id/ll_testList"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_weight="2">
+
+            <Button
+                android:layout_gravity="right"
                 android:textSize="40sp"
-                android:text="@string/total_quantity">
-            </TextView>
-
-            <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingLeft="10sp" android:textSize="40sp" android:id="@+id/tv_totalQuantity2"
-                >
-            </TextView>
-
-            <TextView
                 android:layout_height="wrap_content"
+                android:text="離開"
+                android:id="@+id/leave_button" />
+            <Button
+                android:layout_gravity="right"
+                android:textSize="40sp"
                 android:layout_width="wrap_content"
-                android:paddingLeft="10sp" android:textSize="40sp"
-                android:text="@string/total_correct">
-            </TextView>
-
-            <TextView
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:paddingLeft="10sp" android:textSize="40sp" android:id="@+id/tv_totalCorrect">
-            </TextView>
-
+                android:text="儲存並離開"
+                android:id="@+id/leave_and_save_button" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|right"
+            android:orientation="horizontal"
+            android:layout_weight="2">
             <TextView
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:paddingLeft="10sp" android:textSize="40sp" android:text="@string/correct_percent">
-            </TextView>
-
+                android:layout_height="wrap_content"
+                android:text="路徑："
+                android:textSize="40sp"/>
             <TextView
-                android:layout_height="wrap_content"
+                android:paddingLeft="30sp"
                 android:layout_width="wrap_content"
-                android:paddingLeft="8sp" android:textSize="40sp" android:id="@+id/tv_correctPercent">
-            </TextView></TableRow>
-    </TableLayout>
-
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/ll_testList"
-        android:orientation="vertical">
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom|right"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:layout_gravity="right"
-            android:textSize="40sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="離開"
-            android:id="@+id/leave_button" />
-        <Button
-            android:layout_gravity="right"
-            android:textSize="40sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="儲存並離開"
-            android:id="@+id/leave_and_save_button" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom|right"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="路徑："
-            android:textSize="40sp"/>
-        <TextView
-            android:paddingLeft="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/path_tv"
-            android:textSize="40sp"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/path_tv"
+                android:textSize="40sp"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

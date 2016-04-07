@@ -187,7 +187,7 @@ public class wordfragment extends Fragment {
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
 
-        final Button cp = new Button(getActivity().getApplicationContext());
+        final TextView cp = new Button(getActivity().getApplicationContext());
         cp.setAllCaps(false);
         cp.setText(wordRecordArrayList.get(i).getchin_word());
 //        cp.setText(i.toString());

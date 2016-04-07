@@ -150,4 +150,9 @@ public class ResultActivity extends AppCompatActivity {
             Log.d("Fail",""+e.toString());
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

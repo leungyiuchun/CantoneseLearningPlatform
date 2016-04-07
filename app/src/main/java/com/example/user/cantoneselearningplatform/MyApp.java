@@ -21,7 +21,7 @@ public class MyApp extends Application {
     String globalTaskString = "請選擇任務";
     String globalHintsString = "請選擇提示";
     String globalModeString = "請選擇模式";
-    String globalQuantityString = "請設定已各組合數量";
+    String globalQuantityString = "請設定各組合數量";
     Integer globalTaskInt = 1;
     Integer globalHintInt = 0;
     Integer globalModeInt=0;
@@ -142,7 +142,7 @@ public class MyApp extends Application {
     public void  setAnimBoolean(Boolean animBool){this.animBoolean = animBool;}
     public Boolean getAnimBoolean(){return this.animBoolean;}
 
-    Float speakSpeed = 0.3f;
+    Float speakSpeed = 0.01f;
     public void setSpeakSpeed(Float speed){this.speakSpeed = speed;}
     public Float getSpeakSpeed(){return this.speakSpeed;}
 

@@ -62,20 +62,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_gravity="center_vertical">
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textSize="40sp"
                         android:text="@string/setting_initial"
                         android:paddingRight="30dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:background="#F7BCBC"
+                        android:textColor="#5E3434"/>
+                    <View
+                        android:layout_width="5sp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/background_dark"/>
                     <Spinner
                         android:layout_width="160sp"
                         android:layout_height="80sp"
                         android:id="@+id/init_spinner"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:background="#F7BCBC"
+                        android:textColor="#5E3434"/>
                 </LinearLayout>
+                <View
+                    android:layout_width="40sp"
+                    android:layout_height="match_parent"/>
                 <LinearLayout
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -87,14 +99,22 @@
                         android:layout_height="match_parent"
                         android:textSize="40sp"
                         android:text="@string/setting_vowel"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:background="#DABCF7"/>
+                    <View
+                        android:layout_width="5sp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/background_dark"/>
                     <Spinner
                         android:layout_width="160sp"
                         android:layout_height="80sp"
                         android:id="@+id/vowel_spinner"
-                        android:gravity="center"/>
+                        android:layout_gravity="center"
+                        android:background="#DABCF7"/>
                 </LinearLayout>
-
+                <View
+                    android:layout_width="40sp"
+                    android:layout_height="match_parent"/>
                 <LinearLayout
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
