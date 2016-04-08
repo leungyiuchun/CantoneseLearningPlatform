@@ -78,6 +78,7 @@ public class ExerciseActivity extends Activity{
     Button soundButton;
     Button confirmButton;
     LinearLayout ll_exercise1;
+
     RelativeLayout ll_exercise2;
     RelativeLayout ll_exercise3;
     int[] et1Coord = new int[2];
@@ -119,6 +120,7 @@ public class ExerciseActivity extends Activity{
         ll_exercise1 = (LinearLayout)findViewById(R.id.ll_exercise1);
         ll_exercise2 = (RelativeLayout)findViewById(R.id.ll_exercise2);
         ll_exercise3 = (RelativeLayout)findViewById(R.id.ll_exercise3);
+
         home_clicked = 0;
         final Button home_button = (Button) this.findViewById(R.id.homeButton);
         home_button.setOnClickListener(new View.OnClickListener() {

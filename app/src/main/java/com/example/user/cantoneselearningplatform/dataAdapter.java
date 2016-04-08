@@ -66,7 +66,7 @@ public class dataAdapter {
 
     public Cursor getWordList(String product){
         String cardProduct = product;
-        String query = "SELECT CHAR_TABLE.chin_word  FROM CHAR_TABLE LEFT JOIN SYLLABLE_TABLE ON SYLLABLE_TABLE.s_id = CHAR_TABLE.s_id WHERE SYLLABLE_TABLE.syllable = " + "'"+product+"'";
+        String query = "SELECT CHAR_TABLE.chin_word  FROM CHAR_TABLE LEFT JOIN SYLLABLE_TABLE ON SYLLABLE_TABLE.s_id = CHAR_TABLE.s_id WHERE SYLLABLE_TABLE.syllable = " + "'"+product+"'" + " AND CHAR_TABLE.is_available=1";
             Cursor cursor = mDb.rawQuery(query,null);
         cursor.moveToFirst();
             if (cursor!=null)

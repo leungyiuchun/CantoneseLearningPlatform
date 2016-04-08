@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -39,6 +41,7 @@ public class QuantityFragment extends DialogFragment{
     Integer total_number;
     Integer looping;
     ArrayList<Integer> number_array = new ArrayList<Integer>();
+    ArrayList<String> not_available_array = new ArrayList<String>();
     //    Spinner mSpinner;
     Integer rowLooping=0;
     Integer loop=0;
@@ -53,7 +56,11 @@ public class QuantityFragment extends DialogFragment{
     String vowel;
     Integer status =0;
     Switch switch1;
+    LinearLayout ll_nilRecord1;
+    LinearLayout ll_nilRecord2;
     AlertDialog.Builder builder;
+    dataAdapter dataAdapter1;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         builder = new AlertDialog.Builder(getActivity());
@@ -64,16 +71,30 @@ public class QuantityFragment extends DialogFragment{
 //        button_confirm = (Button)view.findViewById(R.id.number_confirm);
         total_quantity_tv = (TextView)view.findViewById(R.id.tv_totalQuantity);
         total_combination_tv = (TextView)view.findViewById(R.id.tv_totalCombination);
+        ll_nilRecord1 = (LinearLayout)view.findViewById(R.id.ll_nilRecord);
+        ll_nilRecord2 = (LinearLayout)view.findViewById(R.id.ll_nilRecord2);
         switch1 = (Switch)view.findViewById(R.id.quantity_switch1);
         final TextView tv = (TextView) getActivity().findViewById(R.id.tv2_quantity);
         init_number = ((MyApp)getActivity().getApplication()).getInitList().size();
         vowel_number = ((MyApp)getActivity().getApplication()).getVowelList().size();
+        dataAdapter1 = new dataAdapter(this.getActivity());
+        try{
+            dataAdapter1.createDatabase();
+            dataAdapter1.open();
+        }catch (SQLException e){
+            Log.d("sql error",""+e);
+        }
         if(((MyApp) getActivity().getApplication()).getQuantityFlag() -1 == 0) {
             final_List = ((MyApp) getActivity().getApplication()).getCombinationList();
+            not_available_array = ((MyApp)getActivity().getApplication()).getNilRecordList();
         }else {
             createCartesianProduct(init_number, vowel_number);
         }
-
+        if(not_available_array.size()!=0){
+            setNilRecord();
+        }else {
+            ll_nilRecord1.setVisibility(View.GONE);
+        }
         total_number = init_number*vowel_number;
 
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -86,10 +107,11 @@ public class QuantityFragment extends DialogFragment{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ((MyApp) getActivity().getApplication()).setQuantityInt(getTotalQuantity());
-                        Log.d("Total Quantity",""+ getTotalQuantity().toString());
+                        Log.d("Total Quantity", "" + getTotalQuantity().toString());
                         ((MyApp) getActivity().getApplication()).setCombinationList(final_List);
                         ((MyApp) getActivity().getApplication()).setInitReopenFlag(1);
                         ((MyApp) getActivity().getApplication()).setVowelReopenFlag(1);
+                        ((MyApp) getActivity().getApplication()).setNilRecordList(not_available_array);
                         tv.setText((getTotalQuantity().toString()));
                         for (Integer i = 0; i < final_List.size(); i++) {
                             Log.d("final_list_loop", "after " + final_List.get(i).getCartProduct());
@@ -163,7 +185,13 @@ public class QuantityFragment extends DialogFragment{
         for (int i=0;i<init_number ;i++ ) {
             for (int j=0;j<vowel_number ;j++ ) {
                 tmp = ((MyApp)getActivity().getApplication()).getInitList().get(i).toString()+ ((MyApp)getActivity().getApplication()).getVowelList().get(j).toString();
-                ExersList.add(new Exer(((MyApp)getActivity().getApplication()).getInitList().get(i).toString(), ((MyApp)getActivity().getApplication()).getVowelList().get(j).toString(),tmp));
+                Cursor cursor = dataAdapter1.getWordList(tmp);
+                Integer sum = cursor.getCount();
+                if (sum!=0){
+                    ExersList.add(new Exer(((MyApp)getActivity().getApplication()).getInitList().get(i).toString(), ((MyApp)getActivity().getApplication()).getVowelList().get(j).toString(),tmp));
+                }else {
+                    not_available_array.add(tmp);
+                }
             }
         }
         for(int i=0;i<ExersList.size();i++){
@@ -428,5 +456,22 @@ public class QuantityFragment extends DialogFragment{
 
         quantity_tl.addView(row);
 
+    }
+    public void setNilRecord(){
+        TableRow row = new TableRow(getActivity().getApplicationContext());
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        row.setLayoutParams(lp);
+        Integer nil_size = not_available_array.size();
+        for (int i = 0;i<nil_size;i++){
+            final TextView cp = new Button(getActivity().getApplicationContext());
+            cp.setAllCaps(false);
+            cp.setText(not_available_array.get(i).toString());
+            cp.setTextSize(20);
+            cp.setGravity(Gravity.CENTER);
+            cp.setPadding(20, 0, 30, 0);
+
+            row.addView(cp);
+        }
+        ll_nilRecord2.addView(row);
     }
 }

@@ -146,4 +146,7 @@ public class MyApp extends Application {
     public void setSpeakSpeed(Float speed){this.speakSpeed = speed;}
     public Float getSpeakSpeed(){return this.speakSpeed;}
 
+    ArrayList<String> nilRecordList = new ArrayList<String>();
+    public void setNilRecordList(ArrayList<String> list){this.nilRecordList = list;}
+    public ArrayList<String> getNilRecordList(){return this.nilRecordList;}
 }
