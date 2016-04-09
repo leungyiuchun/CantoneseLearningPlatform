@@ -8,6 +8,8 @@ public class wordRecord {
     Integer s_id;
     String chin_word;
     Integer tone;
+    Integer is_available;
+    Integer frequency;
     public wordRecord(Integer c_id1, String chin_word1,Integer tone1,Integer s_id1) {
         this.c_id = c_id1;
         this.s_id = s_id1;
