@@ -13,11 +13,14 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -172,8 +175,11 @@ public class wordfragment extends Fragment {
                 String chin_word = cursor.getString(1);
                 Integer tone = cursor.getInt(2);
                 Integer s_id = cursor.getInt(3);
-                wordRecord newRecord = new wordRecord(c_id,chin_word,tone,s_id);
+                Integer is_available = cursor.getInt(4);
+                Integer frequency = cursor.getInt(5);
+                wordRecord newRecord = new wordRecord(c_id,chin_word,tone,s_id,is_available,frequency);
                 wordRecordArrayList.add(newRecord);
+                Log.d("", "chin word "+chin_word + " is_available"+is_available);
 
                 setTable(i);
                 cursor.moveToNext();
@@ -182,7 +188,6 @@ public class wordfragment extends Fragment {
     }
     public void setTable(Integer i){
         final Integer index =i;
-
         TableRow row = new TableRow(getActivity().getApplicationContext());
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
@@ -196,7 +201,6 @@ public class wordfragment extends Fragment {
         cp.setTextSize(40);
         cp.setGravity(Gravity.CENTER);
         row.addView(cp);
-        Log.d("cp text", "" + cp.getText().toString());
 
 
         TextView tone= new TextView(getActivity().getApplicationContext());
@@ -204,9 +208,39 @@ public class wordfragment extends Fragment {
         tone.setTextSize(30);
         tone.setPadding(100, 0, 30, 0);
         tone.setTextColor(Color.BLACK);
-        Log.d("tone", "" + wordRecordArrayList.get(i).getTone().toString());
         row.addView(tone);
-        delRecord(i,row,cp);
+
+        TextView turnOff= new TextView(getActivity().getApplicationContext());
+        turnOff.setText("關閉");
+        turnOff.setTextSize(15);
+        turnOff.setPadding(100, 0, 30, 0);
+        turnOff.setTextColor(Color.BLACK);
+        turnOff.setGravity(Gravity.CENTER);
+        turnOff.setVisibility(View.INVISIBLE);
+        row.addView(turnOff);
+
+        Switch switch1 = new Switch(getActivity().getApplicationContext());
+        switch1.setSwitchMinWidth(200);
+        switch1.setPadding(0, 0, 0, 0);
+        switch1.setGravity(Gravity.CENTER);
+        switch1.setVisibility(View.INVISIBLE);
+        if (wordRecordArrayList.get(i).getAvailable().intValue() ==1){
+            switch1.setChecked(true);
+        }else{switch1.setChecked(false);
+        }
+        row.addView(switch1);
+
+        TextView turnOn= new TextView(getActivity().getApplicationContext());
+        turnOn.setText("開啟");
+        turnOn.setTextSize(15);
+        turnOn.setPadding(30, 0, 30, 0);
+        turnOn.setTextColor(Color.BLACK);
+        turnOn.setGravity(Gravity.CENTER);
+        turnOn.setVisibility(View.INVISIBLE);
+        row.addView(turnOn);
+
+        delRecord(i, row, cp);
+        setAvailability(row,turnOn,turnOff,switch1,index);
         tl_word.addView(row);
     }
 
@@ -220,6 +254,7 @@ public class wordfragment extends Fragment {
         final TextView cp = cp1;
         final Integer i = index;
         final TableRow row = row1;
+
         row.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -245,6 +280,85 @@ public class wordfragment extends Fragment {
             }
         });
 
+    }
+    public void setAvailability(TableRow row1,TextView on1,TextView off1, Switch switch1,Integer index1){
+        final TableRow row = row1;
+        final TextView on = on1;
+        final TextView off  = off1;
+        final Switch switch_available = switch1;
+        final Integer index = index1;
+        row.setFocusableInTouchMode(true);
+        row.setFocusable(true);
+        row.setClickable(true);
+
+        row.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                row.requestFocus();
+                Log.d("row touch", "getFocus " + row.hasFocus());
+                on.setVisibility(View.VISIBLE);
+                off.setVisibility(View.VISIBLE);
+                switch_available.setVisibility(View.VISIBLE);
+                if (wordRecordArrayList.get(index).getAvailable().intValue() == 1) {
+                    switch_available.setChecked(true);
+                }
+                return false;
+            }
+        });
+        row.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                on.setVisibility(View.INVISIBLE);
+                off.setVisibility(View.INVISIBLE);
+                switch_available.setVisibility(View.INVISIBLE);
+            }
+        });
+        switch_available.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(dataAdapter1.updateAvailability(wordRecordArrayList.get(index).getC_id(),1)){
+                        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                .setTitle("記錄將會程式中啓用")
+                                .setMessage("記錄將會程式中啓用")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        setWordList();
+                                    }
+                                })
+
+                                .show();
+                    }
+                }
+                if (!isChecked){
+                    if(dataAdapter1.updateAvailability(wordRecordArrayList.get(index).getC_id(),0)){
+                        setWordList();
+
+                        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                .setTitle("記錄將不會程式中啓用")
+                                .setMessage("記錄將不會" +
+                                        "程式中啓用")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+
+                                .show();
+                    }else{
+                        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                .setTitle("更改失敗")
+                                .setMessage("更改失敗")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        setWordList();
+                                    }
+                                })
+
+                                .show();
+                    }
+                }
+            }
+        });
     }
 
     @Override

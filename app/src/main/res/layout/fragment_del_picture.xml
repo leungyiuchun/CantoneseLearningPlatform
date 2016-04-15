@@ -1,17 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="com.example.user.cantoneselearningplatform.addPictureFragment"
-    android:paddingLeft="20sp"
-    android:paddingRight="20sp"
-    android:paddingTop="20sp"
+    tools:context="com.example.user.cantoneselearningplatform.delPictureFragment"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:paddingTop="10sp"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
         <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
-            android:text="新增圖片"
+            android:text="刪除圖片"
             android:textSize="50sp"
             android:textColor="#5E3434"/>
     </LinearLayout>
@@ -56,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:paddingRight="20sp"
-                android:id="@+id/addPicture_tv1"
+                android:id="@+id/delPicture_tv1"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -70,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:paddingRight="20sp"
-                android:id="@+id/addPicture_tv3"
+                android:id="@+id/delPicture_tv3"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -82,31 +83,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/addPicture_tv2"
+                android:id="@+id/delPicture_tv2"
                 android:textSize="40sp"
                 android:paddingRight="20sp"
                 android:gravity="center"/>
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:text="新增圖片"
-                android:gravity="center"
-                android:id="@+id/btn_add_pic"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="20sp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20sp"
+            android:gravity="center">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/addImageView"/>
+                android:id="@+id/delImageView"
+                android:layout_gravity="center" />
         </LinearLayout>
     </LinearLayout>
 

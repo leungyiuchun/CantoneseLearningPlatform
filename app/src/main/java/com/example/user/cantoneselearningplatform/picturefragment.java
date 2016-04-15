@@ -165,7 +165,9 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
                 String chin_word = cursor.getString(1);
                 Integer tone = cursor.getInt(2);
                 Integer s_id = cursor.getInt(3);
-                wordRecord newRecord = new wordRecord(c_id,chin_word,tone,s_id);
+                Integer is_available = cursor.getInt(4);
+                Integer frequency = cursor.getInt(5);
+                wordRecord newRecord = new wordRecord(c_id,chin_word,tone,s_id,is_available,frequency);
                 wordRecordArrayList.add(newRecord);
 
                 setTable(i);
@@ -210,7 +212,7 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
         setListener(row, cp, wordRecordArrayList.get(i).getC_id(), addPic);
         tl_picture.addView(row);
     }
-    public void setListener(TableRow row1, TextView cp1, final Integer c_id1,TextView addPic1){
+    public void setListener(TableRow row1, TextView cp1, final Integer c_id1,TextView addPic1) {
         final TableRow row = row1;
         final TextView cp = cp1;
         final Integer c_id = c_id1;
@@ -251,45 +253,40 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
                 gv_picture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                .setTitle("刪除記錄？")
-                                .setMessage("刪除記錄？")
-                                .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        ArrayList<Bitmap> bitmapArrayList2 = new ArrayList<Bitmap>();
-                                        dataAdapter1.delPicture(pictureRecordArrayList.get(position).getP_id());
-                                        Cursor cursor1 = dataAdapter1.getPicture(c_id1);
-                                        setGlobalc_id(c_id);
-                                        Integer sum = cursor1.getCount();
-                                        Log.d("Sum", "" + sum.toString());
-                                        if (sum != 0) {
-                                            cursor1.moveToFirst();
-                                            for (int i = 0; i < sum; i++) {
-                                                Integer p_id = cursor1.getInt(0);
-                                                Integer c_id = cursor1.getInt(1);
-                                                byte[] picture = cursor1.getBlob(2);
-                                                Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-                                                bitmapArrayList2.add(bitmap);
-                                                Timestamp ts = Timestamp.valueOf(cursor1.getString(3));
-                                                pictureRecord newRecord = new pictureRecord(p_id, c_id, picture, ts);
-                                                pictureRecordArrayList.add(newRecord);
-                                                cursor1.moveToNext();
-                                            }
-                                        }
-                                        gv_picture.setAdapter(null);
-                                        GridViewAdapter customGridAdapter2 = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList2);
-                                        gv_picture.setAdapter(customGridAdapter2);
+                        delPictureFragment delPictureFragment1 = new delPictureFragment(pictureRecordArrayList.get(position).getP_id(),c_id,syllable);
+                        delPictureFragment1.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                ArrayList<Bitmap> bitmapArrayList2 = new ArrayList<Bitmap>();
+                                Cursor cursor1 = dataAdapter1.getPicture(c_id1);
+                                setGlobalc_id(c_id);
+                                Integer sum = cursor1.getCount();
+                                Log.d("Sum", "" + sum.toString());
+                                if (sum != 0) {
+                                    cursor1.moveToFirst();
+                                    for (int i = 0; i < sum; i++) {
+                                        Integer p_id = cursor1.getInt(0);
+                                        Integer c_id = cursor1.getInt(1);
+                                        byte[] picture = cursor1.getBlob(2);
+                                        Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+                                        bitmapArrayList2.add(bitmap);
+                                        Timestamp ts = Timestamp.valueOf(cursor1.getString(3));
+                                        pictureRecord newRecord = new pictureRecord(p_id, c_id, picture, ts);
+                                        pictureRecordArrayList.add(newRecord);
+                                        cursor1.moveToNext();
                                     }
-                                })
-                                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                })
-                                .show();
+                                }
+                                gv_picture.setAdapter(null);
+                                GridViewAdapter customGridAdapter2 = new GridViewAdapter(getContext(), R.layout.grid_item, bitmapArrayList2);
+                                gv_picture.setAdapter(customGridAdapter2);
+                            }
+                        });
+                        FragmentManager fm = getActivity().getFragmentManager();
+                        delPictureFragment1.show(fm, "Dialog");
                     }
                 });
+
+
                 cp.setBackgroundResource(R.drawable.borders_black_and_darkblue);
                 addPic.setVisibility(View.VISIBLE);
                 addPic.setOnClickListener(new View.OnClickListener() {
@@ -342,7 +339,6 @@ public class picturefragment extends Fragment implements DialogInterface.OnDismi
                 cp.setBackgroundResource(R.drawable.borders_black_and_blue);
             }
         });
-
     }
 
 

@@ -709,8 +709,14 @@ public class ExerciseActivity extends Activity{
                 cursor.moveToNext();
             }
         }
-        Integer random1 = getRandomNumber(1,sum-1);
+        Integer random1;
+        if(sum.intValue() ==1){
+            random1 = 0;
+        }else {
+            random1 = getRandomNumber(0,sum-1);
+        }
         chinese = data[random1];
+
 //        switch (product){
 //            case "baa":
 //                chinese = "爸";

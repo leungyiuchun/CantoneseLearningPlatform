@@ -92,6 +92,9 @@ public class dataAdapter {
         cv.put("chin_word",chin_word1);
         cv.put("tone", tone1);
         cv.put("s_id", s_id);
+        cv.put("is_available",1);
+
+        cv.put("frequency", 0);
         Long long1 = mDb.insert("CHAR_TABLE",null,cv);
         if(long1 == -1){
             successful = false;
@@ -174,5 +177,27 @@ public class dataAdapter {
             cursor.moveToNext();
         }
         return cursor;
+    }
+
+    public Cursor getPictureByPId(Integer p_id1){
+        Integer p_id = p_id1;
+        String query ="SELECT picture FROM PICTURE_TABLE WHERE p_id = "+ p_id ;
+        Cursor cursor = mDb.rawQuery(query, null);
+        cursor.moveToFirst();
+        if (cursor!=null)
+        {
+            cursor.moveToNext();
+        }
+        return cursor;
+    }
+    public Boolean updateAvailability(Integer c_id1,Integer is_available1){
+        Integer c_id = c_id1;
+        Integer is_available = is_available1;
+        String query ="UPDATE CHAR_TABLE SET is_available = "+is_available+" WHERE c_id ="+c_id;
+        Cursor cursor = mDb.rawQuery(query,null);
+        if (cursor!=null)
+        {
+            return true;
+        }else {return false;}
     }
 }
