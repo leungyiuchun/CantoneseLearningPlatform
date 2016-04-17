@@ -336,8 +336,7 @@ public class wordfragment extends Fragment {
 
                         AlertDialog dialog = new AlertDialog.Builder(getContext())
                                 .setTitle("記錄將不會程式中啓用")
-                                .setMessage("記錄將不會" +
-                                        "程式中啓用")
+                                .setMessage(String.valueOf(isChecked))
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                     }

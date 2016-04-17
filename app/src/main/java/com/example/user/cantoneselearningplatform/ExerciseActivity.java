@@ -611,13 +611,12 @@ public class ExerciseActivity extends Activity{
             }
             @Override
             public void afterTextChanged(Editable s) {
-                if (globalHintInt.intValue() == 0){
-                }else {
-                    if (globalHintInt.intValue() == 0){
+
+                Log.d("globalHintInt",""+ globalHintInt.toString());
+                    if (globalHintInt.intValue() == 0 ){
                     }else {
                         tv1.setText(floatingHint(et1.getText().length(), et1, ans_init));
                     }
-                }
                 if(((MyApp)getApplication()).getAnimBoolean()) {
                     switch (globalTaskInt) {
                         case 0:
@@ -653,14 +652,18 @@ public class ExerciseActivity extends Activity{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 et2.setTextColor(Color.BLACK);
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (globalHintInt.intValue() ==0){
-                    tv2.setText(floatingHint(et2.getText().length(),et2,ans_vowel));
+                if (globalHintInt.intValue() !=0){
+                    tv2.setText(floatingHint(et2.getText().length(), et2, ans_vowel));
+
+
                 }
                 if(((MyApp)getApplication()).getAnimBoolean()) {
+
                     animation(et2Coord[0], et2Coord[1], submitCoord[0], submitCoord[1]);
                     handler.postDelayed(new Runnable() {
                         public void run() {
@@ -670,10 +673,13 @@ public class ExerciseActivity extends Activity{
                 }
             }
         };
+        Log.d("","textListener set 1");
+
     }
     public void addTextListener(){
         et1.addTextChangedListener(textWatcher1);
         et2.addTextChangedListener(textWatcher2);
+        Log.d("","textListener set");
     }
     public void removeTextListener(){
         et1.removeTextChangedListener(textWatcher1);
@@ -740,6 +746,7 @@ public class ExerciseActivity extends Activity{
         String text = et1Hint.getText().toString();
         String edit = ansString.substring(textLength,ansString.length());
         returnString = text + edit;
+        Log.d("returnString ",""+returnString);
         return returnString;
     }
     public void addKey(){

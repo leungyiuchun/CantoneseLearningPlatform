@@ -30,7 +30,7 @@ public class AdvFragment extends DialogFragment {
     Integer color_index;
     Float speakSpeed = 1f;
     Switch animSwitch;
-    SeekBar seekBar;
+//    SeekBar seekBar;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -59,10 +59,10 @@ public class AdvFragment extends DialogFragment {
         orange_btn = (Button)view.findViewById(R.id.orange_button);
         purple_btn = (Button)view.findViewById(R.id.purple_button);
         example_tv = (TextView)view.findViewById(R.id.color_example_tv);
-        seekBar = (SeekBar)view.findViewById(R.id.seekBar1);
+//        seekBar = (SeekBar)view.findViewById(R.id.seekBar1);
         speakSpeed = ((MyApp) getActivity().getApplication()).getSpeakSpeed();
         Integer progress = speakSpeed.intValue()*100;
-        seekBar.setProgress(progress);
+//        seekBar.setProgress(progress);
         animSwitch = (Switch)view.findViewById(R.id.anim_switch1);
         if (((MyApp)getActivity().getApplication()).getAnimBoolean()){
             animSwitch.setChecked(true);
@@ -123,60 +123,60 @@ public class AdvFragment extends DialogFragment {
             }
         });
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.d("Seek",""+progress);
-                switch (progress){
-                    case 0:
-                        speakSpeed = 0.1f;
-                        break;
-                    case 1:
-                        speakSpeed = 0.1f;
-                        break;
-                    case 2:
-                        speakSpeed = 0.2f;
-                        break;
-                    case 3:
-                        speakSpeed = 0.3f;
-                        break;
-                    case 4:
-                        speakSpeed = 0.4f;
-                        break;
-                    case 5:
-                        speakSpeed = 0.5f;
-                        break;
-                    case 6:
-                        speakSpeed = 0.6f;
-                        break;
-                    case 7:
-                        speakSpeed = 0.7f;
-                        break;
-                    case 8:
-                        speakSpeed = 0.8f;
-                        break;
-                    case 9:
-                        speakSpeed = 0.9f;
-                        break;
-                    case 10:
-                        speakSpeed = 1f;
-                        break;
-                    default:
-                        speakSpeed = 0.3f;
-                        break;
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
+//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                Log.d("Seek",""+progress);
+//                switch (progress){
+//                    case 0:
+//                        speakSpeed = 0.1f;
+//                        break;
+//                    case 1:
+//                        speakSpeed = 0.1f;
+//                        break;
+//                    case 2:
+//                        speakSpeed = 0.2f;
+//                        break;
+//                    case 3:
+//                        speakSpeed = 0.3f;
+//                        break;
+//                    case 4:
+//                        speakSpeed = 0.4f;
+//                        break;
+//                    case 5:
+//                        speakSpeed = 0.5f;
+//                        break;
+//                    case 6:
+//                        speakSpeed = 0.6f;
+//                        break;
+//                    case 7:
+//                        speakSpeed = 0.7f;
+//                        break;
+//                    case 8:
+//                        speakSpeed = 0.8f;
+//                        break;
+//                    case 9:
+//                        speakSpeed = 0.9f;
+//                        break;
+//                    case 10:
+//                        speakSpeed = 1f;
+//                        break;
+//                    default:
+//                        speakSpeed = 0.3f;
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
         builder.setView(view);
         final AlertDialog alert = builder.create();
         alert.setOnShowListener(new DialogInterface.OnShowListener() {

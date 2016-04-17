@@ -84,6 +84,12 @@ public class delPictureFragment extends DialogFragment {
                 delPictureFragment.this.getDialog().cancel();
             }
         })
+                .setNeutralButton("確定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        delPictureFragment.this.getDialog().cancel();
+                    }
+                })
                 .setPositiveButton("刪除", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
