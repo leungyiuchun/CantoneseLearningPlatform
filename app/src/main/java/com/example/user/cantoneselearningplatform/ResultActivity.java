@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -94,7 +96,7 @@ public class ResultActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                capScreen();
+                try{genCSV();}catch (Exception e){}
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
 
@@ -150,7 +152,82 @@ public class ResultActivity extends AppCompatActivity {
             Log.d("Fail",""+e.toString());
         }
     }
+    public void genCSV()throws IOException{
+        String name = Environment.getExternalStorageDirectory().toString() + "/" + "Test_" + studentName.getText() + " " +currentTime +".csv";
+        FileWriter fw = new FileWriter(name);
+        try{
+            fw.append("姓名");
+            fw.append(',');
+            fw.append("練習模式");
+            fw.append(',');
+            fw.append("選填");
+            fw.append(',');
+            fw.append("提示");
+            fw.append(',');
+            fw.append("日期");
+            fw.append(',');
+            fw.append('\n');
 
+            fw.append(((MyApp) getApplication()).getStudentName());
+            fw.append(',');
+            fw.append(((MyApp) getApplication()).getModeString());
+            fw.append(',');
+            fw.append(((MyApp) getApplication()).getTaskString());
+            fw.append(',');
+            fw.append(((MyApp) getApplication()).getHintsString());
+            fw.append(',');
+            fw.append(currentTime);
+            fw.append(',');
+
+            fw.append('\n');
+            fw.append("總題數：");
+            fw.append(totalQuestion.toString());
+            fw.append("答對題數：");
+            fw.append(String.format("%d", correctIndex));
+            fw.append("答對率：");
+            fw.append(percent_present);
+            fw.append('\n');
+
+            fw.append("題數");
+            fw.append(',');
+            fw.append("拼音答案");
+            fw.append(',');
+            fw.append("中文答案");
+            fw.append(',');
+            fw.append("學生答案");
+            fw.append(',');
+            fw.append("結果");
+            fw.append(',');
+            fw.append('\n');
+
+            for (int a=1;a<getDisplayCheckList().size();a++){
+             Integer index = a;
+                fw.append(index.toString());
+                fw.append(',');
+                fw.append(getDisplayCheckList().get(a).getCheckAnswer());
+                fw.append(',');
+                fw.append(getDisplayCheckList().get(a).getChinese());
+                fw.append(',');
+                fw.append(getDisplayCheckList().get(a).getCheckUserAnswer());
+                fw.append(',');
+                if(getDisplayCheckList().get(a).getCorrectDecision().intValue()==0){
+                    fw.append("正確");
+                    fw.append(',');
+                }else {
+                    fw.append("錯誤");
+                    fw.append(',');
+                }
+
+                fw.append('\n');
+            }
+
+            fw.close();
+            Toast.makeText(this.getApplicationContext(), "已儲存於： "+name, Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(this.getApplicationContext(), "儲存失敗", Toast.LENGTH_SHORT).show();
+
+        }
+    }
     @Override
     public void onBackPressed() {
 

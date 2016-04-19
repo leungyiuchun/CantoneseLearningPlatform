@@ -84,16 +84,17 @@ public class delPictureFragment extends DialogFragment {
                 delPictureFragment.this.getDialog().cancel();
             }
         })
-                .setNeutralButton("確定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        delPictureFragment.this.getDialog().cancel();
-                    }
-                })
-                .setPositiveButton("刪除", new DialogInterface.OnClickListener() {
+                .setNeutralButton("刪除", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dataAdapter1.delPicture(p_id);
+                    }
+                })
+                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        delPictureFragment.this.getDialog().cancel();
+
                     }
                 });
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -117,6 +118,7 @@ public class delPictureFragment extends DialogFragment {
         }
         Cursor cursor1 = dataAdapter1.getPictureByPId(p_id);
         Integer sum2 = cursor1.getCount();
+
         Log.d("sum2"," "+ sum2);
         Bitmap bitmap;
         try{
@@ -139,7 +141,8 @@ public class delPictureFragment extends DialogFragment {
             public void onShow(DialogInterface dialog) {
                 Button btnPositive = alert.getButton(Dialog.BUTTON_POSITIVE);
                 btnPositive.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-
+                Button btnNeutral = alert.getButton(Dialog.BUTTON_NEUTRAL);
+                btnNeutral.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
                 Button btnNegative = alert.getButton(Dialog.BUTTON_NEGATIVE);
                 btnNegative.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             }
