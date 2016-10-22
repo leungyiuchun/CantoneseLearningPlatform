@@ -19,6 +19,7 @@
     <string name="select_quantity">請選題目數量</string>
     <string name="quantity_again">請重新設定題目數量</string>
     <string name="settings">設定</string>
+    <string name="update_db">更新資料庫</string>
     <string name="init_1">b</string>
     <string name="init_2">p</string>
     <string name="init_3">m</string>

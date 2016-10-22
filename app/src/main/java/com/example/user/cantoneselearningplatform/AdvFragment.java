@@ -45,7 +45,7 @@ public class AdvFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Button advBtn = (Button) getActivity().findViewById(R.id.btn_adv);
+//                        Button advBtn = (Button) getActivity().findViewById(R.id.btn_adv);
                         ((MyApp) getActivity().getApplication()).setColorIndex(color_index);
                         ((MyApp) getActivity().getApplication()).setSpeakSpeed(speakSpeed);
 

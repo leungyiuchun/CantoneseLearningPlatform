@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Button  setting_button;
         Button db_button;
         Log.d("MainActvitiy", "OnCreate");
-
+        createExternalFolder();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         total_number_init = init_array.length;
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         setting_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
@@ -81,13 +81,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         db_button = (Button)findViewById(R.id.db_button);
+
         db_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DBActivity.class);
+                Intent intent = new Intent(MainActivity.this, UpdateDBActivity.class);
                 startActivity(intent);
             }
         });
+        db_button.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -259,5 +262,15 @@ public class MainActivity extends AppCompatActivity {
     private static boolean doesDatabaseExist(Context context, String dbName) {
         File dbFile = context.getDatabasePath(dbName);
         return dbFile.exists();
+    }
+
+    private static void createExternalFolder(){
+        String folder_main = "/CantoneseLearningPlatform/Database";
+
+        File fileForDB = new File(Environment.getExternalStorageDirectory(), folder_main);
+        if (!fileForDB.exists()) {
+            fileForDB.mkdirs();
+            Log.d("External folder path1", fileForDB.getAbsolutePath());
+        }
     }
 }

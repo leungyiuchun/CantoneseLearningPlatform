@@ -1,12 +1,15 @@
 package com.example.user.cantoneselearningplatform;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +19,9 @@ import java.sql.SQLException;
 /**
  * Created by user on 13/3/16.
  */
-public class DBHelper extends SQLiteOpenHelper {
-    private final static String DATABASE_NAME = "production.sqlite";
+public class DBHelper extends SQLiteOpenHelper  {
+
+    private static final String DATABASE_NAME = "production.sqlite";
     private static String DATABASE_PATH = "";
     private final static int DATABASE_VERSION = 3;
     private SQLiteDatabase mDataBase;
@@ -28,6 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         if(android.os.Build.VERSION.SDK_INT >= 17){
             DATABASE_PATH = context.getApplicationInfo().dataDir + "/databases/";
+            Log.d("External folder path2", DATABASE_PATH);
         }
         else
         {
@@ -50,17 +55,23 @@ public class DBHelper extends SQLiteOpenHelper {
         //If the database does not exist, copy it from the assets.
 
         boolean mDataBaseExist = checkDataBase();
+        System.out.println("mDataBaseExist: " + mDataBaseExist);
         if(!mDataBaseExist)
         {
+            System.out.println("copy db");
             this.getWritableDatabase();
             this.close();
             try
             {
                 //Copy the database from assests
+                System.out.println("copy db2");
+
                 copyDataBase();
             }
             catch (IOException mIOException)
             {
+                System.out.println("db error");
+
                 throw new Error("ErrorCopyingDataBase");
             }
         }
@@ -69,14 +80,36 @@ public class DBHelper extends SQLiteOpenHelper {
     private boolean checkDataBase()
     {
         File dbFile = new File(DATABASE_PATH + DATABASE_NAME);
+        if(((MyApp)mContext.getApplicationContext()).getDbUri() == null){
+            System.out.println("NEW DB GOGO");
+        }else{
+            System.out.println("old db exists.");
+        }
+
         //Log.v("dbFile", dbFile + "   "+ dbFile.exists());
-        return dbFile.exists();
+        return ((MyApp)mContext.getApplicationContext()).getDbUri() == null;
     }
 
     //Copy the database from assets
     private void copyDataBase() throws IOException
     {
-        InputStream mInput = mContext.getAssets().open(DATABASE_NAME);
+        System.out.println("Copying DB");
+
+        InputStream mInput;
+        try{
+            mInput = mContext.getContentResolver().openInputStream(((MyApp) mContext).getDbUri());
+//            mInput = new FileInputStream(((MyApp) (mContext).getApplicationContext()).getDbUri().getPath());
+//            mInput = new FileInputStream("/document/production.sqlite");
+//            mInput = new FileInputStream(mContext.getDatabasePath(((MyApp) (mContext).getApplicationContext()).getDbUri().getPath()));
+            System.out.println("new db!!");
+        }catch (Exception e){
+            System.out.println("db error!!: " + e.getMessage());
+            e.printStackTrace();
+            mInput = mContext.getAssets().open(DATABASE_NAME);
+            Log.d("OLD DB!!!!:","");
+            System.out.println("old db!!");
+
+        }
         String outFileName = DATABASE_PATH + DATABASE_NAME;
         OutputStream mOutput = new FileOutputStream(outFileName);
         byte[] mBuffer = new byte[1024];
@@ -131,4 +164,5 @@ public class DBHelper extends SQLiteOpenHelper {
     public String getDatabaseName() {
         return super.getDatabaseName();
     }
+
 }

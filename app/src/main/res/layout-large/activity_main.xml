@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="5px"
-    android:paddingRight="5px"
-    android:paddingTop="5px"
-    android:paddingBottom="5px" tools:context=".MainActivity" android:orientation="vertical">
+    android:layout_height="match_parent" android:paddingLeft="5sp"
+    android:paddingRight="5sp"
+    android:paddingTop="5sp"
+    android:paddingBottom="5sp"  android:orientation="vertical">
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="1">
+    android:layout_weight="1"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_gravity="center_vertical|right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="「悅」拼 － "
+        android:id="@+id/home_theme"
+        android:textColor="@android:color/black"
+        android:textSize="100sp"/>
     <TextView
         android:layout_gravity="center_vertical|right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_theme"
-        android:id="@+id/home_theme"
         android:textColor="@android:color/black"
-        android:textSize="100px"/>
+        android:textSize="60sp"/>
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
@@ -29,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/action_play"
-                android:textSize="45px"
+                android:textSize="45sp"
                 android:gravity="right"
                 android:id="@+id/play_button"/>
 
@@ -38,14 +45,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/settings"
-                android:textSize="45px"
+                android:textSize="45sp"
                 android:id="@+id/setting_button"/>
         <Button
             android:layout_gravity=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mgt_db"
-            android:textSize="45px"
+            android:textSize="45sp"
             android:gravity="bottom|right"
             android:id="@+id/db_button"/>
 

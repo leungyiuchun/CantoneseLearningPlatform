@@ -42,7 +42,7 @@ public class SettingActivity extends AppCompatActivity implements DialogInterfac
         hints_tv = (TextView)findViewById(R.id.tv2_hints);
         quantity_tv = (TextView)findViewById(R.id.tv2_quantity);
         mode_tv = (TextView)findViewById(R.id.tv2_mode);
-        advBtn = (Button)findViewById(R.id.btn_adv);
+//        advBtn = (Button)findViewById(R.id.btn_adv);
         if(((MyApp)getApplication()).getInitList().size()==0){
             init_tv.setText("請選擇聲母");
         }

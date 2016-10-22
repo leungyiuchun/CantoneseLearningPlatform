@@ -1,6 +1,7 @@
 package com.example.user.cantoneselearningplatform;
 
 import android.app.Application;
+import android.net.Uri;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -149,4 +150,12 @@ public class MyApp extends Application {
     ArrayList<String> nilRecordList = new ArrayList<String>();
     public void setNilRecordList(ArrayList<String> list){this.nilRecordList = list;}
     public ArrayList<String> getNilRecordList(){return this.nilRecordList;}
+
+    Uri dbUri;
+    public void setDbUri(Uri uri){dbUri = uri;}
+    public Uri getDbUri(){return dbUri;}
+
+    String dbName;
+    public void setDbName(String name){dbName=name;}
+    public String getDbName(){return dbName;}
 }

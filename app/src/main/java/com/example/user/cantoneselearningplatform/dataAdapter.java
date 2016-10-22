@@ -195,6 +195,7 @@ public class dataAdapter {
         Integer is_available = is_available1;
         String query ="UPDATE CHAR_TABLE SET is_available = "+is_available+" WHERE c_id ="+c_id;
         Cursor cursor = mDb.rawQuery(query,null);
+        cursor.moveToFirst();
         if (cursor!=null)
         {
             return true;

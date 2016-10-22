@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10px"
-    android:paddingRight="10px"
-    android:paddingTop="10px"
-    android:paddingBottom="10px"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     tools:context="com.example.user.cantoneselearningplatform.DBActivity"
     android:orientation="vertical">
     <LinearLayout
@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50px"
+            android:textSize="50sp"
             android:textColor="#5E3434"
             android:text="@string/mgt_db"/>
     </LinearLayout>
@@ -30,22 +30,22 @@
         android:layout_below="@+id/init_theme"
         android:gravity="center_horizontal">
         <TextView
-            android:id="@+id/dipxlayArray"
+            android:id="@+id/displayArray"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="10px"
+            android:textSize="10dp"
             android:background="@android:color/transparent" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="10px"
+            android:layout_height="10dp"
             android:background= "@android:color/darker_gray"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="10px"
+            android:layout_height="10dp"
             android:background="@android:color/transparent" />
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_height="fill_parent"
         android:layout_width="match_parent"
         >
@@ -53,85 +53,130 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="3">
             <LinearLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:textSize="40px"
+                        android:textSize="40sp"
                         android:text="@string/setting_initial"
-                        android:paddingRight="30px"
-                        android:gravity="center"/>
-                    <pxinner
+                        android:paddingRight="30dp"
+                        android:gravity="center"
+                        android:background="#F7BCBC"
+                        android:textColor="#5E3434"/>
+                    <View
+                        android:layout_width="5sp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/background_dark"/>
+                    <Spinner
+                        android:layout_width="160sp"
+                        android:layout_height="80sp"
+                        android:id="@+id/init_spinner"
+                        android:gravity="center"
+                        android:background="#F7BCBC"
+                        android:textColor="#5E3434"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="40sp"
+                    android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <TextView
+                        android:paddingRight="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="40sp"
+                        android:text="@string/setting_vowel"
+                        android:gravity="center"
+                        android:background="#DABCF7"/>
+                    <View
+                        android:layout_width="5sp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/background_dark"/>
+                    <Spinner
+                        android:layout_width="160sp"
+                        android:layout_height="80sp"
+                        android:id="@+id/vowel_spinner"
+                        android:layout_gravity="center"
+                        android:background="#DABCF7"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="40sp"
+                    android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/init_pxinner"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:paddingRight="30px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="40px"
-                        android:text="@string/setting_vowel"
-                        android:gravity="center"/>
-                    <pxinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:id="@+id/vowel_pxinner"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="40px"
+                        android:textSize="40sp"
                         android:text="@string/combination"
                         android:gravity="center"/>
                     <TextView
-                        android:paddingLeft="30px"
+                        android:paddingLeft="30dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:textSize="40px"
+                        android:textSize="40sp"
                         android:id="@+id/db_combination"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center_vertical">
                     <Button
+                        android:id="@+id/goButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/mgt_word"
-                        android:id="@+id/mgt_word"
-                        android:textSize="40px"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mgt_picture"
-                        android:id="@+id/mgt_picture"
-                        android:textSize="40px"/>
+                        android:text="確定"
+                        android:textSize="30sp"/>
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_height="match_parent"
+        <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:id="@+id/pager">
+
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pager_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp" />
+
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_alignParentBottom="true">
+            <Button
+                android:layout_gravity="right"
+                android:textSize="50sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_finish"
+                android:id="@+id/setting_button" />
         </LinearLayout>
     </LinearLayout>
 

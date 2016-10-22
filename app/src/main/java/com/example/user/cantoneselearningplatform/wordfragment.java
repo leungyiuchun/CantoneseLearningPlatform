@@ -179,7 +179,8 @@ public class wordfragment extends Fragment {
                 Integer frequency = cursor.getInt(5);
                 wordRecord newRecord = new wordRecord(c_id,chin_word,tone,s_id,is_available,frequency);
                 wordRecordArrayList.add(newRecord);
-                Log.d("", "chin word "+chin_word + " is_available"+is_available);
+                Log.d("", "chin word "+chin_word + " is_available: " +
+                        ""+is_available);
 
                 setTable(i);
                 cursor.moveToNext();
@@ -339,6 +340,7 @@ public class wordfragment extends Fragment {
                                 .setMessage(String.valueOf(isChecked))
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+                                        setWordList();
                                     }
                                 })
 

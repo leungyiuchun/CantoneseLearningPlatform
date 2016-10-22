@@ -3,27 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="10px"
-    android:paddingRight="10px"
-    android:paddingTop="10px"
-    >
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
 
 
     <LinearLayout
         android:layout_weight="2"
         android:orientation="horizontal"
-        android:id="@+id/pxp"
+        android:id="@+id/spp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="10dp">
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="50px"
-            android:layout_height="50px"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:src="@drawable/finger"
             android:layout_gravity="top"
             />
-        <LinearLayout android:layout_height="match_parent" android:layout_width="0px">
+        <LinearLayout android:layout_height="match_parent" android:layout_width="0sp">
 
         </LinearLayout>
 
@@ -40,21 +39,21 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:background="@drawable/borders_black_and_white_big">
+                    >
 
                         <RelativeLayout
                             android:id="@+id/ll_exercise2"
-                            android:background="@drawable/borders_black_and_white_big"
+                            android:background="@drawable/et1_border"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             >
                             <TextView
-                                android:paddingLeft="50px"
+                                android:paddingLeft="50sp"
                                 android:id="@+id/textView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textSize="70px"
+                                android:textSize="70sp"
                                 android:maxLength="2"
                                 android:textColor="#BDBDBD"
                                 android:fontFamily="sans-serif"
@@ -72,7 +71,7 @@
                                     android:paddingRight="20dp"
                                     android:layout_width="fill_parent"
                                     android:layout_height="match_parent"
-                                    android:textSize="70px"
+                                    android:textSize="70sp"
                                     android:maxLength="2"
                                     android:gravity="right|center_vertical"
                                     android:layout_alignParentRight="true"
@@ -89,15 +88,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/borders_black_and_white_big"
                             android:gravity="left"
+                            android:background="@drawable/et2_border"
                             >
                             <TextView
                                 android:paddingLeft="20dp"
                                 android:id="@+id/textView2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textSize="70px"
+                                android:textSize="70sp"
                                 android:fontFamily="sans-serif－condensed"
                                 android:textColor="#BDBDBD"
                                 android:maxLength="4"
@@ -110,7 +109,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
-                                android:textSize="70px"
+                                android:textSize="70sp"
                                 android:fontFamily="sans-serif－condensed"
                                 android:textColorHint="#BDBDBD"
                                 android:maxLength="4"
@@ -132,7 +131,7 @@
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:id="@+id/soundButton"
-                    android:textSize="150px"
+                    android:textSize="150sp"
                     android:textColor="#000000"
                     android:background="@drawable/soundbutton"
                     />
@@ -146,7 +145,7 @@
             android:layout_weight="1">
             <ImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="500dp"
                 android:layout_height="match_parent"
                 android:id="@+id/imageView"
                 android:background="@drawable/imageview_background"
@@ -168,23 +167,23 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1" android:id="@+id/tv_mode"
                         android:gravity="center"
-                        android:textSize="30px"/>
+                        android:textSize="30sp"/>
                     <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1" android:id="@+id/tv_currentQuestion"
                         android:gravity="bottom|center_horizontal"
-                        android:textSize="50px"/>
-                    <View android:layout_height="12px"
+                        android:textSize="50sp"/>
+                    <View android:layout_height="12sp"
                         android:layout_width="match_parent"
                         android:background="#000000"
-                        android:paddingTop="5px"
-                        android:paddingBottom="5px"/>
+                        android:paddingTop="5sp"
+                        android:paddingBottom="5sp"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1" android:id="@+id/tv_totalQuestion"
-                        android:textSize="50px" android:gravity="top|center_horizontal"/>
+                        android:textSize="50sp" android:gravity="top|center_horizontal"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -195,7 +194,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="@string/submit"
-                        android:textSize="50px"
+                        android:textSize="50sp"
                         android:id="@+id/confirmButton"
                         />
                     <Button android:layout_width="match_parent"
@@ -203,7 +202,7 @@
                         android:layout_weight="1"
                         android:id="@+id/homeButton"
                         android:text="@string/homepage"
-                        android:textSize="50px"
+                        android:textSize="50sp"
                         />
                 </LinearLayout>
 
@@ -224,7 +223,7 @@
         <android.inputmethodservice.KeyboardView
             android:id="@+id/keyboardview"
             android:background="#000000"
-            android:keyTextSize="60px"
+            android:keyTextSize="60sp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

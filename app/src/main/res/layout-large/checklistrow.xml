@@ -15,25 +15,25 @@
             android:gravity="left"
             android:textColor="#000000"
             android:id="@+id/checkPosition"
-            android:layout_width="100px"
+            android:layout_width="100sp"
             android:layout_height="wrap_content"
-            android:textSize="30px"
+            android:textSize="30sp"
             android:layout_column="0"/>
         <TextView
             android:gravity="left"
             android:layout_gravity="left"
             android:layout_height="wrap_content"
-            android:layout_width="150px"
+            android:layout_width="150sp"
             android:textColor="#000000"
             android:id="@+id/checkAnswer"
-            android:textSize="30px"
+            android:textSize="30sp"
             android:layout_column="0"/>
         <TextView
             android:layout_gravity="left"
             android:gravity="left"
             android:layout_height="wrap_content"
-            android:layout_width="150px"
-            android:textSize="30px"
+            android:layout_width="150sp"
+            android:textSize="30sp"
             android:id="@+id/checkChineseWord"
             android:layout_column="0"/>
 
@@ -41,19 +41,19 @@
             android:layout_weight="1"
             android:gravity="left"
             android:layout_height="wrap_content"
-            android:layout_width="150px"
+            android:layout_width="150sp"
             android:textColor="#000000"
             android:id="@+id/checkUserAnswer"
-            android:textSize="30px"
+            android:textSize="30sp"
             android:layout_column="0"/>
 
         <TextView
             android:layout_weight="1"
             android:gravity="left"
             android:layout_height="wrap_content"
-            android:layout_width="150px"
+            android:layout_width="150sp"
             android:id="@+id/checkCorrectness"
-            android:textSize="30px"
+            android:textSize="30sp"
             android:layout_column="0"/>
     </TableRow>
 

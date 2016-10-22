@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50px"
+            android:textSize="50sp"
             android:textColor="#5E3434"
             android:text="@string/init_theme"
             android:id="@+id/init_tv_theme" />
@@ -31,7 +31,7 @@
         android:layout_below="@+id/init_theme"
         android:gravity="center_horizontal">
         <TextView
-            android:id="@+id/dipxlayArray"
+            android:id="@+id/displayArray"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="10dp"
@@ -45,22 +45,13 @@
             android:layout_height="10dp"
             android:background="@android:color/transparent" />
     </LinearLayout>
-    <LinearLayout android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/init_themeSep">
-        <ScrollView android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TableLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
-                android:gravity="center_horizontal" android:layout_below="@+id/init_themeSep"
-                android:id="@+id/tl_init" android:orientation="vertical"
-                >
-            </TableLayout>
-        </ScrollView>
-    </LinearLayout>
 
+    <TableLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:gravity="center_horizontal" android:layout_below="@+id/init_themeSep"
+        android:id="@+id/tl_init" android:orientation="vertical"
+        >
 
-
-
+    </TableLayout>
     <!--<RelativeLayout-->
         <!--android:id="@+id/rl_init"-->
         <!--android:layout_width="wrap_content"-->
